@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/src/screens/registerscreen/register_screen1.dart';
+import 'package:food_app/src/screens/registerscreen/register_screen_1.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatelessWidget {

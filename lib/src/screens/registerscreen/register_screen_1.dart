@@ -21,7 +21,7 @@ class RegisterScreen1 extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0)),
-                            primary: Color.fromARGB(255, 242, 174, 17)),
+                            primary: const  Color.fromARGB(255, 242, 174, 17)),
                         onPressed: () {
                           Navigator.pop(context);
                         },
@@ -126,7 +126,7 @@ class RegisterScreen1 extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 30.0,),
+            const SizedBox(height: 30.0,),
             TextButton(
                 onPressed: () {},
                 child: Text(
