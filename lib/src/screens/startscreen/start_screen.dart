@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../core/util/logo_widget.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/util/gredient_circle.dart';
 import '../../widget/startscreenwidget/overlay_start_screen.dart';
@@ -18,11 +16,11 @@ class _StartScreenState extends State<StartScreen> {
     return SafeArea(
       child: Scaffold(
         body: Stack(
-          children: [
+          children:const [
              Positioned( 
             bottom: -50,
             right: -150,
-              child: const GradientCircle(
+              child:  GradientCircle(
                 radius: 150,
               ),
             ),

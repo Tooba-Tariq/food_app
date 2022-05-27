@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/src/screens/registerscreen/register_screen_1.dart';
+import '../registerscreen/register_screen_1.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -13,7 +13,7 @@ class LoginScreen extends StatelessWidget {
           children: [
             Row(
               children: [
-                Container(
+                SizedBox(
                   height: 80,
                   child: TextButton(
                       style: ElevatedButton.styleFrom(primary: Colors.white),
@@ -43,7 +43,7 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(
               height: 60,
             ),
-            Container(
+            SizedBox(
                 height: 320.0,
                 width: 320.0,
                 child: Padding(
@@ -87,7 +87,7 @@ class LoginScreen extends StatelessWidget {
                       const SizedBox(
                         height: 35,
                       ),
-                      Container(
+                      SizedBox(
                         height: 40,
                         child: TextButton(
                           style: ElevatedButton.styleFrom(
@@ -151,12 +151,7 @@ class LoginScreen extends StatelessWidget {
               ],
             ),
             TextButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: ((context) => const RegisterScreen1())));
-                },
+                onPressed: () {},
                 child: Text(
                   "Create new account",
                   style: GoogleFonts.poppins(
