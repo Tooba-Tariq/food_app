@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/src/screens/loginscreen/login_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/util/logo_widget.dart';
@@ -44,7 +45,7 @@ class OverlayWidget extends StatelessWidget {
               ),
             ],
           ),
-          Spacer(),
+          const Spacer(),
           Padding(
             padding: const EdgeInsets.only(
               left: 25,
@@ -57,7 +58,10 @@ class OverlayWidget extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   primary: Colors.white,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: ((context) => const LoginScreen())));
+                },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

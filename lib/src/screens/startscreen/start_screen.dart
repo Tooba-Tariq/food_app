@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/core/util/logo_widget.dart';
+import '../../../core/util/logo_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/util/gredient_circle.dart';
@@ -19,14 +19,15 @@ class _StartScreenState extends State<StartScreen> {
       child: Scaffold(
         body: Stack(
           children: [
-            Positioned(
-              bottom: -100,
-              left: -100,
-              child: GradientCircle(
+             Positioned( 
+            bottom: -50,
+            right: -150,
+              child: const GradientCircle(
                 radius: 150,
               ),
             ),
-            OverlayWidget(),
+          
+             OverlayWidget(),
           ],
         ),
       ),
