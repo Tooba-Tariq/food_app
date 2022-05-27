@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/src/screens/registerscreen/register_screen_1.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class RegisterScreen1 extends StatelessWidget {
+  const RegisterScreen1({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,29 +12,39 @@ class LoginScreen extends StatelessWidget {
           children: [
             Row(
               children: [
-                Container(
-                  height: 80,
-                  child: TextButton(
-                      style: ElevatedButton.styleFrom(primary: Colors.white),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Icon(
-                        Icons.arrow_back,
-                        color: Color(0XFFF2A902),
-                        size: 30.0,
-                      )),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0, top: 10.0),
+                  child: Container(
+                    height: 40.0,
+                    width: 50.0,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0)),
+                            primary: const  Color.fromARGB(255, 242, 174, 17)),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                          size: 30.0,
+                        )),
+                  ),
                 ),
               ],
             ),
             Row(
               children: [
-                Text(
-                  " SIGN IN",
-                  style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.normal,
-                    fontSize: 38.0,
-                    color: const Color(0XFFF2A902),
+                Padding(
+                  padding: const EdgeInsets.only(left:10.0,top: 25.0),
+                  child: Text(
+                    " REGISTER",
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.normal,
+                      fontSize: 38.0,
+                      color: const Color(0XFFF2A902),
+                    ),
                   ),
                 )
               ],
@@ -62,30 +71,12 @@ class LoginScreen extends StatelessWidget {
                       ),
                       TextFormField(
                         decoration: const InputDecoration(
-                          labelText: "Password",
+                          labelText: "Email",
                           border: OutlineInputBorder(),
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                "Forget Password?",
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 14.0,
-                                  color: Colors.black,
-                                ),
-                              )),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 35,
+                        height: 55,
                       ),
                       Container(
                         height: 40,
@@ -105,7 +96,7 @@ class LoginScreen extends StatelessWidget {
                               Expanded(
                                 child: Center(
                                   child: Text(
-                                    "Login",
+                                    "Next",
                                     style: GoogleFonts.poppins(
                                       fontWeight: FontWeight.normal,
                                       fontSize: 17.0,
@@ -126,43 +117,24 @@ class LoginScreen extends StatelessWidget {
                   ),
                 )),
             Padding(
-              padding: const EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.only(top: 30.0),
               child: Text(
-                "Or",
+                "Terms & Conditions",
                 style: GoogleFonts.poppins(
                   fontSize: 14.0,
+                  color: const Color(0XFFF2A902),
                 ),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                    style: ElevatedButton.styleFrom(primary: Colors.white),
-                    onPressed: () {},
-                    child: Image.asset("assets/images/fb.png")),
-                TextButton(
-                    style: ElevatedButton.styleFrom(primary: Colors.white),
-                    onPressed: () {},
-                    child: Image.asset("assets/images/twitter.png")),
-                TextButton(
-                    onPressed: () {},
-                    child: Image.asset("assets/images/google.png")),
-              ],
-            ),
+            const SizedBox(height: 30.0,),
             TextButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: ((context) => const RegisterScreen1())));
-                },
+                onPressed: () {},
                 child: Text(
-                  "Create new account",
+                  "Already Have An Account? Log In",
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.normal,
                     fontSize: 14.0,
-                    color: Colors.black,
+                    color: const Color(0XFFF2A902),
                   ),
                 )),
           ],
