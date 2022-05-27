@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/src/screens/loginscreen/login_screen.dart';
+import '../../screens/loginscreen/login_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/util/logo_widget.dart';
@@ -52,7 +52,7 @@ class OverlayWidget extends StatelessWidget {
               right: 25,
               bottom: 50,
             ),
-            child: Container(
+            child: SizedBox(
               height: 50,
               child: TextButton(
                 style: ElevatedButton.styleFrom(
