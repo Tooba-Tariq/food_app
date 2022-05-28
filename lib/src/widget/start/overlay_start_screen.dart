@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../screens/loginscreen/login_screen.dart';
+import '../../screens/login/login_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/util/logo_widget.dart';

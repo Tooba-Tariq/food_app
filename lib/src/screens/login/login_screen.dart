@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../registerscreen/register_screen_1.dart';
+import '../register/register_screen_1.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -7,43 +7,37 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          children: [
-            Row(
-              children: [
-                SizedBox(
-                  height: 80,
-                  child: TextButton(
-                      style: ElevatedButton.styleFrom(primary: Colors.white),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Icon(
-                        Icons.arrow_back,
-                        color: Color(0XFFF2A902),
-                        size: 30.0,
-                      )),
-                ),
-              ],
+    Widget backButton = Row(
+      children: [
+        SizedBox(
+          height: 80,
+          child: TextButton(
+            style: ElevatedButton.styleFrom(primary: Colors.white),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Icon(
+              Icons.arrow_back,
+              color: Color(0XFFF2A902),
+              size: 30.0,
             ),
-            Row(
-              children: [
-                Text(
-                  " SIGN IN",
-                  style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.normal,
-                    fontSize: 38.0,
-                    color: const Color(0XFFF2A902),
-                  ),
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 60,
-            ),
-            SizedBox(
+          ),
+        ),
+      ],
+    );
+    Widget singinText = Row(
+      children: [
+        Text(
+          " SIGN IN",
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.normal,
+            fontSize: 38.0,
+            color: const Color(0XFFF2A902),
+          ),
+        )
+      ],
+    );
+    Widget loginForm = SizedBox(
                 height: 320.0,
                 width: 320.0,
                 child: Padding(
@@ -124,7 +118,15 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                )),
+                ));
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            backButton,
+            singinText,
+            const SizedBox(height: 60),
+            loginForm,
             Padding(
               padding: const EdgeInsets.only(top: 10.0),
               child: Text(

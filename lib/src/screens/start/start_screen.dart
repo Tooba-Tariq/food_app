@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/util/gredient_circle.dart';
-import '../../widget/startscreenwidget/overlay_start_screen.dart';
+import '../../widget/start/overlay_start_screen.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({Key? key}) : super(key: key);
