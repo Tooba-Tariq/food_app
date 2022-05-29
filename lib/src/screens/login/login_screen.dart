@@ -10,15 +10,13 @@ class LoginScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Stack(
-          children: [
+          children: const [
             Positioned(
               bottom: -480,
               right: -150,
               left: -150,
-              child: Container(
-                child: const GradientCircle(
-                  radius: 500,
-                ),
+              child:  GradientCircle(
+                radius: 500,
               ),
             ),
             

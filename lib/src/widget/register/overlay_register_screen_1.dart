@@ -13,7 +13,7 @@ class OverLayWidget extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 20.0, top: 10.0),
-              child: Container(
+              child: SizedBox(
                 height: 40.0,
                 width: 50.0,
                 child: ElevatedButton(
@@ -21,7 +21,7 @@ class OverLayWidget extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      primary: Color.fromARGB(255, 253, 198, 69),
+                      primary: const Color.fromARGB(255, 253, 198, 69),
                     ),
                     onPressed: () {
                       Navigator.pop(context);
@@ -79,7 +79,7 @@ class OverLayWidget extends StatelessWidget {
                 const SizedBox(
                   height: 55,
                 ),
-                Container(
+                SizedBox(
                   height: 40,
                   child: TextButton(
                     style: ElevatedButton.styleFrom(

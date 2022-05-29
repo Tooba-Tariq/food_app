@@ -10,15 +10,13 @@ class RegisterScreen1 extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Stack(
-          children: [
+          children: const [
             Positioned(
               top: -430,
               right: -150,
               left: -150,
-              child: Container(
-                child: const GradientCircle(
-                  radius: 450,
-                ),
+              child: GradientCircle(
+                radius: 450,
               ),
             ),
             Positioned(
