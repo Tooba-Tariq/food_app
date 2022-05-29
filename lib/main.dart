@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.orange,
+        accentColor: Colors.white,
       ),
       home: const SafeArea(
         child: SplashScreen(),
