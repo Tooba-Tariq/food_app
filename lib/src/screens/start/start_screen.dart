@@ -17,9 +17,25 @@ class _StartScreenState extends State<StartScreen> {
       child: Scaffold(
         body: Stack(
           children:const [
+            Positioned(
+              bottom: -160,
+              left: -100,
+              
+              child: GradientCircle(
+                radius: 150,
+              ),
+            ),
+             Positioned(
+              bottom: -160,
+              left: -15,
+              right: -8,
+              child: GradientCircle(
+                radius: 150,
+              ),
+            ),
              Positioned( 
-            bottom: -50,
-            right: -150,
+            bottom: -130,
+            right: -90,
               child:  GradientCircle(
                 radius: 150,
               ),
