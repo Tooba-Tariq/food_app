@@ -12,15 +12,16 @@ class LoginScreen extends StatelessWidget {
         body: Stack(
           children: const [
             Positioned(
-              bottom: -480,
+              bottom: -500,
               right: -150,
               left: -150,
-              child:  GradientCircle(
+              child: GradientCircle(
                 radius: 500,
               ),
             ),
-            
-            OverLayWidget(),
+            SingleChildScrollView(
+              child: OverlayLoginScreen(),
+            ),
           ],
         ),
       ),

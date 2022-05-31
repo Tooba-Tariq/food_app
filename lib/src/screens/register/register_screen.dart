@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import '../../../core/util/gredient_circle.dart';
-import '../../widget/register/overlay_register_screen_1.dart';
+import '../../widget/register/overlay_register_screen.dart';
 
-class RegisterScreen1 extends StatelessWidget {
+class RegisterScreen1 extends StatefulWidget {
   const RegisterScreen1({Key? key}) : super(key: key);
 
+  @override
+  State<RegisterScreen1> createState() => _RegisterScreen1State();
+}
+
+class _RegisterScreen1State extends State<RegisterScreen1> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -27,7 +32,9 @@ class RegisterScreen1 extends StatelessWidget {
                 radius: 400,
               ),
             ),
-            OverLayWidget(),
+            SingleChildScrollView(
+              child: OverlayRegisterScreen(),
+            ),
           ],
         ),
       ),
