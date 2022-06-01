@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../screens/register/register_screen_1.dart';
+import '../../screens/register/register_screen.dart';
 
-class OverLayWidget extends StatelessWidget {
-  const OverLayWidget({Key? key}) : super(key: key);
+class OverlayLoginScreen extends StatelessWidget {
+  const OverlayLoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +30,11 @@ class OverLayWidget extends StatelessWidget {
         ),
         Row(
           children: [
+            Container(
+              height: 50.0,
+              width: 20.0,
+              color: const Color(0XFFF2A902),
+            ),
             Text(
               " SIGN IN",
               style: GoogleFonts.poppins(
@@ -37,7 +42,7 @@ class OverLayWidget extends StatelessWidget {
                 fontSize: 38.0,
                 color: const Color(0XFFF2A902),
               ),
-            )
+            ),
           ],
         ),
         const SizedBox(
@@ -80,6 +85,9 @@ class OverLayWidget extends StatelessWidget {
                           fontWeight: FontWeight.normal,
                           fontSize: 14.0,
                           color: Colors.black,
+                          textStyle: const TextStyle(
+                            decoration: TextDecoration.underline,
+                          ),
                         ),
                       ),
                     ),
@@ -98,7 +106,7 @@ class OverLayWidget extends StatelessWidget {
                       // Navigator.push(
                       //     context,
                       //     MaterialPageRoute(
-                      //         builder: ((context) => const LoginScreen())));
+                      //         builder: ((context) => const WelcomeScreen())));
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -128,7 +136,7 @@ class OverLayWidget extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 10.0),
+          padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
           child: Text(
             "Or",
             style: GoogleFonts.poppins(
@@ -136,22 +144,33 @@ class OverLayWidget extends StatelessWidget {
             ),
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextButton(
-              onPressed: () {},
-              child: Image.asset("assets/images/fb.png"),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: Image.asset("assets/images/twitter.png"),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: Image.asset("assets/images/google.png"),
-            ),
-          ],
+        SizedBox(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              SizedBox(
+                child: TextButton(
+                  style: ElevatedButton.styleFrom(primary: Colors.white),
+                  onPressed: () {},
+                  child: Image.asset("assets/images/fb.png"),
+                ),
+              ),
+              SizedBox(
+                child: TextButton(
+                  style: ElevatedButton.styleFrom(primary: Colors.white),
+                  onPressed: () {},
+                  child: Image.asset("assets/images/twitter.png"),
+                ),
+              ),
+              SizedBox(
+                child: TextButton(
+                  style: ElevatedButton.styleFrom(primary: Colors.white),
+                  onPressed: () {},
+                  child: Image.asset("assets/images/google.png"),
+                ),
+              ),
+            ],
+          ),
         ),
         TextButton(
           onPressed: () {
@@ -168,6 +187,9 @@ class OverLayWidget extends StatelessWidget {
               fontWeight: FontWeight.normal,
               fontSize: 14.0,
               color: Colors.black,
+              textStyle: const TextStyle(
+                decoration: TextDecoration.underline,
+              ),
             ),
           ),
         ),

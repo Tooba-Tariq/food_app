@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.orange,
         accentColor: Colors.white,
-      ),
+      ),                 
       home: const SafeArea(
         child: SplashScreen(),
       ),
