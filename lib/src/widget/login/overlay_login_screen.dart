@@ -144,25 +144,32 @@ class OverlayLoginScreen extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
+        Container(
+          width: 250.0,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              SizedBox(
+              Container(
+                height: 50.0,
+                width: 50.0,
                 child: TextButton(
                   style: ElevatedButton.styleFrom(primary: Colors.white),
                   onPressed: () {},
                   child: Image.asset("assets/images/fb.png"),
                 ),
               ),
-              SizedBox(
+              Container(
+                height: 50.0,
+                width: 50.0,
                 child: TextButton(
                   style: ElevatedButton.styleFrom(primary: Colors.white),
                   onPressed: () {},
                   child: Image.asset("assets/images/twitter.png"),
                 ),
               ),
-              SizedBox(
+              Container(
+                height:50.0,
+                width: 50.0,
                 child: TextButton(
                   style: ElevatedButton.styleFrom(primary: Colors.white),
                   onPressed: () {},

@@ -15,10 +15,28 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.orange,
-        accentColor: Colors.white,
-      ),                 
+     theme: ThemeData(
+          primarySwatch: Colors.orange,
+          accentColor: Colors.white,
+          // errorColor: Colors.red,
+          fontFamily: 'Quicksand',
+          textTheme: ThemeData.light().textTheme.copyWith(
+                // subtitle1: TextStyle(
+                //   fontFamily: 'OpenSans',
+                //   fontWeight: FontWeight.bold,
+                //   fontSize: 18,
+                // ),
+                // button: TextStyle(color: Colors.white),
+              ),
+          appBarTheme: AppBarTheme(
+            textTheme: ThemeData.light().textTheme.copyWith(
+                  subtitle1: TextStyle(
+                    fontFamily: 'OpenSans',
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+          )),               
       home: const SafeArea(
         child: SplashScreen(),
       ),
