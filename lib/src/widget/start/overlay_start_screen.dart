@@ -29,11 +29,7 @@ class OverlayWidget extends StatelessWidget {
               ),
               Text(
                 "Welcome!",
-                style: GoogleFonts.poppins(
-                  fontWeight: FontWeight.normal,
-                  fontSize: 28.0,
-                  color: Colors.black,
-                ),
+                style: Theme.of(context).textTheme.subtitle1,
               ),
               Text(
                 "\nEat Food App allow you to find best \n foods and restaurant around you!",
@@ -59,8 +55,10 @@ class OverlayWidget extends StatelessWidget {
                   primary: Colors.white,
                 ),
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: ((context) => const LoginScreen())));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: ((context) => const LoginScreen())));
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

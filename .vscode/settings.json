@@ -1,0 +1,13 @@
+{
+    "editor.cursorBlinking": "expand",
+    "editor.cursorSmoothCaretAnimation": false,
+    "editor.cursorStyle": "line",
+    "editor.cursorSurroundingLinesStyle": "default",
+    "editor.find.autoFindInSelection": "never",
+    "editor.formatOnPaste": false,
+    "editor.formatOnSaveMode": "file",
+    "diffEditor.codeLens": false,
+    "diffEditor.wordWrap": "on",
+    "editor.minimap.scale": 1,
+    "editor.suggest.showStatusBar": true
+}

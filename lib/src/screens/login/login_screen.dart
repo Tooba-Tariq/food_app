@@ -10,18 +10,19 @@ class LoginScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Stack(
-          children: const [
-            Positioned(
+          clipBehavior: Clip.hardEdge,
+          children: [
+            const Positioned(
               bottom: -500,
               right: -150,
               left: -150,
               child: GradientCircle(
                 radius: 500,
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
               ),
             ),
-            SingleChildScrollView(
-              child: OverlayLoginScreen(),
-            ),
+            OverlayLoginScreen(),
           ],
         ),
       ),
