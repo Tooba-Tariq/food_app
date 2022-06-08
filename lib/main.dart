@@ -19,19 +19,26 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.orange,
           accentColor: Colors.white,
           // errorColor: Colors.red,
-          fontFamily: 'Quicksand',
+          fontFamily: 'Poppins',
           textTheme: ThemeData.light().textTheme.copyWith(
-              // subtitle1: TextStyle(
-              //   fontFamily: 'OpenSans',
-              //   fontWeight: FontWeight.bold,
-              //   fontSize: 18,
-              // ),
-              // button: TextStyle(color: Colors.white),
+                subtitle1: const TextStyle(
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+                subtitle2: const TextStyle(
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
+                button: const TextStyle(
+                  color: Colors.white,
+                ),
               ),
           appBarTheme: AppBarTheme(
             textTheme: ThemeData.light().textTheme.copyWith(
                   subtitle1: const TextStyle(
-                    fontFamily: 'OpenSans',
+                    fontFamily: 'Poppins',
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),

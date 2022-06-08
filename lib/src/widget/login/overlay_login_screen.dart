@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/core/constants/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../screens/register/register_screen.dart';
 
 class OverlayLoginScreen extends StatelessWidget {
-  const OverlayLoginScreen({Key? key}) : super(key: key);
-
+  OverlayLoginScreen({Key? key}) : super(key: key);
+  GlobalKey _formKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -19,9 +20,9 @@ class OverlayLoginScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Icon(
+                child: Icon(
                   Icons.arrow_back,
-                  color: Color(0XFFF2A902),
+                  color: AppColor.themeSecondary,
                   size: 30.0,
                 ),
               ),
@@ -33,14 +34,15 @@ class OverlayLoginScreen extends StatelessWidget {
             Container(
               height: 50.0,
               width: 20.0,
-              color: const Color(0XFFF2A902),
+              color: AppColor.themePrimary,
             ),
             Text(
               " SIGN IN",
-              style: GoogleFonts.poppins(
-                fontWeight: FontWeight.normal,
-                fontSize: 38.0,
-                color: const Color(0XFFF2A902),
+              style: TextStyle(
+                fontSize: 38,
+                color: AppColor.themePrimary,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w300,
               ),
             ),
           ],
@@ -54,87 +56,104 @@ class OverlayLoginScreen extends StatelessWidget {
           color: Colors.white,
           child: Padding(
             padding: const EdgeInsets.only(top: 15, left: 20.0, right: 20.0),
-            child: Column(
-              children: [
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: "User Name",
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: "Password",
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Forget Password?",
-                        style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.normal,
-                          fontSize: 14.0,
-                          color: Colors.black,
-                          textStyle: const TextStyle(
-                            decoration: TextDecoration.underline,
-                          ),
-                        ),
-                      ),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    decoration: InputDecoration(
+                      fillColor: Colors.grey.shade200,
+                      filled: true,
+                      enabledBorder: InputBorder.none,
+                      labelText: "User Name",
+                      border: OutlineInputBorder(),
                     ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 35,
-                ),
-                SizedBox(
-                  height: 40,
-                  child: TextButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: const Color(0XFFF2A902),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      fillColor: Colors.grey.shade200,
+                      filled: true,
+                      enabledBorder: InputBorder.none,
+                      labelText: "Password",
+                      border: OutlineInputBorder(),
                     ),
-                    onPressed: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: ((context) => const WelcomeScreen())));
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Center(
-                            child: Text(
-                              "Login",
-                              style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.normal,
-                                fontSize: 17.0,
-                                color: Colors.white,
-                              ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          "Forgot Password?",
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.normal,
+                            fontSize: 14.0,
+                            color: Colors.black,
+                            textStyle: const TextStyle(
+                              decoration: TextDecoration.underline,
                             ),
                           ),
                         ),
-                        const Icon(
-                          Icons.arrow_forward,
-                          color: Colors.white,
-                        ),
-                      ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 35,
+                  ),
+                  Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          AppColor.themePrimary,
+                          AppColor.themeSecondary,
+                        ],
+                        stops: [0.6, 2],
+                      ),
+                    ),
+                    child: TextButton(
+                      onPressed: () {
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: ((context) => const WelcomeScreen())));
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Center(
+                              child: Text(
+                                "Login",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const Icon(
+                            Icons.arrow_forward,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
+        const Spacer(),
         Padding(
           padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
           child: Text(
@@ -144,6 +163,7 @@ class OverlayLoginScreen extends StatelessWidget {
             ),
           ),
         ),
+        const Spacer(),
         Container(
           width: 250.0,
           child: Row(
@@ -168,7 +188,7 @@ class OverlayLoginScreen extends StatelessWidget {
                 ),
               ),
               Container(
-                height:50.0,
+                height: 50.0,
                 width: 50.0,
                 child: TextButton(
                   style: ElevatedButton.styleFrom(primary: Colors.white),
@@ -179,26 +199,36 @@ class OverlayLoginScreen extends StatelessWidget {
             ],
           ),
         ),
-        TextButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: ((context) => const RegisterScreen1()),
+        const Spacer(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height * 0.1,
+              width: MediaQuery.of(context).size.width,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(350),
+                  topRight: Radius.circular(350),
+                ),
+                color: Colors.white,
               ),
-            );
-          },
-          child: Text(
-            "Create new account",
-            style: GoogleFonts.poppins(
-              fontWeight: FontWeight.normal,
-              fontSize: 14.0,
-              color: Colors.black,
-              textStyle: const TextStyle(
-                decoration: TextDecoration.underline,
+              child: TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: ((context) => const RegisterScreen1()),
+                    ),
+                  );
+                },
+                child: Text(
+                  "Create new account",
+                  style: Theme.of(context).textTheme.subtitle2,
+                ),
               ),
             ),
-          ),
+          ],
         ),
       ],
     );

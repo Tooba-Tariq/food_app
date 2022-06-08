@@ -19,7 +19,7 @@ class GradientCircle extends StatelessWidget {
           shape: BoxShape.circle,
           gradient: LinearGradient(
             colors: const [
-              Color(0xFFFFC901),
+              Color(0xFFFFC901),                    
               Color(0xFFF2A902),
             ],
             begin: begin,
