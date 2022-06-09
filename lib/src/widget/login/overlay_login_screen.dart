@@ -112,7 +112,8 @@ class OverlayLoginScreen extends StatelessWidget {
                       gradient: LinearGradient(
                         colors: [
                           AppColor.themePrimary,
-                          AppColor.themeSecondary,
+                          AppColor
+                              .themeSecondary, // ab jo bhi color use krna h usko ese krna h
                         ],
                         stops: [0.6, 2],
                       ),
@@ -132,9 +133,11 @@ class OverlayLoginScreen extends StatelessWidget {
                               child: Text(
                                 "Login",
                                 style: TextStyle(
+                                  // font ese use krna h
                                   fontSize: 18,
                                   color: Colors.white,
-                                  fontFamily: 'Poppins',
+                                  fontFamily:
+                                      'Poppins', // yeh likhna zroori ni h kiu k hamne apni app ka default font  yei rakh dia h
                                   fontWeight: FontWeight.normal,
                                 ),
                               ),
@@ -204,7 +207,7 @@ class OverlayLoginScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * 0.1,
+              height: MediaQuery.of(context).size.height * 0.05,
               width: MediaQuery.of(context).size.width,
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
@@ -224,7 +227,8 @@ class OverlayLoginScreen extends StatelessWidget {
                 },
                 child: Text(
                   "Create new account",
-                  style: Theme.of(context).textTheme.subtitle2,
+                  style:
+                      Theme.of(context).textTheme.subtitle2, // yeh b ek tareeka
                 ),
               ),
             ),
