@@ -1,5 +1,5 @@
 name: food_app
-description: A new Flutter project.
+description: Food Application
 
 publish_to: "none"
 
@@ -12,6 +12,8 @@ dependencies:
   flutter:
     sdk: flutter
   introduction_screen: ^3.0.2
+  carousel_slider: ^4.1.1
+  smooth_page_indicator: ^1.0.0+2
 
   cupertino_icons: ^1.0.2
   google_fonts: ^3.0.1
