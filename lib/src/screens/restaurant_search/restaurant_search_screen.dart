@@ -1,8 +1,13 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, non_constant_identifier_names
+import 'package:food_app/src/widget/drawer/navigation_drawer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:search_page/search_page.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import '../../widget/bottom_navigation_bar/bottom_navigation_bar.dart';
+import '../../widget/restaurant_search/heading.dart';
+import '../../widget/restaurant_search/promotion_item.dart';
+import '../../widget/restaurant_search/tag.dart';
 
 class Person {
   final String name, surname;
@@ -40,74 +45,18 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
-          leading: Builder(
-            builder: (BuildContext context) {
-              return IconButton(
-                icon: const Icon(Icons.clear_all_outlined),
-                onPressed: () {
-                  Scaffold.of(context).openDrawer();
-                },
-                tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-              );
-            },
-          ),
           title: const Text("Current Location"),
+          actions: const [
+            Padding(
+              padding: EdgeInsets.only(right: 8.0),
+              child: Icon(Icons.more_vert_rounded),
+            )
+          ],
         ),
+        drawer: const NavigationDrawer(),
         body: SingleChildScrollView(
           child: Column(
             children: [
-//               CarouselSlider(
-
-//                 options: CarouselOptions(
-//                   height: 200.0,
-//                   initialPage: 0,
-//                   enableInfiniteScroll: true,
-//                   reverse: false,
-//                   autoPlay: true,
-//                   autoPlayInterval: Duration(seconds: 3),
-//                   autoPlayAnimationDuration: Duration(milliseconds: 800),
-//                   enlargeCenterPage: true,
-//                   scrollDirection: Axis.horizontal,
-//                 ),
-//                 items: [
-//                   1,
-//                   2,
-//                   3,
-//                   4,
-//                 ].map((i) {
-//                   return Builder(
-//                     builder: (BuildContext context) {
-//                       return Container(
-//                         width: MediaQuery.of(context).size.width,
-//                         margin: EdgeInsets.symmetric(horizontal: 5.0),
-//                         decoration: BoxDecoration(
-//                             image: DecorationImage(
-//                                 image: AssetImage("assets/images/slider.png")),
-//                             color: Colors.amber),
-//                         child: Text(""),
-//                       );
-//                     },
-//                   );
-//                 }).toList(),
-//               ),
-// //                CarouselSlider(
-//    items: items,
-//    options: CarouselOptions(
-//       height: 400,
-//       aspectRatio: 16/9,
-//       viewportFraction: 0.8,
-//       initialPage: 0,
-//       enableInfiniteScroll: true,
-//       reverse: false,
-//       autoPlay: true,
-//       autoPlayInterval: Duration(seconds: 3),
-//       autoPlayAnimationDuration: Duration(milliseconds: 800),
-//       autoPlayCurve: Curves.fastOutSlowIn,
-//       enlargeCenterPage: true,
-//       onPageChanged: callbackFunction,
-//       scrollDirection: Axis.horizontal,
-//    )
-//  ),
               SizedBox(
                 child: Column(
                   children: [
@@ -142,7 +91,7 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
                       },
                       icon: const Icon(Icons.search),
                     ),
-                    Container(
+                    SizedBox(
                       height: 230,
                       width: 350,
                       child: Column(
@@ -155,7 +104,7 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
                               padEnds: true,
                               autoPlay: true,
 
-                              autoPlayInterval: Duration(seconds: 3),
+                              autoPlayInterval: const Duration(seconds: 3),
                               onPageChanged: (index, reason) =>
                                   setState(() => activeindex = index),
                             ),
@@ -251,50 +200,12 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
             ],
           ),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                color: Colors.black,
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.wifi_outlined,
-                color: Colors.black,
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.message_rounded,
-                color: Colors.black,
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.favorite_border_rounded,
-                color: Colors.black,
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person_outline_outlined,
-                color: Colors.black,
-              ),
-              label: '',
-            ),
-          ],
-        ),
+        bottomNavigationBar: const bottomNavigationBar(),
       ),
     );
   }
 
-  Widget buildImage(String urlImage, int index) => Container(
+  Widget buildImage(String urlImage, int index) => SizedBox(
         width: double.infinity,
         child: Image.asset(
           'assets/images/food4.png',
@@ -303,137 +214,7 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
       );
   buildIndicator() => AnimatedSmoothIndicator(
         activeIndex: activeindex,
-        effect: WormEffect(activeDotColor: Colors.orange),
+        effect: const WormEffect(activeDotColor: Colors.orange),
         count: 4,
       );
-
-  ///
-}
-
-class Heading extends StatelessWidget {
-  String title;
-  String subtitle;
-  Heading({
-    Key? key,
-    required this.title,
-    required this.subtitle,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            title,
-            style: const TextStyle(
-              fontWeight: FontWeight.normal,
-              color: Colors.black,
-              fontSize: 16,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Text(
-            subtitle,
-            style: const TextStyle(
-              fontWeight: FontWeight.normal,
-              color: Colors.black,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class Tag extends StatelessWidget {
-  String title;
-  Color color;
-  Tag({
-    Key? key,
-    required this.title,
-    required this.color,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: TextButton(
-        style: ElevatedButton.styleFrom(primary: color),
-        onPressed: () {},
-        child: Text(
-          title,
-        ),
-      ),
-    );
-  }
-}
-
-class PromotionItem extends StatelessWidget {
-  String title;
-  String subtitle;
-  String imageUrl;
-  String rating;
-  PromotionItem({
-    Key? key,
-    required this.title,
-    required this.subtitle,
-    required this.imageUrl,
-    required this.rating,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 220.0,
-      width: 250.0,
-      child: Card(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 150.0,
-              width: 250,
-              child: Image.asset(
-                imageUrl,
-                fit: BoxFit.fill,
-              ),
-            ),
-            Text(
-              title,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 14.0,
-              ),
-            ),
-            Text(
-              subtitle,
-              style: const TextStyle(
-                fontSize: 11.0,
-                color: Colors.grey,
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Icon(
-                  Icons.star,
-                  color: Color(0XFFF2A902),
-                ),
-                Text(""),
-                Icon(
-                  Icons.favorite_rounded,
-                  color: Colors.red,
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }
