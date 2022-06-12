@@ -6,7 +6,7 @@ import 'src/screens/start/splash_screen.dart';
 void main() {
   runApp(const MyApp());
 }
-// mene pehli screens dekhin or font static add kia h google se ni lia assets ke throug kia // Acha tume App ka name change krna sikhata hun
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
