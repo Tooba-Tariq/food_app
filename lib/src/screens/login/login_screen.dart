@@ -9,6 +9,8 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.grey.shade100,
+        resizeToAvoidBottomInset: false,
         body: Stack(
           clipBehavior: Clip.hardEdge,
           children: [

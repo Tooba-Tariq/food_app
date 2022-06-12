@@ -1,10 +1,9 @@
-// ignore_for_file: avoid_print, unused_element, prefer_is_empty, prefer_final_fields, use_key_in_widget_constructors
+// ignore_for_file: deprecated_member_use
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:food_app/src/screens/restaurant_search/restaurant_search_screen.dart';
 import 'package:food_app/src/screens/welcome/welcome_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
-//import 'package:validate/validate.dart';  //for validation
 
 class MyData {
   String name = '';
@@ -14,14 +13,16 @@ class MyData {
 }
 
 class OverlayRegisterScreen extends StatefulWidget {
+  const OverlayRegisterScreen({Key? key}) : super(key: key);
+
   @override
   _OverlayRegisterScreenState createState() => _OverlayRegisterScreenState();
 }
 
 class _OverlayRegisterScreenState extends State<OverlayRegisterScreen> {
   int currStep = 0;
-  static var _focusNode = FocusNode();
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  static final _focusNode = FocusNode();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   static MyData data = MyData();
 
   static var dropdownValue = '1';
@@ -32,7 +33,9 @@ class _OverlayRegisterScreenState extends State<OverlayRegisterScreen> {
     _focusNode.addListener(
       () {
         setState(() {});
-        print('Has focus: $_focusNode.hasFocus');
+        if (kDebugMode) {
+          print('Has focus: $_focusNode.hasFocus');
+        }
       },
     );
   }
@@ -65,7 +68,7 @@ class _OverlayRegisterScreenState extends State<OverlayRegisterScreen> {
                   if (value!.isEmpty || value.length < 4) {
                     return 'Please Enter Username';
                   }
-                  ;
+                  return null;
                 },
                 decoration: const InputDecoration(
                   labelText: 'Username',
@@ -86,10 +89,10 @@ class _OverlayRegisterScreenState extends State<OverlayRegisterScreen> {
                 maxLines: 1,
                 //initialValue: 'Aseem Wangoo',
                 validator: (value) {
-                  if (value!.isEmpty || value.length < 1) {
+                  if (value!.isEmpty || value.isEmpty) {
                     return 'Please Enter First Name';
                   }
-                  ;
+                  return null;
                 },
                 decoration: const InputDecoration(
                   labelText: 'First Name',
@@ -110,10 +113,10 @@ class _OverlayRegisterScreenState extends State<OverlayRegisterScreen> {
                 maxLines: 1,
                 //initialValue: 'Aseem Wangoo',
                 validator: (value) {
-                  if (value!.isEmpty || value.length < 1) {
+                  if (value!.isEmpty || value.isEmpty) {
                     return 'Please Enter Last Name';
                   }
-                  ;
+                  return null;
                 },
                 decoration: const InputDecoration(
                   labelText: 'Last Name',
@@ -143,7 +146,7 @@ class _OverlayRegisterScreenState extends State<OverlayRegisterScreen> {
                           .hasMatch(value)) {
                     return 'Please Enter Valid Email';
                   }
-                  ;
+                  return null;
                 },
                 onSaved: (String? value) {
                   data.email = value!;
@@ -166,6 +169,7 @@ class _OverlayRegisterScreenState extends State<OverlayRegisterScreen> {
                           .hasMatch(value)) {
                     return 'Please Enter Valid email';
                   }
+                  return null;
                 },
                 onSaved: (String? value) {
                   data.email = value!;
@@ -195,7 +199,7 @@ class _OverlayRegisterScreenState extends State<OverlayRegisterScreen> {
               if (value!.isEmpty || value.length < 10) {
                 return 'Please Enter Valid Number';
               }
-              ;
+              return null;
             },
             onSaved: (String? value) {
               data.phone = value!;
@@ -221,7 +225,8 @@ class _OverlayRegisterScreenState extends State<OverlayRegisterScreen> {
             style: const TextStyle(color: Color(0XFFF2A902)),
             underline: Container(
               height: 2,
-            ),menuMaxHeight: 200.0,
+            ),
+            menuMaxHeight: 200.0,
             onChanged: (String? newValue) {
               setState(() {
                 dropdownValue = newValue!;
@@ -256,10 +261,12 @@ class _OverlayRegisterScreenState extends State<OverlayRegisterScreen> {
         showSnackBarMessage('Please enter correct data');
       } else {
         formState.save();
-        print("Name: ${data.name}");
-        print("Phone: ${data.phone}");
-        print("Email: ${data.email}");
-        print("Age: ${data.age}");
+        if (kDebugMode) {
+          print("Name: ${data.name}");
+          print("Phone: ${data.phone}");
+          print("Email: ${data.email}");
+          print("Age: ${data.age}");
+        }
 
         showDialog(
           context: context,

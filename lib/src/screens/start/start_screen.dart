@@ -16,30 +16,36 @@ class _StartScreenState extends State<StartScreen> {
     return SafeArea(
       child: Scaffold(
         body: Stack(
-          children: const [
-            Positioned(
-              bottom: -160,
-              left: -100,
-              child: GradientCircle(
-                radius: 150,
-              ),
-            ),
+          children: [
             Positioned(
               bottom: -160,
               left: -15,
               right: -8,
               child: GradientCircle(
-                radius: 150,
+                radius: MediaQuery.of(context).size.width * 0.39,
+                begin: Alignment.bottomLeft,
+                end: Alignment.topRight,
               ),
             ),
             Positioned(
               bottom: -130,
               right: -90,
               child: GradientCircle(
-                radius: 150,
+                radius: MediaQuery.of(context).size.width * 0.4,
+                begin: Alignment.centerRight,
+                end: Alignment.centerLeft,
               ),
             ),
-            OverlayWidget(),
+            Positioned(
+              bottom: -160,
+              left: -100,
+              child: GradientCircle(
+                radius: MediaQuery.of(context).size.width * 0.35,
+                begin: Alignment.bottomRight,
+                end: Alignment.topLeft,
+              ),
+            ),
+            const OverlayWidget(),
           ],
         ),
       ),

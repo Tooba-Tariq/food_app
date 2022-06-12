@@ -15,13 +15,14 @@ class GradientCircle extends StatelessWidget {
     return CircleAvatar(
       radius: radius,
       child: Container(
-        decoration: BoxDecoration( 
+        decoration: BoxDecoration(
           shape: BoxShape.circle,
           gradient: LinearGradient(
             colors: const [
-              Color(0xFFFFC901),                    
+              Color(0xFFFFC901),
               Color(0xFFF2A902),
             ],
+            // stops: [0.2, 0.8],
             begin: begin,
             end: end,
           ),

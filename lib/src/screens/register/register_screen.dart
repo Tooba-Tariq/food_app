@@ -60,8 +60,8 @@ class _RegisterScreen1State extends State<RegisterScreen1> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 3.0),
+                const Padding(
+                  padding: EdgeInsets.only(top: 3.0),
                   child: SingleChildScrollView(
                     child: Center(
                       child: OverlayRegisterScreen(),

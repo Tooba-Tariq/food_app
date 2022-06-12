@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../../core/constants/app_colors.dart';
+import '../../../core/util/custom_page_route.dart';
 import '../../screens/login/login_screen.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import '../../../core/util/logo_widget.dart';
 
 class OverlayWidget extends StatelessWidget {
@@ -29,15 +29,11 @@ class OverlayWidget extends StatelessWidget {
               ),
               Text(
                 "Welcome!",
-                style: Theme.of(context).textTheme.subtitle1,
+                style: Theme.of(context).textTheme.headline4,
               ),
               Text(
                 "\nEat Food App allow you to find best \n foods and restaurant around you!",
-                style: GoogleFonts.poppins(
-                  fontWeight: FontWeight.normal,
-                  fontSize: 16.0,
-                  color: Colors.black,
-                ),
+                style: Theme.of(context).textTheme.subtitle2,
               ),
             ],
           ),
@@ -56,9 +52,11 @@ class OverlayWidget extends StatelessWidget {
                 ),
                 onPressed: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: ((context) => const LoginScreen())));
+                    context,
+                    CustomPageRoute(
+                      builder: const LoginScreen(),
+                    ),
+                  );
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,17 +65,17 @@ class OverlayWidget extends StatelessWidget {
                       child: Center(
                         child: Text(
                           "Don't Wait, Get Started!",
-                          style: GoogleFonts.poppins(
+                          style: TextStyle(
                             fontWeight: FontWeight.normal,
                             fontSize: 18.0,
-                            color: const Color(0XFFF2A902),
+                            color: AppColor.themePrimary,
                           ),
                         ),
                       ),
                     ),
-                    const Icon(
+                    Icon(
                       Icons.arrow_forward,
-                      color: Color(0XFFF2A902),
+                      color: AppColor.themePrimary,
                     )
                   ],
                 ),

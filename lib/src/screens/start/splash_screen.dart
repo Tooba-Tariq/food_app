@@ -1,27 +1,43 @@
-import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
+import '../../../core/util/custom_page_route.dart';
 
 import '../../../core/util/logo_widget.dart';
 import 'start_screen.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsFlutterBinding.ensureInitialized();
+    loadingNextScreen();
+  }
+
+  loadingNextScreen() async {
+    await Future.delayed(const Duration(seconds: 2));
+    Navigator.pushAndRemoveUntil(
+      context,
+      CustomPageRoute(
+        builder: const StartScreen(),
+      ),
+      (route) => false,
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: AnimatedSplashScreen(
-        duration: 3000,
-        splashIconSize: 100,
-        splash: const Logo(
-          height: 100,
-          width: 100,
+    return const Scaffold(
+      body: Center(
+        child: Logo(
+          height: 75,
+          width: 75,
         ),
-        nextScreen: const StartScreen(),
-        splashTransition: SplashTransition.fadeTransition,
-        pageTransitionType: PageTransitionType.rightToLeftWithFade,
-        backgroundColor: Colors.white,
       ),
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/src/screens/cart/cart.dart';
+import '../../screens/cart/cart.dart';
 import '../../../core/constants/app_colors.dart';
 
 class NavigationDrawer extends StatelessWidget {
@@ -235,7 +235,7 @@ class NavigationDrawer extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.only(left: 8.0),
-          child: Container(
+          child: SizedBox(
             height: 100.0,
             width: 100.0,
             child: Image.asset("assets/images/image.png"),

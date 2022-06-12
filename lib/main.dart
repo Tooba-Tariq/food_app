@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+
 import 'src/screens/start/splash_screen.dart';
 
 void main() {
@@ -16,20 +17,29 @@ class MyApp extends StatelessWidget {
       title: 'Food App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          primarySwatch: Colors.orange,
-          accentColor: Colors.white,
-          // errorColor: Colors.red,
-          fontFamily: 'Poppins',// /yeh
+          fontFamily: 'Poppins', // /yeh
           textTheme: ThemeData.light().textTheme.copyWith(
+                headline4: const TextStyle(
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.normal,
+                  fontSize: 28,
+                  color: Colors.black,
+                ),
                 subtitle1: const TextStyle(
                   fontFamily: 'Poppins',
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.normal,
                   fontSize: 18,
                 ),
                 subtitle2: const TextStyle(
                   fontFamily: 'Poppins',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 16,
+                ),
+                labelMedium: const TextStyle(
+                  fontFamily: 'Poppins',
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.grey,
                 ),
                 button: const TextStyle(
                   color: Colors.white,
@@ -43,7 +53,9 @@ class MyApp extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-          )),
+          ),
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange)
+              .copyWith(secondary: Colors.white)),
       home: const SafeArea(
         child: SplashScreen(),
       ),

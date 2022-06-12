@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/src/widget/bottom_navigation_bar/bottom_navigation_bar.dart';
+import '../../widget/bottom_navigation_bar/bottom_navigation_bar.dart';
 
 class Cart extends StatelessWidget {
   const Cart({Key? key}) : super(key: key);
@@ -61,7 +61,7 @@ class Cart extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(top: 20.0),
             child: Column(
-              children: [
+              children: const [
                 // Container(
                 //   color: Colors.grey,
                 //   height: 80.0,
