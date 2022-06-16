@@ -19,6 +19,7 @@ dependencies:
   google_fonts: ^3.0.1
   animated_splash_screen: ^1.2.0
   search_page: ^2.0.0+1
+  toggle_switch: ^2.0.1
 
 dev_dependencies:
   flutter_test:
