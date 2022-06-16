@@ -33,7 +33,10 @@ class OverlayWidget extends StatelessWidget {
               ),
               Text(
                 "\nEat Food App allow you to find best \n foods and restaurant around you!",
-                style: Theme.of(context).textTheme.subtitle2,
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w300,
+                ),
               ),
             ],
           ),
@@ -67,7 +70,7 @@ class OverlayWidget extends StatelessWidget {
                           "Don't Wait, Get Started!",
                           style: TextStyle(
                             fontWeight: FontWeight.normal,
-                            fontSize: 18.0,
+                            fontSize: 17.0,
                             color: AppColor.themePrimary,
                           ),
                         ),

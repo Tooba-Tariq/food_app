@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
           textTheme: ThemeData.light().textTheme.copyWith(
                 headline4: const TextStyle(
                   fontFamily: 'Poppins',
-                  fontWeight: FontWeight.normal,
-                  fontSize: 28,
+                  fontWeight: FontWeight.w300,
+                  fontSize: 27,
                   color: Colors.black,
                 ),
                 subtitle1: const TextStyle(
@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
                   subtitle1: const TextStyle(
                     fontFamily: 'Poppins',
                     fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
           ),
