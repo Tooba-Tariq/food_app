@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/src/widget/bottom_navigation_bar/bottom_navigation_bar.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
-import '../restaurant_search/restaurant_search_screen.dart';
+
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -23,7 +24,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: ((context) => const RestaurantSearchScreen()),
+                builder: ((context) => const bottomNavigationBar()),
               ),
             );
           },
