@@ -5,16 +5,16 @@ import 'package:food_app/core/constants/app_colors.dart';
 import 'package:food_app/src/screens/home/home_screen.dart';
 import 'package:food_app/src/screens/inbox/inbox.dart';
 
-class bottomNavigationBar extends StatefulWidget {
-  const bottomNavigationBar({
+class TabScreen extends StatefulWidget {
+  const TabScreen({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<bottomNavigationBar> createState() => _bottomNavigationBarState();
+  State<TabScreen> createState() => _TabScreenState();
 }
 
-class _bottomNavigationBarState extends State<bottomNavigationBar> {
+class _TabScreenState extends State<TabScreen> {
   int _selectedPageIndex = 0;
   final List<Map<String, dynamic>> _pages = [
     {

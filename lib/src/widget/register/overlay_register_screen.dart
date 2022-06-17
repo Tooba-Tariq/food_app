@@ -1,16 +1,14 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:food_app/src/screens/welcome/welcome_screen.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-class MyData {
-  String name = '';
-  String phone = '';
-  String email = '';
-  String age = '';
-}
+import 'package:flutter/material.dart';
+import 'package:food_app/core/util/custom_page_route.dart';
+import 'package:food_app/src/screens/login/login_screen.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import '/src/screens/welcome/welcome_screen.dart';
+import '../../../core/constants/app_colors.dart';
+import 'form_drop_down_button.dart';
+import 'form_text_field.dart';
 
 class OverlayRegisterScreen extends StatefulWidget {
   const OverlayRegisterScreen({Key? key}) : super(key: key);
@@ -21,373 +19,302 @@ class OverlayRegisterScreen extends StatefulWidget {
 
 class _OverlayRegisterScreenState extends State<OverlayRegisterScreen> {
   int currStep = 0;
-  static final _focusNode = FocusNode();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  static MyData data = MyData();
 
-  static var dropdownValue = '1';
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  String ageValue = 'Age';
+  String statusValue = 'Status';
 
+  int formController = 0;
+
+  List<DropdownMenuItem> ageItems = [
+    const DropdownMenuItem(
+      value: 'Age',
+      child: Text(
+        'Age',
+        style: TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 16,
+          fontWeight: FontWeight.normal,
+        ),
+      ),
+    )
+  ];
+  List<DropdownMenuItem> statusItems = [
+    const DropdownMenuItem(
+      value: 'Status',
+      child: Text(
+        'Status',
+        style: TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 16,
+          fontWeight: FontWeight.normal,
+        ),
+      ),
+    ),
+    const DropdownMenuItem(
+      value: 'Single',
+      child: Text(
+        'Single',
+        style: TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 16,
+          fontWeight: FontWeight.normal,
+        ),
+      ),
+    ),
+    const DropdownMenuItem(
+      value: 'Married',
+      child: Text(
+        'Married',
+        style: TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 16,
+          fontWeight: FontWeight.normal,
+        ),
+      ),
+    ),
+  ];
+
+  List<List<Widget>> steps(BuildContext context) => [
+        [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              FormTextField(label: 'User Name', controller: userNameController),
+              const SizedBox(
+                height: 20,
+              ),
+              FormTextField(
+                label: 'Email',
+                controller: emailController,
+              ),
+              const SizedBox(
+                height: 35,
+              ),
+            ],
+          ),
+          buildIndicator(),
+          formControlButton(
+              title: 'Next',
+              onPressed: () {
+                setState(() {
+                  formController = (formController + 1) % 3;
+                });
+              }),
+        ],
+        [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              FormTextField(
+                  label: 'First Name', controller: firstNameController),
+              const SizedBox(
+                height: 20,
+              ),
+              FormTextField(label: 'Last Name', controller: lastNameController),
+              const SizedBox(
+                height: 20,
+              ),
+              FormTextField(
+                  label: 'Password',
+                  obscureText: true,
+                  controller: passwordController),
+            ],
+          ),
+          buildIndicator(),
+          formControlButton(
+              title: 'Next',
+              onPressed: () {
+                setState(() {
+                  formController = (formController + 1) % 3;
+                });
+              }),
+        ],
+        [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              FormTextField(label: 'Phone', controller: phoneController),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  FormDropDownButton(
+                    label: 'Status',
+                    valueController: statusValue,
+                    items: statusItems,
+                    width: 150,
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  FormDropDownButton(
+                    label: 'Age',
+                    valueController: ageValue,
+                    items: ageItems,
+                    width: 100,
+                  ),
+                ],
+              ),
+            ],
+          ),
+          buildIndicator(),
+          formControlButton(
+              title: 'Sign Up',
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    CustomPageRoute(builder: const WelcomeScreen()),
+                    (route) => false);
+              }),
+        ],
+      ];
+
+  Widget buildIndicator() => AnimatedSmoothIndicator(
+        activeIndex: formController,
+        effect: const WormEffect(
+          dotHeight: 12,
+          dotWidth: 12,
+          dotColor: Colors.orange,
+          paintStyle: PaintingStyle.stroke,
+          activeDotColor: Colors.orange,
+        ),
+        count: 3,
+      );
   @override
   void initState() {
     super.initState();
-    _focusNode.addListener(
-      () {
-        setState(() {});
-        if (kDebugMode) {
-          print('Has focus: $_focusNode.hasFocus');
-        }
-      },
+    ageItems.addAll(
+      List.generate(100, (index) => index.toString())
+          .map<DropdownMenuItem<String>>(
+        (String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(
+              value,
+              style: const TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 16,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+          );
+        },
+      ).toList(),
     );
   }
 
   @override
-  void dispose() {
-    // _focusNode.dispose();
-    super.dispose();
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Container(
+          decoration: const BoxDecoration(color: Colors.white),
+          height: 320,
+          width: 320,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 15, left: 20.0, right: 20.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: steps(context)[formController],
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.08,
+        ),
+        Text(
+          'Terms & Conditions',
+          style: TextStyle(
+            fontFamily: 'Poppins',
+            color: AppColor.themePrimary,
+            fontSize: 14,
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  CustomPageRoute(
+                    builder: const LoginScreen(),
+                  ),
+                );
+              },
+              child: const Text(
+                "Already Have An Account? Login",
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.white,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.normal,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
   }
 
-  List<Step> steps() => [
-        Step(
-          title: const Text('Account'),
-          //subtitle: const Text('Enter your name'),
-          isActive: true,
-          //state: StepState.error,
-          state: StepState.indexed,
-          content: Column(
-            children: [
-              TextFormField(
-                focusNode: _focusNode,
-                keyboardType: TextInputType.text,
-                autocorrect: false,
-                onSaved: (String? value) {
-                  data.name = value!;
-                },
-                maxLines: 1,
-                //initialValue: 'Aseem Wangoo',
-                validator: (value) {
-                  if (value!.isEmpty || value.length < 4) {
-                    return 'Please Enter Username';
-                  }
-                  return null;
-                },
-                decoration: const InputDecoration(
-                  labelText: 'Username',
-                  hintText: 'Username',
-                  //filled: true,
-
-                  labelStyle:
-                      TextStyle(decorationStyle: TextDecorationStyle.solid),
-                ),
-              ),
-              TextFormField(
-                focusNode: _focusNode,
-                keyboardType: TextInputType.text,
-                autocorrect: false,
-                onSaved: (String? value) {
-                  data.name = value!;
-                },
-                maxLines: 1,
-                //initialValue: 'Aseem Wangoo',
-                validator: (value) {
-                  if (value!.isEmpty || value.isEmpty) {
-                    return 'Please Enter First Name';
-                  }
-                  return null;
-                },
-                decoration: const InputDecoration(
-                  labelText: 'First Name',
-                  hintText: 'First Name',
-                  //filled: true,
-
-                  labelStyle:
-                      TextStyle(decorationStyle: TextDecorationStyle.solid),
-                ),
-              ),
-              TextFormField(
-                focusNode: _focusNode,
-                keyboardType: TextInputType.text,
-                autocorrect: false,
-                onSaved: (String? value) {
-                  data.name = value!;
-                },
-                maxLines: 1,
-                //initialValue: 'Aseem Wangoo',
-                validator: (value) {
-                  if (value!.isEmpty || value.isEmpty) {
-                    return 'Please Enter Last Name';
-                  }
-                  return null;
-                },
-                decoration: const InputDecoration(
-                  labelText: 'Last Name',
-                  hintText: 'Last Name',
-                  //filled: true,
-                  labelStyle:
-                      TextStyle(decorationStyle: TextDecorationStyle.solid),
-                ),
-              ),
-            ],
-          ),
+  Container formControlButton({
+    required String title,
+    required Function onPressed,
+  }) {
+    return Container(
+      height: 40,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            AppColor.themePrimary,
+            AppColor.themeSecondary,
+          ],
+          stops: const [0.6, 2],
         ),
-        Step(
-          title: const Text('Email'),
-          // subtitle: const Text('Subtitle'),
-          isActive: true,
-          state: StepState.indexed,
-          // state: StepState.disabled,
-          content: Column(
-            children: [
-              TextFormField(
-                keyboardType: TextInputType.emailAddress,
-                autocorrect: false,
-                validator: (value) {
-                  if (value!.isEmpty ||
-                      RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                          .hasMatch(value)) {
-                    return 'Please Enter Valid Email';
-                  }
-                  return null;
-                },
-                onSaved: (String? value) {
-                  data.email = value!;
-                },
-                maxLines: 1,
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                  hintText: 'Enter a Email Address',
-                  icon: Icon(Icons.email),
-                  labelStyle:
-                      TextStyle(decorationStyle: TextDecorationStyle.solid),
-                ),
-              ),
-              TextFormField(
-                keyboardType: TextInputType.emailAddress,
-                autocorrect: false,
-                validator: (value) {
-                  if (value!.isEmpty ||
-                      RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
-                          .hasMatch(value)) {
-                    return 'Please Enter Valid email';
-                  }
-                  return null;
-                },
-                onSaved: (String? value) {
-                  data.email = value!;
-                },
-                maxLines: 1,
-                decoration: const InputDecoration(
-                  labelText: 'Password',
-                  hintText: 'Enter Password',
-                  icon: Icon(Icons.key),
-                  labelStyle:
-                      TextStyle(decorationStyle: TextDecorationStyle.solid),
-                ),
-              ),
-            ],
-          ),
-        ),
-        Step(
-          title: const Text('Phone Number'),
-          //subtitle: const Text('Subtitle'),
-          isActive: true,
-          //state: StepState.editing,
-          state: StepState.indexed,
-          content: TextFormField(
-            keyboardType: TextInputType.phone,
-            autocorrect: false,
-            validator: (value) {
-              if (value!.isEmpty || value.length < 10) {
-                return 'Please Enter Valid Number';
-              }
-              return null;
-            },
-            onSaved: (String? value) {
-              data.phone = value!;
-            },
-            maxLines: 1,
-            decoration: const InputDecoration(
-              labelText: 'Phone Number',
-              hintText: 'Enter a Number',
-              icon: Icon(Icons.phone),
-              labelStyle: TextStyle(decorationStyle: TextDecorationStyle.solid),
+      ),
+      child: TextButton(
+        onPressed: () {
+          onPressed();
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const SizedBox(
+              width: 30,
             ),
-          ),
-        ),
-        Step(
-          title: const Text('Age'),
-          // subtitle: const Text('Subtitle'),
-          isActive: true,
-          state: StepState.indexed,
-          content: DropdownButton<String>(
-            value: dropdownValue.toString(),
-            icon: const Icon(Icons.keyboard_arrow_down_rounded),
-            elevation: 16,
-            style: const TextStyle(color: Color(0XFFF2A902)),
-            underline: Container(
-              height: 2,
-            ),
-            menuMaxHeight: 200.0,
-            onChanged: (String? newValue) {
-              setState(() {
-                dropdownValue = newValue!;
-              });
-            },
-            items: List.generate(100, (index) => index.toString())
-                .map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-          ),
-        ),
-      ];
-
-  @override
-  Widget build(BuildContext context) {
-    void showSnackBarMessage(String message,
-        [MaterialColor color = Colors.red]) {
-      Scaffold.of(context).showSnackBar(
-        SnackBar(
-          content: Text(message),
-        ),
-      );
-    }
-
-    void _submitDetails() {
-      final FormState? formState = _formKey.currentState;
-
-      if (!formState!.validate()) {
-        showSnackBarMessage('Please enter correct data');
-      } else {
-        formState.save();
-        if (kDebugMode) {
-          print("Name: ${data.name}");
-          print("Phone: ${data.phone}");
-          print("Email: ${data.email}");
-          print("Age: ${data.age}");
-        }
-
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text("Details"),
-            //content: new Text("Hello World"),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: <Widget>[
-                  Text("Name : " + data.name),
-                  Text("Phone : " + data.phone),
-                  Text("Email : " + data.email),
-                  Text("Age : " + data.age),
-                ],
-              ),
-            ),
-            actions: <Widget>[
-              FlatButton(
-                child: const Text('OK'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          ),
-        );
-      }
-    }
-
-    return SizedBox(
-      height: 550,
-      child: Form(
-        key: _formKey,
-        child: SizedBox(
-          child: ListView(
-            children: <Widget>[
-              Stepper(
-                steps: steps(),
-                type: StepperType.vertical,
-                currentStep: currStep,
-                onStepContinue: () {
-                  setState(
-                    () {
-                      if (currStep < steps().length - 1) {
-                        currStep = currStep + 1;
-                      } else {
-                        currStep = 0;
-                      }
-                      // else {
-                      // Scaffold
-                      //     .of(context)
-                      //     .showSnackBar(new SnackBar(content: new Text('$currStep')));
-
-                      // if (currStep == 1) {
-                      //   print('First Step');
-                      //   print('object' + FocusScope.of(context).toStringDeep());
-                      // }
-
-                      // }
-                    },
-                  );
-                },
-                onStepCancel: () {
-                  setState(
-                    () {
-                      if (currStep > 0) {
-                        currStep = currStep - 1;
-                      } else {
-                        currStep = 0;
-                      }
-                    },
-                  );
-                },
-                onStepTapped: (step) {
-                  setState(
-                    () {
-                      currStep = step;
-                    },
-                  );
-                },
-              ),
-              SizedBox(
-                height: 40,
-                child: TextButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: const Color(0XFFF2A902),
-                  ),
-                  onPressed: () {
-                    _submitDetails();
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: ((context) => const WelcomeScreen()),
-                      ),
-                    );
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Center(
-                          child: Text(
-                            "Sign Up",
-                            style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.normal,
-                              fontSize: 17.0,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const Icon(
-                        Icons.arrow_forward,
-                        color: Colors.white,
-                      ),
-                    ],
+            Expanded(
+              child: Center(
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    color: Colors.white,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+            const Icon(
+              Icons.arrow_forward,
+              color: Colors.white,
+            ),
+          ],
         ),
       ),
     );

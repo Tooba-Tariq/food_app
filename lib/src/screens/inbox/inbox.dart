@@ -16,24 +16,7 @@ class _InboxScreenState extends State<InboxScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        // appBar: AppBar(
-        //   backgroundColor: Colors.white,
-        //   elevation: 0,
-        //   leading: Icon(
-        //             Icons.arrow_back,
-        //             color: AppColor.themeSecondary,
-        //             size: 20.0,
-        //           ),
-        //   title: const Text("Inbox"),
-        //   actions: const [
-
-        //     // Padding(
-        //     //   padding: EdgeInsets.only(right: 8.0),
-        //     //   child: Icon(Icons.more_vert_rounded),
-        //     // )
-        //   ],
-
-        // ),
+      
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

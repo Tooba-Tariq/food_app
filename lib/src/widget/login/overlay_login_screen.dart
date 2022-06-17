@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/src/widget/bottom_navigation_bar/bottom_navigation_bar.dart';
+import '../../screens/tabs/tab_screen.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/util/custom_page_route.dart';
-
 import '../../screens/register/register_screen.dart';
 
 class OverlayLoginScreen extends StatelessWidget {
@@ -126,7 +125,7 @@ class OverlayLoginScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           CustomPageRoute(
-                            builder: const bottomNavigationBar(),
+                            builder: const TabScreen(),
                           ),
                         );
                       },

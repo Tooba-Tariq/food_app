@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
             child: Column(
               children: [
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width *
                       0.8, 
                   child: GestureDetector(

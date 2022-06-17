@@ -31,7 +31,7 @@ class OverlayWidget extends StatelessWidget {
                 "Welcome!",
                 style: Theme.of(context).textTheme.headline4,
               ),
-              Text(
+              const Text(
                 "\nEat Food App allow you to find best \n foods and restaurant around you!",
                 style: TextStyle(
                   fontSize: 13,
