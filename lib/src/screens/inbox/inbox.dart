@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:food_app/src/widget/inbox/coupon_tab.dart';
 import 'package:food_app/src/widget/inbox/message_tab.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
@@ -68,12 +69,11 @@ class _InboxScreenState extends State<InboxScreen> {
                   widget.appBarSize -
                   (boxSize + 100)),
               child: LayoutBuilder(builder: (context, constarints) {
-                //ok tobabasas y text row ma lagaya lakin us ma bhi issue a raha
                 return TabBarView(
-                  
+
                   children: [
                     MessageTab(),
-                    Container(),
+                    CouponTab(),
                     Container(),
                   ],
                 );

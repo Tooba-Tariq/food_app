@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/core/constants/app_colors.dart';
@@ -11,28 +10,26 @@ class MessageTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemBuilder: (context, index) => Center(
-        child: Container(
+        child: SizedBox(
           height: 100,
           width: 370,
           child: Padding(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             child: Row(
               children: [
                 Badge(
                   animationType: BadgeAnimationType.scale,
                   badgeContent: Text(
                     Random().nextInt(90).toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 10,
                       color: Colors.white,
-
-                      
                     ),
                   ),
-                  position: BadgePosition(start: -3, top: -3),
+                  position: const BadgePosition(start: -3, top: -3),
                   badgeColor: AppColor.themePrimary,
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         // borderRadius: BorderRadius.circular(20),
                         ),
                     child: ClipRRect(
@@ -42,7 +39,7 @@ class MessageTab extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   width: 275,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,7 +48,7 @@ class MessageTab extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                          const Text(
                             "Jack Gamble",
                             style: TextStyle(
                               fontSize: 16,
@@ -66,7 +63,7 @@ class MessageTab extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Text(
+                      const Text(
                         "Lorem ipsum dolor sit amet, nonumy consetetur elitr.",
                         style: TextStyle(
                           fontSize: 13,
