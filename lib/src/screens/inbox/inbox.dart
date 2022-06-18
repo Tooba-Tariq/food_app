@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/src/widget/inbox/coupon_tab.dart';
-import 'package:food_app/src/widget/inbox/message_tab.dart';
+
+import '../../widget/inbox/coupon_tab.dart';
+import '../../widget/inbox/message_tab.dart';
 
 // ignore: must_be_immutable
 class InboxScreen extends StatefulWidget {
