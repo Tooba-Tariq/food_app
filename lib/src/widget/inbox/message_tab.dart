@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
-import 'package:food_app/core/constants/app_colors.dart';
+import '../../../core/constants/app_colors.dart';
 
 class MessageTab extends StatelessWidget {
   const MessageTab({Key? key}) : super(key: key);

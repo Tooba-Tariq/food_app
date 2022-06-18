@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/core/util/custom_page_route.dart';
-import 'package:food_app/src/screens/login/login_screen.dart';
+import '../../../core/util/custom_page_route.dart';
+import '../../screens/login/login_screen.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../screens/cart/cart.dart';

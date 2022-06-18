@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/core/constants/app_colors.dart';
 
 import 'package:introduction_screen/introduction_screen.dart';
 
 import '../tabs/tab_screen.dart';
-
-
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -19,7 +18,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: IntroductionScreen(
-        isTopSafeArea: true,
+        // isTopSafeArea: true,
         done: const Text('Done'),
         onDone: () {
           Navigator.push(
@@ -29,15 +28,24 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
           );
         },
+        globalBackgroundColor: AppColor.themePrimary,
+        dotsDecorator: DotsDecorator(
+          activeColor: AppColor.themePrimary,
+        ),
+        overrideNext: Container(),
         next: Container(),
         pages: [
           PageViewModel(
+            footer: ElevatedButton(
+              onPressed: () {},
+              child: Text('Data'),
+            ),
             decoration: const PageDecoration(
               imageFlex: 3,
               bodyPadding: EdgeInsets.zero,
               bodyTextStyle: TextStyle(
                 fontSize: 14.0,
-                fontWeight: FontWeight.normal,
+                fontWeight: FontWeight.w300,
               ),
             ),
             title: 'Find your nearby food places\nand your favourite foods',
@@ -49,7 +57,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   width: MediaQuery.of(context).size.width * 1.5,
                   child: Image.asset(
                     "assets/images/map.png",
-                    fit: BoxFit.fitWidth,
+                    fit: BoxFit.fill,
                   ),
                 ),
               ],
@@ -63,14 +71,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             title: "Get your favorite food delivered at\n your door step.",
             body: "",
             image: Container(
-              width: MediaQuery.of(context).size.width,
               height: 500,
-              color: const Color(0xFFFFF1D6),
-              child: SizedBox(
-                height: 400,
-                child: Image.asset(
-                  "assets/images/pic.png",
-                  fit: BoxFit.contain,
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: 200,
+                color: const Color(0xFFFFF1D6),
+                child: Center(
+                  child: SizedBox(
+                    height: 300,
+                    child: Image.asset(
+                      "assets/images/pic.png",
+                      // fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
             ),
