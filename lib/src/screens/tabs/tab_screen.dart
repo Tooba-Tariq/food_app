@@ -16,79 +16,86 @@ class TabScreen extends StatefulWidget {
 
 class _TabScreenState extends State<TabScreen> {
   int _selectedPageIndex = 0;
-  final List<Map<String, dynamic>> _pages = [
-    {
-      'appBar': AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: const Text("Current Location"),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 8.0),
-            child: Icon(Icons.more_vert_rounded),
-          )
-        ],
-      ),
-      'drawer': const NavigationDrawer(),
-      'route': const HomeScreen(),
-    },
-    {
-      'appBar': AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: IconButton(
-            icon: Icon(
-              Icons.adaptive.arrow_back,
-              color: AppColor.themePrimary,
-            ),
-            onPressed: () {}),
-        title: const Text('News Feed'),
-      ),
-      'route': const Text('News Feed'),
-    },
-    {
-      'appBar': AppBar(
-        backgroundColor: Colors.white,
-        leading: IconButton(
-            icon: Icon(
-              Icons.adaptive.arrow_back,
-              color: AppColor.themePrimary,
-            ),
-            onPressed: () {}),
-        elevation: 0,
-        title: const Text('Inbox'),
-      ),
-      'route': const InboxScreen(),
-    },
-    {
-      'appBar': AppBar(
-        backgroundColor: Colors.white,
-        leading: IconButton(
-            icon: Icon(
-              Icons.adaptive.arrow_back,
-              color: AppColor.themePrimary,
-            ),
-            onPressed: () {}),
-        elevation: 0,
-        title: const Text('Favorites'),
-      ),
-      'route': const Text('Favorites'),
-    },
-    {
-      'appBar': AppBar(
-        backgroundColor: Colors.white,
-        leading: IconButton(
-            icon: Icon(
-              Icons.adaptive.arrow_back,
-              color: AppColor.themePrimary,
-            ),
-            onPressed: () {}),
-        elevation: 0,
-        title: const Text('Person'),
-      ),
-      'route': const Text('Person'),
-    },
-  ];
+
+  List<AppBar> get appBar => [
+        AppBar(
+          backgroundColor: Colors.white,
+          leading: IconButton(
+              icon: Icon(
+                Icons.adaptive.arrow_back,
+                color: AppColor.themePrimary,
+              ),
+              onPressed: () {}),
+          elevation: 0,
+          title: const Text('Inbox'),
+        ),
+      ];
+  List<Map<String, dynamic>> _pages() => [
+        {
+          'appBar': AppBar(
+            backgroundColor: Colors.white,
+            elevation: 0,
+            title: const Text("Current Location"),
+            actions: const [
+              Padding(
+                padding: EdgeInsets.only(right: 8.0),
+                child: Icon(Icons.more_vert_rounded),
+              )
+            ],
+          ),
+          'drawer': const NavigationDrawer(),
+          'route': const HomeScreen(),
+        },
+        {
+          'appBar': AppBar(
+            backgroundColor: Colors.white,
+            elevation: 0,
+            leading: IconButton(
+                icon: Icon(
+                  Icons.adaptive.arrow_back,
+                  color: AppColor.themePrimary,
+                ),
+                onPressed: () {}),
+            title: const Text('News Feed'),
+          ),
+          'route': const Text('News Feed'),
+        },
+        {
+          'appBar': appBar[0],
+          'route': InboxScreen(
+            appBar[0].preferredSize.height,
+            context,
+          ),
+        },
+        {
+          'appBar': AppBar(
+            backgroundColor: Colors.white,
+            leading: IconButton(
+                icon: Icon(
+                  Icons.adaptive.arrow_back,
+                  color: AppColor.themePrimary,
+                ),
+                onPressed: () {}),
+            elevation: 0,
+            title: const Text('Favorites'),
+          ),
+          'route': const Text('Favorites'),
+        },
+        {
+          'appBar': AppBar(
+            backgroundColor: Colors.white,
+            leading: IconButton(
+                icon: Icon(
+                  Icons.adaptive.arrow_back,
+                  color: AppColor.themePrimary,
+                ),
+                onPressed: () {}),
+            elevation: 0,
+            title: const Text('Person'),
+          ),
+          'route': const Text('Person'),
+        },
+      ];
   @override
   void initState() {
     super.initState();
@@ -103,9 +110,10 @@ class _TabScreenState extends State<TabScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // hmne scafold already lgaay hua h bas hmne body bnani h jo yhan pr replace hogi yeh sb quiz app jesa kam h
       drawer: _selectedPageIndex == 0 ? const NavigationDrawer() : null,
-      appBar: _pages[_selectedPageIndex]['appBar'],
-      body: _pages[_selectedPageIndex]['route'],
+      appBar: _pages()[_selectedPageIndex]['appBar'],
+      body: _pages()[_selectedPageIndex]['route'],
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
         unselectedItemColor: Colors.grey,
