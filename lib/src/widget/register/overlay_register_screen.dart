@@ -2,9 +2,10 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:food_app/core/util/custom_page_route.dart';
-import 'package:food_app/src/screens/login/login_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '/core/util/custom_page_route.dart';
+import '/src/screens/login/login_screen.dart';
 import '/src/screens/welcome/welcome_screen.dart';
 import '../../../core/constants/app_colors.dart';
 import 'form_drop_down_button.dart';

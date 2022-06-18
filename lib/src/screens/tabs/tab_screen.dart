@@ -1,9 +1,9 @@
-// ignore_for_file: camel_case_types, unused_field, unused_element, prefer_const_constructors, equal_keys_in_map
-
 import 'package:flutter/material.dart';
-import 'package:food_app/core/constants/app_colors.dart';
-import 'package:food_app/src/screens/home/home_screen.dart';
-import 'package:food_app/src/screens/inbox/inbox.dart';
+
+import '../../widget/drawer/navigation_drawer.dart';
+import '/core/constants/app_colors.dart';
+import '/src/screens/home/home_screen.dart';
+import '/src/screens/inbox/inbox.dart';
 
 class TabScreen extends StatefulWidget {
   const TabScreen({
@@ -18,24 +18,75 @@ class _TabScreenState extends State<TabScreen> {
   int _selectedPageIndex = 0;
   final List<Map<String, dynamic>> _pages = [
     {
-      'title': 'Home',
-      'route': HomeScreen(),
+      'appBar': AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: const Text("Current Location"),
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 8.0),
+            child: Icon(Icons.more_vert_rounded),
+          )
+        ],
+      ),
+      'drawer': const NavigationDrawer(),
+      'route': const HomeScreen(),
     },
     {
-      'title': 'News Feed',
-      'route': Text('News Feed'),
+      'appBar': AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+            icon: Icon(
+              Icons.adaptive.arrow_back,
+              color: AppColor.themePrimary,
+            ),
+            onPressed: () {}),
+        title: const Text('News Feed'),
+      ),
+      'route': const Text('News Feed'),
     },
     {
-      'title': 'Inbox',
-      'route': InboxScreen(),
+      'appBar': AppBar(
+        backgroundColor: Colors.white,
+        leading: IconButton(
+            icon: Icon(
+              Icons.adaptive.arrow_back,
+              color: AppColor.themePrimary,
+            ),
+            onPressed: () {}),
+        elevation: 0,
+        title: const Text('Inbox'),
+      ),
+      'route': const InboxScreen(),
     },
     {
-      'title': 'Favorities',
-      'route': Text('Favorites'),
+      'appBar': AppBar(
+        backgroundColor: Colors.white,
+        leading: IconButton(
+            icon: Icon(
+              Icons.adaptive.arrow_back,
+              color: AppColor.themePrimary,
+            ),
+            onPressed: () {}),
+        elevation: 0,
+        title: const Text('Favorites'),
+      ),
+      'route': const Text('Favorites'),
     },
     {
-      'title': 'Person',
-      'route': Text('Person'),
+      'appBar': AppBar(
+        backgroundColor: Colors.white,
+        leading: IconButton(
+            icon: Icon(
+              Icons.adaptive.arrow_back,
+              color: AppColor.themePrimary,
+            ),
+            onPressed: () {}),
+        elevation: 0,
+        title: const Text('Person'),
+      ),
+      'route': const Text('Person'),
     },
   ];
   @override
@@ -52,9 +103,8 @@ class _TabScreenState extends State<TabScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(_pages[_selectedPageIndex]['title'].toString()),
-      ),
+      drawer: _selectedPageIndex == 0 ? const NavigationDrawer() : null,
+      appBar: _pages[_selectedPageIndex]['appBar'],
       body: _pages[_selectedPageIndex]['route'],
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
