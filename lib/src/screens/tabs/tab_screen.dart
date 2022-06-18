@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/core/util/custom_page_route.dart';
+import 'package:food_app/src/screens/login/login_screen.dart';
 
 import '../../widget/drawer/navigation_drawer.dart';
 import '/core/constants/app_colors.dart';
@@ -27,23 +29,90 @@ class _TabScreenState extends State<TabScreen> {
               ),
               onPressed: () {}),
           elevation: 0,
-          title: const Text('Inbox'),
+          title: const Text(
+            'Inbox',
+            style: TextStyle(
+              fontSize: 18,
+            ),
+          ),
         ),
       ];
   List<Map<String, dynamic>> _pages() => [
         {
           'appBar': AppBar(
+            leading: Builder(
+              builder: (BuildContext context) {
+                return IconButton(
+                  icon: Icon(
+                    Icons.menu_rounded,
+                    color: AppColor.themePrimary,
+                  ),
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                  tooltip:
+                      MaterialLocalizations.of(context).openAppDrawerTooltip,
+                );
+              },
+            ),
             backgroundColor: Colors.white,
             elevation: 0,
-            title: const Text("Current Location"),
-            actions: const [
-              Padding(
-                padding: EdgeInsets.only(right: 8.0),
-                child: Icon(Icons.more_vert_rounded),
+            title: Row(
+              children: [
+                const Text(
+                  "Current Location",
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+                Icon(
+                  Icons.keyboard_arrow_down_rounded,
+                  color: AppColor.themePrimary,
+                )
+              ],
+            ),
+            actions: [
+              PopupMenuButton(
+                onSelected: (value) {
+                  if (value == 'Logout') {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      CustomPageRoute(builder: const LoginScreen()),
+                      (route) => false,
+                    );
+                  }
+                },
+                icon: Icon(
+                  Icons.more_vert_rounded,
+                  color: AppColor.themePrimary,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    value: 'Logout',
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.logout_rounded,
+                            color: AppColor.themePrimary,
+                            size: 30,
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text('Logout'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               )
             ],
           ),
-          'drawer': const NavigationDrawer(),
           'route': const HomeScreen(),
         },
         {
@@ -56,7 +125,12 @@ class _TabScreenState extends State<TabScreen> {
                   color: AppColor.themePrimary,
                 ),
                 onPressed: () {}),
-            title: const Text('News Feed'),
+            title: const Text(
+              'News Feed',
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
           ),
           'route': const Text('News Feed'),
         },
@@ -77,7 +151,12 @@ class _TabScreenState extends State<TabScreen> {
                 ),
                 onPressed: () {}),
             elevation: 0,
-            title: const Text('Favorites'),
+            title: const Text(
+              'Favorites',
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
           ),
           'route': const Text('Favorites'),
         },
@@ -91,7 +170,12 @@ class _TabScreenState extends State<TabScreen> {
                 ),
                 onPressed: () {}),
             elevation: 0,
-            title: const Text('Person'),
+            title: const Text(
+              'Person',
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
           ),
           'route': const Text('Person'),
         },
@@ -110,7 +194,7 @@ class _TabScreenState extends State<TabScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // hmne scafold already lgaay hua h bas hmne body bnani h jo yhan pr replace hogi yeh sb quiz app jesa kam h
+      backgroundColor: Colors.white,
       drawer: _selectedPageIndex == 0 ? const NavigationDrawer() : null,
       appBar: _pages()[_selectedPageIndex]['appBar'],
       body: _pages()[_selectedPageIndex]['route'],

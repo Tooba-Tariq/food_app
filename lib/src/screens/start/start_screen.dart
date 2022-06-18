@@ -13,41 +13,39 @@ class StartScreen extends StatefulWidget {
 class _StartScreenState extends State<StartScreen> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Stack(
-          children: [
-            Positioned(
-              bottom: -160,
-              left: -15,
-              right: -8,
-              child: GradientCircle(
-                radius: MediaQuery.of(context).size.width * 0.39,
-                begin: Alignment.bottomLeft,
-                end: Alignment.topRight,
-              ),
+    return Scaffold(
+      body: Stack(
+        children: [
+          Positioned(
+            bottom: -160,
+            left: -15,
+            right: -8,
+            child: GradientCircle(
+              radius: MediaQuery.of(context).size.width * 0.45,
+              begin: Alignment.bottomLeft,
+              end: Alignment.topRight,
             ),
-            Positioned(
-              bottom: -130,
-              right: -90,
-              child: GradientCircle(
-                radius: MediaQuery.of(context).size.width * 0.4,
-                begin: Alignment.centerRight,
-                end: Alignment.centerLeft,
-              ),
+          ),
+          Positioned(
+            bottom: -130,
+            right: -90,
+            child: GradientCircle(
+              radius: MediaQuery.of(context).size.width * 0.4,
+              begin: Alignment.centerRight,
+              end: Alignment.centerLeft,
             ),
-            Positioned(
-              bottom: -160,
-              left: -100,
-              child: GradientCircle(
-                radius: MediaQuery.of(context).size.width * 0.35,
-                begin: Alignment.bottomRight,
-                end: Alignment.topLeft,
-              ),
+          ),
+          Positioned(
+            bottom: -160,
+            left: -100,
+            child: GradientCircle(
+              radius: MediaQuery.of(context).size.width * 0.37,
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft,
             ),
-            const OverlayWidget(),
-          ],
-        ),
+          ),
+          const OverlayWidget(),
+        ],
       ),
     );
   }
