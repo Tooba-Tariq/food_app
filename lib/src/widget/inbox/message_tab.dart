@@ -12,7 +12,7 @@ class MessageTab extends StatelessWidget {
       itemBuilder: (context, index) => Center(
         child: SizedBox(
           height: 100,
-          width: 370,
+          width: MediaQuery.of(context).size.width * 0.95,
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: Row(
@@ -29,6 +29,7 @@ class MessageTab extends StatelessWidget {
                   position: const BadgePosition(start: -3, top: -3),
                   badgeColor: AppColor.themePrimary,
                   child: Container(
+                    width: 80,
                     decoration: const BoxDecoration(
                         // borderRadius: BorderRadius.circular(20),
                         ),
@@ -40,7 +41,7 @@ class MessageTab extends StatelessWidget {
                 ),
                 Container(
                   padding: const EdgeInsets.all(8),
-                  width: 275,
+                  width: (MediaQuery.of(context).size.width * 0.65),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,

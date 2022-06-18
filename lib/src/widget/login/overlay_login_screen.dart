@@ -74,41 +74,43 @@ class OverlayLoginScreen extends StatelessWidget {
             child: Form(
               key: _formKey,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  formTextFeild(
-                    label: 'User Name',
-                    context: context,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  formTextFeild(
-                    label: 'Password',
-                    obscureText: true,
-                    context: context,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                  Column(
                     children: [
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          "Forgot Password?",
-                          style: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            fontSize: 14.0,
-                            color: Colors.black,
-                            decoration: TextDecoration.underline,
+                      formTextFeild(
+                        label: 'User Name',
+                        context: context,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      formTextFeild(
+                        label: 'Password',
+                        obscureText: true,
+                        context: context,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text(
+                              "Forgot Password?",
+                              style: TextStyle(
+                                fontWeight: FontWeight.normal,
+                                fontSize: 14.0,
+                                color: Colors.black,
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                     ],
-                  ),
-                  const SizedBox(
-                    height: 35,
                   ),
                   Container(
                     height: 40,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/core/util/custom_page_route.dart';
+import 'package:food_app/src/screens/login/login_screen.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../screens/cart/cart.dart';
@@ -42,16 +44,15 @@ class NavigationDrawer extends StatelessWidget {
                               color: Colors.white),
                         ),
                         onTap: () {
-                           Navigator.push(
-                             context,
-                             MaterialPageRoute(
-                                 builder: ((context) => const Cart())));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => const Cart())));
                         },
                       ),
                       ListTile(
                         leading: const Icon(
-                          Icons
-                              .euro_symbol_outlined,
+                          Icons.euro_symbol_outlined,
                           color: Colors.white,
                         ),
                         title: const Text(
@@ -203,7 +204,11 @@ class NavigationDrawer extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
-                  // Navigator.of(context).pushReplacementNamed('/');
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    CustomPageRoute(builder: const LoginScreen()),
+                    (route) => false,
+                  );
                 },
               ),
             ],

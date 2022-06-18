@@ -56,9 +56,8 @@ class MyApp extends StatelessWidget {
           ),
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange)
               .copyWith(secondary: Colors.white)),
-      home: const SafeArea(
-        child: SplashScreen(),
-      ),
+      home:  const SplashScreen(),
+      
     );
   }
 }

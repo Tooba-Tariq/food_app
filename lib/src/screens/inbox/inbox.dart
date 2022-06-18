@@ -1,12 +1,12 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/src/widget/inbox/coupon_tab.dart';
 import 'package:food_app/src/widget/inbox/message_tab.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 
+// ignore: must_be_immutable
 class InboxScreen extends StatefulWidget {
   InboxScreen(this.appBarSize, this.context, {Key? key}) : super(key: key);
   double appBarSize;
+  // ignore: prefer_typing_uninitialized_variables
   var context;
   @override
   State<InboxScreen> createState() => _InboxScreenState();
@@ -24,7 +24,7 @@ class _InboxScreenState extends State<InboxScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
+              child: SizedBox(
                 height: 50,
                 child: LayoutBuilder(builder: (context, constraint) {
                   boxSize = constraint.maxHeight;
@@ -64,7 +64,7 @@ class _InboxScreenState extends State<InboxScreen> {
             //     inactiveBgColor: Colors.white,
             //   ),
             // ),
-            Container(
+            SizedBox(
               height: (MediaQuery.of(context).size.height -
                   widget.appBarSize -
                   (boxSize + 100)),
@@ -72,8 +72,8 @@ class _InboxScreenState extends State<InboxScreen> {
                 return TabBarView(
 
                   children: [
-                    MessageTab(),
-                    CouponTab(),
+                    const MessageTab(),
+                    const CouponTab(),
                     Container(),
                   ],
                 );
