@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../core/util/custom_page_route.dart';
 
+import '../../../core/util/custom_page_route.dart';
 import '../../../core/util/logo_widget.dart';
 import 'start_screen.dart';
 

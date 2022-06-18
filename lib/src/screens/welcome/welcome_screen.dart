@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/src/widget/bottom_navigation_bar/bottom_navigation_bar.dart';
+
 import 'package:introduction_screen/introduction_screen.dart';
+
+import '../tabs/tab_screen.dart';
 
 
 
@@ -24,7 +26,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: ((context) => const bottomNavigationBar()),
+                builder: ((context) => const TabScreen()),
               ),
             );
           },

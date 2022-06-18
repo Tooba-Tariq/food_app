@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../widget/bottom_navigation_bar/bottom_navigation_bar.dart';
+import '../tabs/tab_screen.dart';
+
 
 class Cart extends StatelessWidget {
   const Cart({Key? key}) : super(key: key);
@@ -82,7 +83,7 @@ class Cart extends StatelessWidget {
             ),
           ),
         )),
-        bottomNavigationBar: const bottomNavigationBar(),
+        bottomNavigationBar: const TabScreen(),
       ),
     );
   }

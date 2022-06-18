@@ -1,14 +1,14 @@
 // ignore_for_file: must_be_immutable, non_constant_identifier_names
 
-import 'package:food_app/core/constants/app_colors.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:search_page/search_page.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../widget/restaurant_search/heading.dart';
-import '../../widget/restaurant_search/promotion_item.dart';
-import '../../widget/restaurant_search/tag.dart';
+import '/core/constants/app_colors.dart';
+import '../../widget/home/heading.dart';
+import '../../widget/home/promotion_item.dart';
+import '../../widget/home/tag.dart';
 
 class Person {
   final String name, surname;
@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
             child: Column(
               children: [
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width *
                       0.8, 
                   child: GestureDetector(
