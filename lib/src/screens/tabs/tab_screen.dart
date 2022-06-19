@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/src/screens/feed/news_feed_screen.dart';
+import 'package:food_app/src/screens/person/person_screen.dart';
 import '../../../core/util/custom_page_route.dart';
 import '../login/login_screen.dart';
 
@@ -132,7 +134,7 @@ class _TabScreenState extends State<TabScreen> {
               ),
             ),
           ),
-          'route': const Text('News Feed'),
+          'route': const NewsFeedScreen(),
         },
         {
           'appBar': appBar[0],
@@ -163,21 +165,18 @@ class _TabScreenState extends State<TabScreen> {
         {
           'appBar': AppBar(
             backgroundColor: Colors.white,
-            leading: IconButton(
-                icon: Icon(
-                  Icons.adaptive.arrow_back,
-                  color: AppColor.themePrimary,
-                ),
-                onPressed: () {}),
+            leading: appBarElevatedButton(Icons.arrow_back_rounded),
             elevation: 0,
+            centerTitle: true,
             title: const Text(
-              'Person',
+              'My Account',
               style: TextStyle(
                 fontSize: 18,
               ),
             ),
+            actions: [appBarElevatedButton(Icons.more_vert)],
           ),
-          'route': const Text('Person'),
+          'route': const PersonScreen(),
         },
       ];
   @override
@@ -236,6 +235,30 @@ class _TabScreenState extends State<TabScreen> {
             label: '',
           ),
         ],
+      ),
+    );
+  }
+
+  appBarElevatedButton(IconData icon) {
+    return Container(
+      height: 30,
+      width: 30,
+      child: ElevatedButton(
+        onPressed: () {},
+        child: Icon(
+          icon,
+          color: Colors.yellow,
+          size: 20,
+        ),
+        style: ElevatedButton.styleFrom(
+          //background color of button
+          padding: EdgeInsets.all(0),
+          elevation: 3,
+          primary: Colors.white, //elevation of button
+          // shape: RoundedRectangleBorder(
+          //   borderRadius: BorderRadius.circular(5),
+          // ),
+        ),
       ),
     );
   }
