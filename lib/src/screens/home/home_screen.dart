@@ -10,23 +10,10 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../widget/home/heading.dart';
 import '../../widget/home/promotion_item.dart';
 import '../../widget/home/tag.dart';
-
-class Person {
-  final String name, surname;
-  final num age;
-
-  Person(this.name, this.surname, this.age);
-}
+import '../search/search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
-  static List<Person> people = [
-    Person('Mike', 'Barron', 64),
-    Person('Todd', 'Black', 30),
-    Person('Ahmad', 'Edwards', 55),
-    Person('Anthony', 'Johnson', 67),
-    Person('Annette', 'Brooks', 39),
-  ];
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -56,62 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    width: 334,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                        color: Colors.grey.shade300,
-                      ),
-                    ),
-                    child: GestureDetector(
-                      onTap: () {
-                        showSearch(
-                          context: context,
-                          delegate: SearchPage<Person>(
-                            items: HomeScreen.people,
-                            searchLabel: 'Search people',
-                            suggestion: const Center(
-                              child:
-                                  Text('Filter people by name, surname or age'),
-                            ),
-                            failure: const Center(
-                              child: Text('No person found :('),
-                            ),
-                            filter: (person) => [
-                              person.name,
-                              person.surname,
-                              person.age.toString(),
-                            ],
-                            builder: (person) => ListTile(
-                              title: Text(person.name),
-                              subtitle: Text(person.surname),
-                              trailing: Text('${person.age} yo'),
-                            ),
-                          ),
-                        );
-                      },
-                      child: Row(
-                        children: const [
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Icon(
-                            (Icons.search_rounded),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            'Searching here|',
-                            style: TextStyle(
-                                fontSize: 13, fontWeight: FontWeight.w300),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
+                  child: SearchScreen(),
                 ),
                 SizedBox(
                   height: 188,
@@ -159,8 +91,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Container(
                                   width: 334,
                                   decoration: const BoxDecoration(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(5))),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(5))),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(5),
                                     child: BackdropFilter(
