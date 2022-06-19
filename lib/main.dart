@@ -46,18 +46,18 @@ class MyApp extends StatelessWidget {
                 ),
               ),
           appBarTheme: AppBarTheme(
+            backgroundColor: Colors.white,
             textTheme: ThemeData.light().textTheme.copyWith(
                   subtitle1: const TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 20,
-                    fontWeight: FontWeight.normal,
-                  ),
+                      fontFamily: 'Poppins',
+                      fontSize: 20,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black),
                 ),
           ),
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange)
               .copyWith(secondary: Colors.white)),
-      home:  const SplashScreen(),
-      
+      home: const SplashScreen(),
     );
   }
 }
