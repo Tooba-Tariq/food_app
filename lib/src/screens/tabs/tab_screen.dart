@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/src/screens/feed/news_feed_screen.dart';
 import 'package:food_app/src/screens/person/person_screen.dart';
 import '../../../core/util/custom_page_route.dart';
 import '../login/login_screen.dart';
@@ -133,7 +134,7 @@ class _TabScreenState extends State<TabScreen> {
               ),
             ),
           ),
-          'route': const Text('News Feed'),
+          'route': const NewsFeedScreen(),
         },
         {
           'appBar': appBar[0],
