@@ -26,29 +26,31 @@ class NavigationDrawer extends StatelessWidget {
                 color: Colors.grey,
               ),
               SizedBox(
-                child: Container(
+                child: Container(// yaha kahi issue ha i thinn h
                   color: const Color(0XFFF2A902),
                   child: Column(
                     children: [
-                      ListTile(
-                        leading: const Icon(
-                          Icons.shopping_cart_outlined,
-                          color: Colors.white,
+                      GestureDetector(
+                        child: ListTile(
+                          leading: const Icon(
+                            Icons.shopping_cart_outlined,
+                            color: Colors.white,
+                          ),
+                          title: const Text(
+                            'Cart',
+                            style: TextStyle(
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.normal,
+                                fontSize: 18,
+                                color: Colors.white),
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: ((context) => const Cart()),),);
+                          },
                         ),
-                        title: const Text(
-                          'Cart',
-                          style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.normal,
-                              fontSize: 18,
-                              color: Colors.white),
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: ((context) => const Cart())));
-                        },
                       ),
                       ListTile(
                         leading: const Icon(
