@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import '../tabs/tab_screen.dart';
 
@@ -53,7 +55,7 @@ class Cart extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 primary: Colors.white.withOpacity(0.2),
                 padding: EdgeInsets.zero,
-                elevation: 0, 
+                elevation: 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -77,16 +79,184 @@ class Cart extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  color: Colors.grey,
-                  height: 80.0,
+                  height: 140.0,
                   width: 350.0,
-                  child: Card(),
+                  child: Card(
+                    child: Row(
+                      children: [
+                        Container(
+                          child: Image.asset("assets/images/food3.png"),
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  "Zinger Burger",
+                                  style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 18,
+                                      color: Colors.orange),
+                                ),
+                                IconButton(
+                                  splashRadius: 15.0,
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.cancel_outlined,
+                                    color: Colors.orange,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: const [
+                                Text(
+                                  "Small - 30",
+                                  style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 16,
+                                      color: Colors.grey),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  "60.00",
+                                  style: TextStyle(
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 22.0,
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    IconButton(
+                                      splashRadius: 15.0,
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.remove,
+                                      ),
+                                    ),
+                                    const Text(
+                                      "2",
+                                      style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 22.0,
+                                      ),
+                                    ),
+                                    IconButton(
+                                      splashRadius: 15.0,
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.add,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
                 Container(
-                  color: Colors.grey,
-                  height: 80.0,
+                  height: 140.0,
                   width: 350.0,
-                  child: Card(),
+                  child: Card(
+                    child: Row(
+                      children: [
+                        Container(
+                          child: Image.asset("assets/images/food3.png"),
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  "Zinger Burger",
+                                  style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 18,
+                                      color: Colors.orange),
+                                ),
+                                IconButton(
+                                  splashRadius: 15.0,
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.cancel_outlined,
+                                    color: Colors.orange,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: const [
+                                Text(
+                                  "Small - 30",
+                                  style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 16,
+                                      color: Colors.grey),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  "60.00",
+                                  style: TextStyle(
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 22.0,
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    IconButton(
+                                      splashRadius: 15.0,
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.remove,
+                                      ),
+                                    ),
+                                    const Text(
+                                      "2",
+                                      style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 22.0,
+                                      ),
+                                    ),
+                                    IconButton(
+                                      splashRadius: 15.0,
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.add,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
