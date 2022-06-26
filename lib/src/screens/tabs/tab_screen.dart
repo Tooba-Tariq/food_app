@@ -29,7 +29,10 @@ class _TabScreenState extends State<TabScreen> {
                 Icons.adaptive.arrow_back,
                 color: AppColor.themePrimary,
               ),
-              onPressed: () {}),
+              splashRadius: 20,
+              onPressed: () {
+                returnToHomePage();
+              }),
           elevation: 0,
           title: const Text(
             'Inbox',
@@ -49,6 +52,7 @@ class _TabScreenState extends State<TabScreen> {
                     Icons.menu_rounded,
                     color: AppColor.themePrimary,
                   ),
+                  splashRadius: 20,
                   onPressed: () {
                     Scaffold.of(context).openDrawer();
                   },
@@ -75,6 +79,7 @@ class _TabScreenState extends State<TabScreen> {
             ),
             actions: [
               PopupMenuButton(
+                splashRadius: 20,
                 onSelected: (value) {
                   if (value == 'Logout') {
                     Navigator.pushAndRemoveUntil(
@@ -126,7 +131,10 @@ class _TabScreenState extends State<TabScreen> {
                   Icons.adaptive.arrow_back,
                   color: AppColor.themePrimary,
                 ),
-                onPressed: () {}),
+                splashRadius: 20,
+                onPressed: () {
+                  returnToHomePage();
+                }),
             title: const Text(
               'News Feed',
               style: TextStyle(
@@ -147,11 +155,14 @@ class _TabScreenState extends State<TabScreen> {
           'appBar': AppBar(
             backgroundColor: Colors.white,
             leading: IconButton(
+                splashRadius: 20,
                 icon: Icon(
                   Icons.adaptive.arrow_back,
                   color: AppColor.themePrimary,
                 ),
-                onPressed: () {}),
+                onPressed: () {
+                  returnToHomePage();
+                }),
             elevation: 0,
             title: const Text(
               'Favorites',
@@ -165,7 +176,15 @@ class _TabScreenState extends State<TabScreen> {
         {
           'appBar': AppBar(
             backgroundColor: Colors.white,
-            leading: appBarElevatedButton(Icons.arrow_back_rounded),
+            leading: IconButton(
+                splashRadius: 20,
+                icon: Icon(
+                  Icons.adaptive.arrow_back,
+                  color: AppColor.themePrimary,
+                ),
+                onPressed: () {
+                  returnToHomePage();
+                }),
             elevation: 0,
             centerTitle: true,
             title: const Text(
@@ -174,7 +193,15 @@ class _TabScreenState extends State<TabScreen> {
                 fontSize: 18,
               ),
             ),
-            actions: [appBarElevatedButton(Icons.more_vert)],
+            actions: [
+              IconButton(
+                  splashRadius: 20,
+                  icon: Icon(
+                    Icons.more_vert_rounded,
+                    color: AppColor.themePrimary,
+                  ),
+                  onPressed: () {}),
+            ],
           ),
           'route': const PersonScreen(),
         },
@@ -184,13 +211,18 @@ class _TabScreenState extends State<TabScreen> {
     super.initState();
   }
 
+  void returnToHomePage() {
+    setState(() {
+      _selectedPageIndex = 0;
+    });
+  }
+
   void _selectPage(int index) {
     setState(() {
       _selectedPageIndex = index;
     });
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -236,30 +268,6 @@ class _TabScreenState extends State<TabScreen> {
             label: '',
           ),
         ],
-      ),
-    );
-  }
-
-  appBarElevatedButton(IconData icon) {
-    return Container(
-      height: 30,
-      width: 30,
-      child: ElevatedButton(
-        onPressed: () {},
-        child: Icon(
-          icon,
-          color: Colors.yellow,
-          size: 20,
-        ),
-        style: ElevatedButton.styleFrom(
-          //background color of button
-          padding: EdgeInsets.all(0),
-          elevation: 3,
-          primary: Colors.white, //elevation of button
-          // shape: RoundedRectangleBorder(
-          //   borderRadius: BorderRadius.circular(5),
-          // ),
-        ),
       ),
     );
   }
