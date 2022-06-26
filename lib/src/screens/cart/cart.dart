@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import '../tabs/tab_screen.dart';
 
 class Cart extends StatelessWidget {
   const Cart({Key? key}) : super(key: key);

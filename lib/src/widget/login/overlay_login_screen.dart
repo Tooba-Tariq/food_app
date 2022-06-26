@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/src/blocs/auth_bloc.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../../core/util/custom_page_route.dart';
@@ -183,9 +185,13 @@ class OverlayLoginScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              loginOption(url: "assets/images/fb.png"),
-              loginOption(url: "assets/images/twitter.png"),
-              loginOption(url: "assets/images/google.png"),
+              loginOption(
+                  url: "assets/images/fb.png",
+                  onPressed: () {
+                    context.read<AuthBloc>().loginFacebook();
+                  }),
+              loginOption(url: "assets/images/twitter.png", onPressed: () {}),
+              loginOption(url: "assets/images/google.png", onPressed: () {}),
             ],
           ),
         ),
@@ -233,13 +239,15 @@ class OverlayLoginScreen extends StatelessWidget {
     );
   }
 
-  SizedBox loginOption({required String url}) {
+  SizedBox loginOption({required String url, required Function onPressed}) {
     return SizedBox(
       height: 50.0,
       width: 50.0,
       child: TextButton(
         style: ElevatedButton.styleFrom(primary: Colors.white),
-        onPressed: () {},
+        onPressed: () {
+          onPressed();
+        },
         child: Image.asset(url),
       ),
     );

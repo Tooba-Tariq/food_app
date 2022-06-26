@@ -1,9 +1,13 @@
-
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:food_app/src/blocs/auth_bloc.dart';
+import 'package:provider/provider.dart';
 
 import 'src/screens/start/splash_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -12,51 +16,54 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Food App',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          fontFamily: 'Poppins', // /yeh
-          textTheme: ThemeData.light().textTheme.copyWith(
-                headline4: const TextStyle(
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w300,
-                  fontSize: 27,
-                  color: Colors.black,
-                ),
-                subtitle1: const TextStyle(
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.normal,
-                  fontSize: 18,
-                ),
-                subtitle2: const TextStyle(
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.normal,
-                  fontSize: 16,
-                ),
-                labelMedium: const TextStyle(
-                  fontFamily: 'Poppins',
-                  fontSize: 16,
-                  fontWeight: FontWeight.normal,
-                  color: Colors.grey,
-                ),
-                button: const TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-          appBarTheme: AppBarTheme(
-            backgroundColor: Colors.white,
+    return Provider(
+      create: (context) => AuthBloc(),
+      child: MaterialApp(
+        title: 'Food App',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            fontFamily: 'Poppins', // /yeh
             textTheme: ThemeData.light().textTheme.copyWith(
+                  headline4: const TextStyle(
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w300,
+                    fontSize: 27,
+                    color: Colors.black,
+                  ),
                   subtitle1: const TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 20,
-                      fontWeight: FontWeight.normal,
-                      color: Colors.black),
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.normal,
+                    fontSize: 18,
+                  ),
+                  subtitle2: const TextStyle(
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.normal,
+                    fontSize: 16,
+                  ),
+                  labelMedium: const TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 16,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.grey,
+                  ),
+                  button: const TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
-          ),
-          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange)
-              .copyWith(secondary: Colors.white)),
-      home: const SplashScreen(),
+            appBarTheme: AppBarTheme(
+              backgroundColor: Colors.white,
+              textTheme: ThemeData.light().textTheme.copyWith(
+                    subtitle1: const TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 20,
+                        fontWeight: FontWeight.normal,
+                        color: Colors.black),
+                  ),
+            ),
+            colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange)
+                .copyWith(secondary: Colors.white)),
+        home: const SplashScreen(),
+      ),
     );
   }
 }

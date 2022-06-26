@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/core/constants/app_colors.dart';
+import '../../../core/constants/app_colors.dart';
 
 import 'package:introduction_screen/introduction_screen.dart';
 

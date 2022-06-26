@@ -44,7 +44,7 @@ class _StartScreenState extends State<StartScreen> {
               end: Alignment.topLeft,
             ),
           ),
-          const OverlayWidget(),
+          OverlayWidget(),
         ],
       ),
     );
