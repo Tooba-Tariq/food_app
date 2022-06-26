@@ -21,6 +21,10 @@ dependencies:
   search_page: ^2.0.0+1
   toggle_switch: ^2.0.1
   badges: ^2.0.3
+  flutter_login_facebook: ^1.5.0+1
+  provider: ^6.0.3
+  firebase_auth: ^3.3.20
+  firebase_core: ^1.18.0
 
 dev_dependencies:
   flutter_test:

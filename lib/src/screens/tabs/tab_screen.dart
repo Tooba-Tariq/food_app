@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/src/screens/feed/news_feed_screen.dart';
-import 'package:food_app/src/screens/person/person_screen.dart';
+import '../feed/news_feed_screen.dart';
+import '../person/person_screen.dart';
 import '../../../core/util/custom_page_route.dart';
 import '../login/login_screen.dart';
 

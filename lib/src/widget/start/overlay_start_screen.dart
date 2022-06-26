@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
+
 import '../../../core/constants/app_colors.dart';
 import '../../../core/util/custom_page_route.dart';
-import '../../screens/login/login_screen.dart';
 import '../../../core/util/logo_widget.dart';
+import '../../screens/login/login_screen.dart';
 
-class OverlayWidget extends StatelessWidget {
-  const OverlayWidget({
+class OverlayWidget extends StatefulWidget {
+  OverlayWidget({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<OverlayWidget> createState() => _OverlayWidgetState();
+}
+
+class _OverlayWidgetState extends State<OverlayWidget> {
+  bool _isLoggedIn = false;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +61,7 @@ class OverlayWidget extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   primary: Colors.white,
                 ),
-                onPressed: () {
+                onPressed: () async {
                   Navigator.push(
                     context,
                     CustomPageRoute(

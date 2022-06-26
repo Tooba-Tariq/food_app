@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Theme applied to the Android Window while the process is starting when the OS's Dark Mode setting is off -->
+    <string name="app_name">Food App</string>
+    <string name="facebook_app_id">728549241803467</string>
+    <string name="fb_login_protocol_scheme">fb728549241803467</string>
+    <string name="facebook_client_token">fbe8f3500b46f7b052a12e6358cb1224</string>
+
+
+</resources>

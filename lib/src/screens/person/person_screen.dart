@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/core/constants/app_colors.dart';
+import '../../../core/constants/app_colors.dart';
 
 class PersonScreen extends StatelessWidget {
   const PersonScreen({Key? key}) : super(key: key);

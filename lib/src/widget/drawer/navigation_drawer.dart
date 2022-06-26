@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../../core/util/custom_page_route.dart';
-import '../../screens/login/login_screen.dart';
 
 import '../../../core/constants/app_colors.dart';
+import '../../../core/util/custom_page_route.dart';
 import '../../screens/cart/cart.dart';
+import '../../screens/login/login_screen.dart';
 
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer({Key? key}) : super(key: key);
@@ -26,7 +26,8 @@ class NavigationDrawer extends StatelessWidget {
                 color: Colors.grey,
               ),
               SizedBox(
-                child: Container(// yaha kahi issue ha i thinn h
+                child: Container(
+                  // yaha kahi issue ha i thinn h
                   color: const Color(0XFFF2A902),
                   child: Column(
                     children: [
@@ -46,9 +47,11 @@ class NavigationDrawer extends StatelessWidget {
                           ),
                           onTap: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: ((context) => const Cart()),),);
+                              context,
+                              MaterialPageRoute(
+                                builder: ((context) => const Cart()),
+                              ),
+                            );
                           },
                         ),
                       ),

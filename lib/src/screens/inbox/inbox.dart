@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/src/widget/inbox/promotion_tab.dart';
+import '../../widget/inbox/promotion_tab.dart';
 
 import '../../widget/inbox/coupon_tab.dart';
 import '../../widget/inbox/message_tab.dart';
