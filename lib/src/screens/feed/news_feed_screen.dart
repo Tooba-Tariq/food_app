@@ -8,96 +8,114 @@ class NewsFeedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
+      child: ListView.builder(
+        itemCount: 3,
+        itemBuilder: (context, index) =>
             //row for icon
             Container(
-              color: Colors.white,
-              padding: EdgeInsets.fromLTRB(20, 40, 0, 40),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage(
-                      "assets/images/food1.png",
-                    ),
+          color: Colors.white,
+          padding: const EdgeInsets.fromLTRB(10, 20, 0, 0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 50,
+                width: 50,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.red,
+                  image: const DecorationImage(
+                    image: AssetImage("assets/images/food1.png"),
+                    fit: BoxFit.none,
+                    scale: 15,
                   ),
-                  Container(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.only(left: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
                       children: [
-                        Row(
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               "New Cheezy Burger",
-                              style: TextStyle(fontSize: 25),
+                              style: TextStyle(fontSize: 16),
                             ),
-                            SizedBox(
-                              width: 55,
-                            ),
-                            IconButton(
-                                onPressed: () {}, icon: Icon(Icons.more_vert))
-                          ],
-                        ),
-                        Text(
-                          "Burgers Mania",
-                          style: TextStyle(fontSize: 15, color: Colors.grey),
-                        ),
-                        //first 2 pictures
-                        Container(
-                          child: Column(
-                            children: [
-                              Row(children: [
-                                image(),
-                                image(),
-                              ]),
-                              Row(children: [
-                                image(),
-                                image(),
-                              ]),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          child: Text(
-                            "Hi new cutomer, we have added new burgers\nto our list and free fries for new customers. \nVisit our branch and try any of these and give \nfeedback. Thanks!",
-                            style: TextStyle(color: Colors.grey, fontSize: 15),
-                          ),
-                        ),
-                        Container(
-                            child: Row(
-                          children: [
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(Icons.thumb_up_alt_outlined),
-                            ),
-                            Text("5.2K"),
-                            SizedBox(
-                              width: 50,
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(Icons.message_rounded),
-                            ),
-                            Text("100"),
-                            SizedBox(
-                              width: 50,
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(Icons.share_rounded),
+                            const Text(
+                              "Burgers Mania",
+                              style: TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w300,
+                                color: Colors.grey,
+                              ),
                             ),
                           ],
-                        ))
+                        ),
+                        const SizedBox(
+                          width: 55,
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.more_vert),
+                        )
                       ],
                     ),
-                  )
-                ],
-              ),
-            )
-          ],
+
+                    //first 2 pictures
+                    Container(
+                      child: Column(
+                        children: [
+                          Row(children: [
+                            image(),
+                            image(),
+                          ]),
+                          Row(children: [
+                            image(),
+                            image(),
+                          ]),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      child: const Text(
+                        "Hi new cutomer, we have added new burgers\nto our list and free fries for new customers. \nVisit our branch and try any of these and give \nfeedback. Thanks!",
+                        style: TextStyle(color: Colors.grey, fontSize: 15),
+                      ),
+                    ),
+                    Container(
+                        child: Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.thumb_up_alt_outlined),
+                        ),
+                        const Text("5.2K"),
+                        const SizedBox(
+                          width: 50,
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.message_rounded),
+                        ),
+                        const Text("100"),
+                        const SizedBox(
+                          width: 50,
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.share_rounded),
+                        ),
+                      ],
+                    ))
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -105,12 +123,14 @@ class NewsFeedScreen extends StatelessWidget {
 
   Container image() {
     return Container(
-      child: Image(
-        image: AssetImage("assets/images/food3.png"),
+      child: Image.asset(
+        ("assets/images/food3.png"),
+        fit: BoxFit.none,
+        scale: 5,
       ),
       height: 100,
       width: 150,
-      margin: EdgeInsets.fromLTRB(0, 5, 5, 5),
+      margin: const EdgeInsets.fromLTRB(0, 5, 5, 5),
     );
   }
 }

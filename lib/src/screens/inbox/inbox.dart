@@ -21,19 +21,30 @@ class _InboxScreenState extends State<InboxScreen> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: DefaultTabController(
-        length: 3,
+        length: 2,
         child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                height: 50,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: Colors.grey.shade200,
+                  ),
+                ),
+                height: 30,
                 child: LayoutBuilder(builder: (context, constraint) {
                   boxSize = constraint.maxHeight;
                   return TabBar(
+                      labelStyle: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w300,
+                      ),
                       indicator: BoxDecoration(
-                          color: Colors.orange,
-                          borderRadius: BorderRadius.circular(8.0)),
+                        color: Colors.orange,
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
                       unselectedLabelColor: Colors.black,
                       tabs: const [
                         Tab(
@@ -42,9 +53,9 @@ class _InboxScreenState extends State<InboxScreen> {
                         Tab(
                           text: 'Coupons',
                         ),
-                        Tab(
-                          text: 'Promotions',
-                        )
+                        // Tab(
+                        //   text: 'Promotions',
+                        // )
                       ]);
                 }),
               ),
@@ -72,11 +83,10 @@ class _InboxScreenState extends State<InboxScreen> {
                   (boxSize + 100)),
               child: LayoutBuilder(builder: (context, constarints) {
                 return const TabBarView(
-
                   children: [
                     MessageTab(),
                     CouponTab(),
-                    PromotionTab(),
+                    // PromotionTab(),
                   ],
                 );
               }),
@@ -87,4 +97,3 @@ class _InboxScreenState extends State<InboxScreen> {
     );
   }
 }
-

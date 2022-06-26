@@ -41,8 +41,8 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
                   child: SearchScreen(),
                 ),
                 SizedBox(
@@ -66,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 height: 188,
                                 child: CarouselSlider(
                                   options: CarouselOptions(
-                                    viewportFraction: 1.2,
+                                    viewportFraction: 1,
                                     autoPlay: true,
                                     autoPlayInterval:
                                         const Duration(seconds: 3),
@@ -78,7 +78,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       final UrlImage = UrlImages[0];
                                       return Row(
                                         children: [
-                                          Expanded(
+                                          SizedBox(
+                                              width: 334,
                                               child: buildImage(UrlImage, 0)),
                                         ],
                                       );
@@ -91,10 +92,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Container(
                                   width: 334,
                                   decoration: const BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(5))),
+                                      borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(5),
+                                          bottomRight: Radius.circular(5))),
                                   child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(5),
+                                    borderRadius: const BorderRadius.only(
+                                        bottomLeft: Radius.circular(5),
+                                        bottomRight: Radius.circular(5)),
                                     child: BackdropFilter(
                                       filter: ImageFilter.blur(
                                           sigmaX: 10, sigmaY: 10),
@@ -188,45 +192,36 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: "Promotions",
                   subtitle: "View All",
                 ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      PromotionItem(
-                        imageUrl: "assets/images/food.png",
-                        title: "Pizzeria Restaurant",
-                        subtitle: "Chinese & Italian",
-                        rating: "",
-                      ),
-                      PromotionItem(
-                        imageUrl: "assets/images/food3.png",
-                        title: "Burger Mania",
-                        subtitle: "Pizzas & Burgers",
-                        rating: "",
-                      ),
-                    ],
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: 250,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 2,
+                    itemBuilder: (context, index) => PromotionItem(
+                      imageUrl: "assets/images/food.png",
+                      title: "Pizzeria Restaurant",
+                      subtitle: "Chinese & Italian",
+                      rating: "",
+                      stripVisible: true,
+                      num: index % 2,
+                    ),
                   ),
                 ),
                 Heading(title: "Featured", subtitle: "View All"),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      PromotionItem(
-                        imageUrl: "assets/images/food1.png",
-                        title: "Chinese Specializers",
-                        subtitle: "Chinese Food Specialist",
-                        rating: "",
-                      ),
-                      PromotionItem(
-                        imageUrl: "assets/images/food4.png",
-                        title: "The Italian Restaurant",
-                        subtitle: "Italians Foods",
-                        rating: "",
-                      ),
-                    ],
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: 220,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 2,
+                    itemBuilder: (context, index) => PromotionItem(
+                      imageUrl: "assets/images/food.png",
+                      title: "Pizzeria Restaurant",
+                      subtitle: "Chinese & Italian",
+                      rating: "",
+                      stripVisible: false,
+                    ),
                   ),
                 ),
               ],
@@ -237,13 +232,12 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget buildImage(String urlImage, int index) => const SizedBox(
-        child: AspectRatio(
-          aspectRatio: 2 / 1.5,
-          child: Image(
-            image: AssetImage('assets/images/food4.png'),
-            fit: BoxFit.fitWidth, // use this
-          ),
+  Widget buildImage(String urlImage, int index) => SizedBox(
+        child: Image.asset(
+          ('assets/images/food4.png'),
+          fit: BoxFit.none,
+          scale: 2,
+          width: 334,
         ),
       );
   buildIndicator() => AnimatedSmoothIndicator(
