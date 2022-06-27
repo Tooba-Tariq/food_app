@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 
+import '../../services/item/item_crud.dart';
+
 class Tag extends StatelessWidget {
   String title;
   Color color;
@@ -17,7 +19,9 @@ class Tag extends StatelessWidget {
       padding: const EdgeInsets.all(4.0),
       child: TextButton(
         style: ElevatedButton.styleFrom(primary: color),
-        onPressed: () {},
+        onPressed: () async {
+          await ItemCRUD.readItemData();
+        },
         child: Text(
           title,
         ),

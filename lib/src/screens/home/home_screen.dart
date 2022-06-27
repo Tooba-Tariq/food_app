@@ -1,15 +1,11 @@
 // ignore_for_file: must_be_immutable, non_constant_identifier_names
 
-import 'dart:ui';
-
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:search_page/search_page.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
+import 'package:food_app/src/blocs/item_bloc.dart';
+import 'package:provider/provider.dart';
 import '../../widget/home/heading.dart';
+import '../../widget/home/item_slider.dart';
 import '../../widget/home/promotion_item.dart';
-import '../../widget/home/tag.dart';
 import '../search/search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,23 +16,24 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int activeindex = 0;
   @override
   void initState() {
     WidgetsFlutterBinding.ensureInitialized();
     super.initState();
+    getItem();
   }
 
-  final UrlImages = [
-    'https://pixabay.com/link/?ua=cd3%3Dimage%26cd7%3Den%253Aurger%253APAK%26ec%3Dapi_ad%26ea%3Dnavigate%26el%3Dgetty%26tid%3DUA-20223345-1%26dr%3Dhttps%253A%252F%252Fpixabay.com%252F&next=https%3A%2F%2Fwww.istockphoto.com%2Fphoto%2Fburger-with-beef-and-cheese-gm998309062-270055548%3Futm_source%3Dpixabay%26utm_medium%3Daffiliate%26utm_campaign%3DSRP_image_sponsored%26utm_content%3Dhttp%253A%252F%252Fpixabay.com%252Fimages%252Fsearch%252Furger%252F%26utm_term%3Durger&hash=897f32fd6ced8f0a4d0157870b759651bb6a1504&='
-        'https://pixabay.com/link/?ua=cd3%3Dimage%26cd7%3Den%253Apizza%253APAK%26ec%3Dapi_ad%26ea%3Dnavigate%26el%3Dgetty%26tid%3DUA-20223345-1%26dr%3Dhttps%253A%252F%252Fpixabay.com%252F&next=https%3A%2F%2Fwww.istockphoto.com%2Fphoto%2Fsupreme-pizza-gm1302565865-394263820%3Futm_source%3Dpixabay%26utm_medium%3Daffiliate%26utm_campaign%3DSRP_image_sponsored%26utm_content%3Dhttp%253A%252F%252Fpixabay.com%252Fimages%252Fsearch%252Fpizza%252F%26utm_term%3Dpizza&hash=3803ae7042ad1464fa7ed25e67ca7bcb6a621815&='
-        'https://pixabay.com/link/?ua=cd3%3Dimage%26cd7%3Den%253Apasta%253APAK%26ec%3Dapi_ad%26ea%3Dnavigate%26el%3Dgetty%26tid%3DUA-20223345-1%26dr%3Dhttps%253A%252F%252Fpixabay.com%252Fimages%252Fsearch%252Fpizza%252F&next=https%3A%2F%2Fwww.istockphoto.com%2Fphoto%2Fchinese-noodles-with-chicken-and-peanuts-chinese-cuisine-food-gm547170528-98841545%3Futm_source%3Dpixabay%26utm_medium%3Daffiliate%26utm_campaign%3DSRP_image_sponsored%26utm_content%3Dhttp%253A%252F%252Fpixabay.com%252Fimages%252Fsearch%252Fpasta%252F%26utm_term%3Dpasta&hash=3523fc587cf8988b9321bd1c7f0100f62525b806&='
-        'https://pixabay.com/link/?ua=cd3%3Dimage%26cd7%3Den%253Achinese%2Bfood%253APAK%26ec%3Dapi_ad%26ea%3Dnavigate%26el%3Dgetty%26tid%3DUA-20223345-1%26dr%3Dhttps%253A%252F%252Fpixabay.com%252Fimages%252Fsearch%252Fchinese%252F&next=https%3A%2F%2Fwww.istockphoto.com%2Fphoto%2Fjapanese-dumplings-gyoza-with-pork-meat-and-vegetables-gm1133151212-300660172%3Futm_source%3Dpixabay%26utm_medium%3Daffiliate%26utm_campaign%3DSRP_image_sponsored%26utm_content%3Dhttp%253A%252F%252Fpixabay.com%252Fimages%252Fsearch%252Fchinese%252520food%252F%26utm_term%3Dchinese%2Bfood&hash=341d0f41893e017db11dcd26264b8ce95a12a549&='
-  ];
+  Future<void> getItem() async {
+    await context.read<ItemBloc>().fetchItems();
+    return Future.delayed(Duration.zero);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
+    return RefreshIndicator(
+      onRefresh: getItem,
+      child: SingleChildScrollView(
+          child: Column(
         children: [
           SizedBox(
             child: Column(
@@ -45,149 +42,42 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: EdgeInsets.all(8.0),
                   child: SearchScreen(),
                 ),
-                SizedBox(
-                  height: 188,
-                  width: 334,
-                  child: Column(
-                    children: [
-                      Container(
-                        width: 334,
-                        height: 188,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Colors.deepOrange,
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(5),
-                          child: Stack(
-                            children: [
-                              SizedBox(
-                                width: 334,
-                                height: 188,
-                                child: CarouselSlider(
-                                  options: CarouselOptions(
-                                    viewportFraction: 1,
-                                    autoPlay: true,
-                                    autoPlayInterval:
-                                        const Duration(seconds: 3),
-                                    onPageChanged: (index, reason) =>
-                                        setState(() => activeindex = index),
-                                  ),
-                                  items: [1, 2, 3, 4, 5].map(
-                                    (e) {
-                                      final UrlImage = UrlImages[0];
-                                      return Row(
-                                        children: [
-                                          SizedBox(
-                                              width: 334,
-                                              child: buildImage(UrlImage, 0)),
-                                        ],
-                                      );
-                                    },
-                                  ).toList(),
-                                ),
-                              ),
-                              Positioned(
-                                bottom: 0,
-                                child: Container(
-                                  width: 334,
-                                  decoration: const BoxDecoration(
-                                      borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(5),
-                                          bottomRight: Radius.circular(5))),
-                                  child: ClipRRect(
-                                    borderRadius: const BorderRadius.only(
-                                        bottomLeft: Radius.circular(5),
-                                        bottomRight: Radius.circular(5)),
-                                    child: BackdropFilter(
-                                      filter: ImageFilter.blur(
-                                          sigmaX: 10, sigmaY: 10),
-                                      child: Container(
-                                        height: 40,
-                                        width: 40,
-                                        decoration: BoxDecoration(
-                                            color:
-                                                Colors.black.withOpacity(0.2)),
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                            vertical: 4.0,
-                                            horizontal: 8,
-                                          ),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
-                                                children: const [
-                                                  Text(
-                                                    'Chienes Food',
-                                                    style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: Colors.white,
-                                                        fontWeight:
-                                                            FontWeight.w300),
-                                                  ),
-                                                  Text(
-                                                    '12 Resturants',
-                                                    style: TextStyle(
-                                                        fontSize: 10,
-                                                        color: Colors.white,
-                                                        fontWeight:
-                                                            FontWeight.w300),
-                                                  ),
-                                                ],
-                                              ),
-                                              Container(
-                                                child: buildIndicator(),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                ItemDealSlider(
+                  items: context.watch<ItemBloc>().items,
                 ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Tag(
-                        title: "Burgers",
-                        color: const Color(0xFFFCF4CE),
-                      ),
-                      Tag(
-                        title: "Pizzas",
-                        color: const Color(0xFFFFE1E1),
-                      ),
-                      Tag(
-                        title: "Chinese",
-                        color: const Color(0xFFC9FFDA),
-                      ),
-                      Tag(
-                        title: "Ice Cream",
-                        color: const Color(0xFFFFE1E1),
-                      ),
-                      Tag(
-                        title: "Sodas",
-                        color: const Color(0xFFD5F9FF),
-                      ),
-                    ],
-                  ),
-                ),
+                // SingleChildScrollView(
+                //   scrollDirection: Axis.horizontal,
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //     children: [
+                //       Tag(
+                //         title: "Burgers",
+                //         color: const Color(0xFFFCF4CE),
+                //       ),
+                //       Tag(
+                //         title: "Pizzas",
+                //         color: const Color(0xFFFFE1E1),
+                //       ),
+                //       Tag(
+                //         title: "Chinese",
+                //         color: const Color(0xFFC9FFDA),
+                //       ),
+                //       Tag(
+                //         title: "Ice Cream",
+                //         color: const Color(0xFFFFE1E1),
+                //       ),
+                //       GestureDetector(
+                //         onTap: (() async {
+                //           await ItemCRUD.readItemData();
+                //         }),
+                //         child: Tag(
+                //           title: "Sodas",
+                //           color: const Color(0xFFD5F9FF),
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
                 Heading(
                   title: "Promotions",
                   subtitle: "View All",
@@ -196,31 +86,42 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: MediaQuery.of(context).size.width,
                   height: 250,
                   child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 2,
-                    itemBuilder: (context, index) => PromotionItem(
-                      imageUrl: "assets/images/food.png",
-                      title: "Pizzeria Restaurant",
-                      subtitle: "Chinese & Italian",
-                      rating: "",
-                      stripVisible: true,
-                      num: index % 2,
-                    ),
-                  ),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: context.watch<ItemBloc>().items.length,
+                      itemBuilder: (context, index) {
+                        var itemFetched = context.watch<ItemBloc>().items;
+                        return PromotionItem(
+                          imageUrl: itemFetched[index].imageUrl,
+                          title: itemFetched[index].name,
+                          subtitle: itemFetched[index].description,
+                          rating: itemFetched[index].status,
+                          stripVisible: true,
+                          num: index % 2,
+                        );
+                      }),
                 ),
-                Heading(title: "Featured", subtitle: "View All"),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: 220,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 2,
-                    itemBuilder: (context, index) => PromotionItem(
-                      imageUrl: "assets/images/food.png",
-                      title: "Pizzeria Restaurant",
-                      subtitle: "Chinese & Italian",
-                      rating: "",
-                      stripVisible: false,
+                GestureDetector(
+                    onTap: () async {
+                    },
+                    child: Heading(title: "Featured", subtitle: "View All")),
+                GestureDetector(
+                  onTap: () {},
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 220,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: context.watch<ItemBloc>().items.length,
+                      itemBuilder: (context, index) {
+                        var itemFetched = context.watch<ItemBloc>().items;
+                        return PromotionItem(
+                          imageUrl: itemFetched[index].imageUrl,
+                          title: itemFetched[index].name,
+                          subtitle: itemFetched[index].description,
+                          rating: itemFetched[index].status,
+                          stripVisible: false,
+                        );
+                      },
                     ),
                   ),
                 ),
@@ -228,27 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ],
-      ),
+      )),
     );
   }
-
-  Widget buildImage(String urlImage, int index) => SizedBox(
-        child: Image.asset(
-          ('assets/images/food4.png'),
-          fit: BoxFit.none,
-          scale: 2,
-          width: 334,
-        ),
-      );
-  buildIndicator() => AnimatedSmoothIndicator(
-        activeIndex: activeindex,
-        effect: WormEffect(
-          type: WormType.thin,
-          dotHeight: 9,
-          dotWidth: 9,
-          dotColor: Colors.white.withOpacity(0.5),
-          activeDotColor: Colors.orange,
-        ),
-        count: 4,
-      );
 }

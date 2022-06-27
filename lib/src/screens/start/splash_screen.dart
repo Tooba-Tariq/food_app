@@ -61,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Positioned(
             right: -110,
             bottom: 100,
-            child: Container(
+            child: SizedBox(
               height: 200,
               width: 200,
               child: Image.asset('assets/images/side.png'),
@@ -70,7 +70,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Positioned(
             right: -60,
             bottom: 150,
-            child: Container(
+            child: SizedBox(
               height: 100,
               width: 100,
               child: Image.asset('assets/images/circle.png'),

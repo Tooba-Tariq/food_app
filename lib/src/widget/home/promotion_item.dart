@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable
 
-import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class PromotionItem extends StatelessWidget {
@@ -23,6 +23,9 @@ class PromotionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (kDebugMode) {
+      print(imageUrl);
+    }
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -62,10 +65,10 @@ class PromotionItem extends StatelessWidget {
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
+                    children: const [
+                      SizedBox(
                         width: 150,
-                        child: const Center(
+                        child: Center(
                           child: Text(
                             'Flat 50% Off',
                             style: TextStyle(
@@ -76,7 +79,7 @@ class PromotionItem extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const Icon(
+                      Icon(
                         Icons.east_rounded,
                         color: Colors.white,
                         size: 15,
@@ -89,7 +92,7 @@ class PromotionItem extends StatelessWidget {
                 height: 130,
                 width: 190,
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  // color: Colors.blue,
                   borderRadius: !stripVisible
                       ? const BorderRadius.only(
                           topLeft: Radius.circular(10),
@@ -104,12 +107,12 @@ class PromotionItem extends StatelessWidget {
                           topRight: (Radius.circular(10)),
                         )
                       : BorderRadius.circular(0),
-                  child: Image.asset(
-                    (imageUrl),
-                    fit: BoxFit.none,
-                    height: 150,
-                    width: 200,
-                    scale: 4,
+                  child: Image.network(
+                    imageUrl,
+                    fit: BoxFit.cover,
+                    // height: 150,
+                    // width: 200,
+                    // scale: 4,
                   ),
                 ),
               ),
@@ -139,7 +142,7 @@ class PromotionItem extends StatelessWidget {
                   ],
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 6.0,
@@ -148,16 +151,14 @@ class PromotionItem extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.star_rounded,
-                            color: Colors.orange,
-                          ),
-                          Text("4.5"),
-                        ],
-                      ),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.star_rounded,
+                          color: Colors.orange,
+                        ),
+                        Text(rating),
+                      ],
                     ),
                     //  Text(
                     //               locationsSlides[counter]['rating'].toString(),
@@ -168,7 +169,7 @@ class PromotionItem extends StatelessWidget {
                     //                 letterSpacing: 2,
                     //               ),
                     //             ),
-                    CircleAvatar(
+                    const CircleAvatar(
                       radius: 12,
                       backgroundColor: Colors.red,
                       child: Center(

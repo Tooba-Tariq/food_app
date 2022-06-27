@@ -1,13 +1,16 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:food_app/src/blocs/auth_bloc.dart';
+import 'package:food_app/src/blocs/item_bloc.dart';
+import 'src/blocs/auth_bloc.dart';
 import 'package:provider/provider.dart';
 
 import 'src/screens/start/splash_screen.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -16,8 +19,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      create: (context) => AuthBloc(),
+    WidgetsFlutterBinding.ensureInitialized();
+    Future.delayed(Duration.zero);
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => GoogleLoginBloc(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ItemBloc(),
+        ),
+      ],
       child: MaterialApp(
         title: 'Food App',
         debugShowCheckedModeBanner: false,
