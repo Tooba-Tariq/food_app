@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/src/blocs/auth_bloc.dart';
+import '../../blocs/auth_bloc.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/constants/app_colors.dart';
@@ -61,9 +61,7 @@ class OverlayLoginScreen extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(
-          height: 60,
-        ),
+        const Spacer(),
         Container(
           height: 320.0,
           width: 320.0,
@@ -185,13 +183,17 @@ class OverlayLoginScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
+              // loginOption(
+              //     url: "assets/images/fb.png",
+              //     onPressed: () {
+              //       context.read<AuthBloc>().loginFacebook();
+              //     }),
+              // loginOption(url: "assets/images/twitter.png", onPressed: () {}),
               loginOption(
-                  url: "assets/images/fb.png",
+                  url: "assets/images/google.png",
                   onPressed: () {
-                    context.read<AuthBloc>().loginFacebook();
+                    context.read<GoogleLoginBloc>().googleLogin();
                   }),
-              loginOption(url: "assets/images/twitter.png", onPressed: () {}),
-              loginOption(url: "assets/images/google.png", onPressed: () {}),
             ],
           ),
         ),
@@ -239,16 +241,36 @@ class OverlayLoginScreen extends StatelessWidget {
     );
   }
 
-  SizedBox loginOption({required String url, required Function onPressed}) {
+  loginOption({required String url, required Function onPressed}) {
     return SizedBox(
       height: 50.0,
-      width: 50.0,
+      width: 250.0,
       child: TextButton(
         style: ElevatedButton.styleFrom(primary: Colors.white),
         onPressed: () {
           onPressed();
         },
-        child: Image.asset(url),
+        child: Padding(
+          padding: const EdgeInsets.all(2.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.asset(
+                url,
+                height: 30,
+                width: 30,
+              ),
+              const Text(
+                'Continue with Google Account',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w300,
+                  fontSize: 13,
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

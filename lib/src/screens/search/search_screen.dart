@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:search_page/search_page.dart';
 
@@ -28,7 +30,7 @@ class SearchScreen extends StatelessWidget {
             barTheme: ThemeData(
               appBarTheme: AppBarTheme(
                 elevation: 0,
-                iconTheme: IconThemeData(color: Colors.orange),
+                iconTheme: const IconThemeData(color: Colors.orange),
                 backgroundColor: Colors.white,
                 textTheme: ThemeData.light().textTheme.copyWith(
                       subtitle1: const TextStyle(
@@ -40,7 +42,7 @@ class SearchScreen extends StatelessWidget {
               ),
             ),
             showItemsOnEmpty: true,
-            searchStyle: TextStyle(color: Colors.white),
+            searchStyle: const TextStyle(color: Colors.white),
             searchLabel: 'Search people',
             suggestion: const Center(
               child: Text('Filter item by name'),
@@ -53,7 +55,7 @@ class SearchScreen extends StatelessWidget {
               person.surname,
               person.age.toString(),
             ],
-            builder: (person) => Container(
+            builder: (person) => SizedBox(
               width: 350,
               child: Card(
                 child: Center(
@@ -69,29 +71,29 @@ class SearchScreen extends StatelessWidget {
                           child: Image.asset("assets/images/chinese.PNG"),
                         ),
                         Container(
-                          padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                          padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
-                              Text(
+                              const Text(
                                 "Chinese In Resturant",
                                 style: TextStyle(color: Colors.black),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
-                              Text(
+                              const Text(
                                 "Resturant Chinese Food | \$\$",
                                 style: TextStyle(color: Colors.grey),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               Row(
-                                children: [
+                                children: const [
                                   Icon(Icons.star, color: Colors.yellow),
                                   Text(
                                     "4.5  ",
@@ -107,7 +109,7 @@ class SearchScreen extends StatelessWidget {
                         ),
                         IconButton(
                             onPressed: () {},
-                            icon: Icon(Icons.favorite_border_rounded)),
+                            icon: const Icon(Icons.favorite_border_rounded)),
                       ],
                     ),
                   ),

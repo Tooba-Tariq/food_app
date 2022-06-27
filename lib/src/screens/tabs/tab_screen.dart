@@ -35,7 +35,7 @@ class _TabScreenState extends State<TabScreen> {
               }),
           elevation: 0,
           title: const Text(
-            'Inbox',
+            'Coupons',
             style: TextStyle(
               fontSize: 18,
             ),
@@ -203,7 +203,7 @@ class _TabScreenState extends State<TabScreen> {
                   onPressed: () {}),
             ],
           ),
-          'route': const PersonScreen(),
+          'route': PersonScreen(),
         },
       ];
   @override
@@ -227,7 +227,9 @@ class _TabScreenState extends State<TabScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      drawer: _selectedPageIndex == 0 ? const NavigationDrawer() : null,
+      drawer: _selectedPageIndex == 0
+          ? NavigationDrawer(pageIndex: _selectPage)
+          : null,
       appBar: _pages()[_selectedPageIndex]['appBar'],
       body: _pages()[_selectedPageIndex]['route'],
       bottomNavigationBar: BottomNavigationBar(
@@ -251,7 +253,7 @@ class _TabScreenState extends State<TabScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.message_rounded,
+              Icons.euro_symbol_rounded,
             ),
             label: '',
           ),

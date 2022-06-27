@@ -6,7 +6,7 @@ import '../../../core/util/logo_widget.dart';
 import '../../screens/login/login_screen.dart';
 
 class OverlayWidget extends StatefulWidget {
-  OverlayWidget({
+  const OverlayWidget({
     Key? key,
   }) : super(key: key);
 
@@ -15,8 +15,6 @@ class OverlayWidget extends StatefulWidget {
 }
 
 class _OverlayWidgetState extends State<OverlayWidget> {
-  bool _isLoggedIn = false;
-
   @override
   Widget build(BuildContext context) {
     return Center(

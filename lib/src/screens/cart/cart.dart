@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -77,15 +76,13 @@ class Cart extends StatelessWidget {
             padding: const EdgeInsets.only(top: 20.0),
             child: Column(
               children: [
-                Container(
+                SizedBox(
                   height: 140.0,
                   width: 350.0,
                   child: Card(
                     child: Row(
                       children: [
-                        Container(
-                          child: Image.asset("assets/images/food3.png"),
-                        ),
+                        Image.asset("assets/images/food3.png"),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -167,15 +164,13 @@ class Cart extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   height: 140.0,
                   width: 350.0,
                   child: Card(
                     child: Row(
                       children: [
-                        Container(
-                          child: Image.asset("assets/images/food3.png"),
-                        ),
+                        Image.asset("assets/images/food3.png"),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [

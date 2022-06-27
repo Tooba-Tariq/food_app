@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../../../core/constants/app_colors.dart';
 
@@ -10,7 +8,7 @@ class PromotionTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemBuilder: (context, index) => Center(child: Container(
+      itemBuilder: (context, index) => Center(child: SizedBox(
         height: (MediaQuery.of(context).size.width * 0.251),
                   width: (MediaQuery.of(context).size.width * 0.75),
                   child: Column(

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../widget/inbox/promotion_tab.dart';
 
 import '../../widget/inbox/coupon_tab.dart';
-import '../../widget/inbox/message_tab.dart';
 
 // ignore: must_be_immutable
 class InboxScreen extends StatefulWidget {
@@ -21,7 +19,7 @@ class _InboxScreenState extends State<InboxScreen> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: DefaultTabController(
-        length: 2,
+        length: 1,
         child: Column(
           children: [
             Padding(
@@ -37,7 +35,7 @@ class _InboxScreenState extends State<InboxScreen> {
                 child: LayoutBuilder(builder: (context, constraint) {
                   boxSize = constraint.maxHeight;
                   return TabBar(
-                      labelStyle: TextStyle(
+                      labelStyle: const TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w300,
                       ),
@@ -47,9 +45,9 @@ class _InboxScreenState extends State<InboxScreen> {
                       ),
                       unselectedLabelColor: Colors.black,
                       tabs: const [
-                        Tab(
-                          text: 'Messages',
-                        ),
+                        // Tab(
+                        //   text: 'Messages',
+                        // ),
                         Tab(
                           text: 'Coupons',
                         ),
@@ -84,7 +82,7 @@ class _InboxScreenState extends State<InboxScreen> {
               child: LayoutBuilder(builder: (context, constarints) {
                 return const TabBarView(
                   children: [
-                    MessageTab(),
+                    // MessageTab(),
                     CouponTab(),
                     // PromotionTab(),
                   ],

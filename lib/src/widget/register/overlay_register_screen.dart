@@ -233,9 +233,6 @@ class _OverlayRegisterScreenState extends State<OverlayRegisterScreen> {
             ),
           ),
         ),
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.08,
-        ),
         Text(
           'Terms & Conditions',
           style: TextStyle(

@@ -36,7 +36,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           activeColor: Colors.white,
           color: AppColor.themePrimary,
         ),
-        next: Text(
+        next: const Text(
           'Next',
           style: TextStyle(color: Colors.white),
         ),
@@ -77,7 +77,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
             title: "Get your favorite food delivered at\n your door step.",
             body: "",
-            image: Container(
+            image: SizedBox(
               height: 500,
               child: Container(
                 width: MediaQuery.of(context).size.width,
