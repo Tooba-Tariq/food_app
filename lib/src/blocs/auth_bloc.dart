@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:food_app/src/services/auth_service.dart';
 
@@ -15,6 +16,15 @@ class AuthBloc {
         FacebookPermission.email,
       ],
     );
+    final FacebookAccessToken? _accessToken = res.accessToken;
+
+    final AuthCredential credential =
+        FacebookAuthProvider.credential(_accessToken!.token);
+
+    final result = await authService.signInWithCredential(credential);
+
+    print('${result.user.displayName} is now logged In');
+
     switch (res.status) {
       case FacebookLoginStatus.success:
         print(res);
