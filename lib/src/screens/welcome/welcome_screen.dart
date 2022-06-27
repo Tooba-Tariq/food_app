@@ -19,7 +19,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Scaffold(
       body: IntroductionScreen(
         // isTopSafeArea: true,
-        done: const Text('Done'),
+        done: const Text(
+          'Done',
+          style: TextStyle(color: Colors.white),
+        ),
         onDone: () {
           Navigator.push(
             context,
@@ -30,26 +33,25 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         },
         globalBackgroundColor: AppColor.themePrimary,
         dotsDecorator: DotsDecorator(
-          activeColor: AppColor.themePrimary,
+          activeColor: Colors.white,
+          color: AppColor.themePrimary,
         ),
-        overrideNext: Container(),
-        next: Container(),
+        next: Text(
+          'Next',
+          style: TextStyle(color: Colors.white),
+        ),
         pages: [
           PageViewModel(
-            footer: ElevatedButton(
-              onPressed: () {},
-              child: Text('Data'),
-            ),
             decoration: const PageDecoration(
-              imageFlex: 3,
-              bodyPadding: EdgeInsets.zero,
-              bodyTextStyle: TextStyle(
+              titleTextStyle: TextStyle(
                 fontSize: 14.0,
+                color: Colors.white,
                 fontWeight: FontWeight.w300,
               ),
+              imageFlex: 3,
+              bodyPadding: EdgeInsets.zero,
             ),
             title: 'Find your nearby food places\nand your favourite foods',
-            // body: "Find your nearby food places\nand your favourite foods",
             body: '',
             image: Stack(
               children: [
@@ -66,6 +68,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           PageViewModel(
             decoration: const PageDecoration(
               imageFlex: 3,
+              titleTextStyle: TextStyle(
+                fontSize: 14.0,
+                color: Colors.white,
+                fontWeight: FontWeight.w300,
+              ),
               bodyPadding: EdgeInsets.zero,
             ),
             title: "Get your favorite food delivered at\n your door step.",

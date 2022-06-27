@@ -17,6 +17,7 @@ class AuthBloc {
     );
     switch (res.status) {
       case FacebookLoginStatus.success:
+        print(res);
         print('It Worked');
 
         break;
