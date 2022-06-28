@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/src/blocs/item_bloc.dart';
 import 'package:provider/provider.dart';
+
 import '../../widget/home/heading.dart';
 import '../../widget/home/item_slider.dart';
 import '../../widget/home/promotion_item.dart';

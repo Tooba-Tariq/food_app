@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../blocs/auth_bloc.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../../core/util/custom_page_route.dart';
+import '../../blocs/auth_bloc.dart';
 import '../../screens/register/register_screen.dart';
 import '../../screens/tabs/tab_screen.dart';
 

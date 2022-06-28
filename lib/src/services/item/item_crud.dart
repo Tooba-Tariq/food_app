@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:food_app/src/services/server.dart';
+import '../server.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 
