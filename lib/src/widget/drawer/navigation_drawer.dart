@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import '../../blocs/auth_bloc.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../../core/util/custom_page_route.dart';
+import '../../blocs/auth_bloc.dart';
 import '../../screens/cart/cart.dart';
 
 class NavigationDrawer extends StatelessWidget {
