@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'overlay_register_screen.dart';
 
 import '../../../core/constants/app_colors.dart';
 
@@ -59,11 +59,8 @@ class _FormDropDownButtonState extends State<FormDropDownButton> {
             setState(() {});
             widget.valueController = newValue;
 
-            if (kDebugMode) {
-              print(widget.valueController);
-              // print(widget.ageValue);
-              // print(widget.statusValue);
-            }
+            if (widget.label == 'Status') statusValue = newValue;
+            if (widget.label == 'Age') ageValue = newValue;
           });
         },
         items: widget.items,

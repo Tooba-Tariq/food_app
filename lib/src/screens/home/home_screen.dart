@@ -102,8 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       }),
                 ),
                 GestureDetector(
-                    onTap: () async {
-                    },
+                    onTap: () async {},
                     child: Heading(title: "Featured", subtitle: "View All")),
                 GestureDetector(
                   onTap: () {},

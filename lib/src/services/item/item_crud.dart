@@ -12,9 +12,7 @@ class ItemCRUD {
           await http.get(Uri.parse(server + 'readItem.php'));
       // print(response.body);
       List<dynamic> value = jsonDecode(response.body);
-      if (kDebugMode) {
-        print(value);
-      }
+
       return value;
     } on Exception catch (e) {
       if (kDebugMode) {

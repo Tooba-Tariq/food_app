@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/src/blocs/item_bloc.dart';
+import 'package:food_app/src/blocs/user_bloc.dart';
 import 'src/blocs/auth_bloc.dart';
 import 'package:provider/provider.dart';
 
@@ -24,10 +25,13 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => GoogleLoginBloc(),
+          create: (context) => AuthBloc(),
         ),
         ChangeNotifierProvider(
           create: (context) => ItemBloc(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => UserBloc(),
         ),
       ],
       child: MaterialApp(

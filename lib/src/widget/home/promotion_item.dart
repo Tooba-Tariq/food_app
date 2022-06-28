@@ -1,7 +1,5 @@
 // ignore_for_file: must_be_immutable
 
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class PromotionItem extends StatelessWidget {
@@ -23,9 +21,6 @@ class PromotionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (kDebugMode) {
-      print(imageUrl);
-    }
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
