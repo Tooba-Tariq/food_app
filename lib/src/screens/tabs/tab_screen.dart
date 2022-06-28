@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/src/blocs/auth_bloc.dart';
+import 'package:provider/provider.dart';
 import '../feed/news_feed_screen.dart';
 import '../person/person_screen.dart';
 import '../../../core/util/custom_page_route.dart';
@@ -82,11 +84,7 @@ class _TabScreenState extends State<TabScreen> {
                 splashRadius: 20,
                 onSelected: (value) {
                   if (value == 'Logout') {
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      CustomPageRoute(builder: const LoginScreen()),
-                      (route) => false,
-                    );
+                    context.read<AuthBloc>().logout();
                   }
                 },
                 icon: Icon(

@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => GoogleLoginBloc(),
+          create: (context) => AuthBloc(),
         ),
         ChangeNotifierProvider(
           create: (context) => ItemBloc(),

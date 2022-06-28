@@ -29,24 +29,8 @@ class _FormTextFieldState extends State<FormTextField> {
             fontSize: 16,
             fontWeight: FontWeight.normal,
           ),
-          validator: (value) {
-            if (widget.label == 'Email' &&
-                (value!.isEmpty ||
-                    RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                        .hasMatch(value))) {
-              return 'Please Enter Valid Email';
-            }
-            if (widget.label == 'Password' &&
-                (value!.isEmpty ||
-                    RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
-                        .hasMatch(value))) {
-              return 'Please Enter Strong Password';
-            }
-            if (widget.label == 'User Name' && (value!.length < 4)) {
-              return 'Please Enter Longer User Name';
-            }
-            return null;
-          },
+          keyboardType:widget.label == 'Phone'?TextInputType.number:TextInputType.name,
+         
           decoration: InputDecoration(
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 20, vertical: 0),

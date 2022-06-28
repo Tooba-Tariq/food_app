@@ -1,7 +1,9 @@
 // ignore_for_file: deprecated_member_use
 
-
 import 'package:flutter/material.dart';
+import 'package:food_app/core/util/error_message.dart';
+import 'package:food_app/src/blocs/auth_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '/core/util/custom_page_route.dart';
@@ -11,9 +13,13 @@ import '../../../core/constants/app_colors.dart';
 import 'form_drop_down_button.dart';
 import 'form_text_field.dart';
 
-class OverlayRegisterScreen extends StatefulWidget {
-  const OverlayRegisterScreen({Key? key}) : super(key: key);
+String ageValue = 'Age';
+String statusValue = 'Status';
 
+class OverlayRegisterScreen extends StatefulWidget {
+  OverlayRegisterScreen({Key? key, required this.parentContext})
+      : super(key: key);
+  BuildContext parentContext;
   @override
   _OverlayRegisterScreenState createState() => _OverlayRegisterScreenState();
 }
@@ -28,8 +34,6 @@ class _OverlayRegisterScreenState extends State<OverlayRegisterScreen> {
   TextEditingController lastNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  String ageValue = 'Age';
-  String statusValue = 'Status';
 
   int formController = 0;
 
@@ -105,6 +109,28 @@ class _OverlayRegisterScreenState extends State<OverlayRegisterScreen> {
               title: 'Next',
               onPressed: () {
                 setState(() {
+                  if (userNameController.text.trim().isEmpty &&
+                      userNameController.text.trim().length < 4) {
+                    ScaffoldMessenger.of(widget.parentContext).showSnackBar(
+                      const SnackBar(
+                        content: ErrorMessage(
+                            message: 'Please Enter Long User Name'),
+                      ),
+                    );
+                    return;
+                  }
+                  if (!(RegExp(
+                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                      .hasMatch(emailController.text.toString()))) {
+                    ScaffoldMessenger.of(widget.parentContext).showSnackBar(
+                      const SnackBar(
+                        content:
+                            ErrorMessage(message: 'Please Enter Valid Email'),
+                      ),
+                    );
+                    return;
+                  }
+
                   formController = (formController + 1) % 3;
                 });
               }),
@@ -133,6 +159,36 @@ class _OverlayRegisterScreenState extends State<OverlayRegisterScreen> {
               title: 'Next',
               onPressed: () {
                 setState(() {
+                  if (firstNameController.text.trim().isEmpty) {
+                    ScaffoldMessenger.of(widget.parentContext).showSnackBar(
+                      const SnackBar(
+                        content:
+                            ErrorMessage(message: 'Please Enter First Name'),
+                      ),
+                    );
+                    return;
+                  }
+                  if (lastNameController.text.trim().isEmpty) {
+                    ScaffoldMessenger.of(widget.parentContext).showSnackBar(
+                      const SnackBar(
+                        content:
+                            ErrorMessage(message: 'Please Enter Last Name'),
+                      ),
+                    );
+                    return;
+                  }
+                  if (RegExp(
+                          r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
+                      .hasMatch(passwordController.text.trim())) {
+                    ScaffoldMessenger.of(widget.parentContext).showSnackBar(
+                      const SnackBar(
+                        content: ErrorMessage(
+                            message: 'Please Enter Long User Name'),
+                      ),
+                    );
+                    return;
+                  }
+
                   formController = (formController + 1) % 3;
                 });
               }),
@@ -169,13 +225,41 @@ class _OverlayRegisterScreenState extends State<OverlayRegisterScreen> {
           ),
           buildIndicator(),
           formControlButton(
-              title: 'Sign Up',
-              onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    CustomPageRoute(builder: const WelcomeScreen()),
-                    (route) => false);
-              }),
+            title: 'Sign Up',
+            onPressed: () {
+              print(statusValue);
+              print(ageValue);
+              if (phoneController.text.trim().isEmpty) {
+                ScaffoldMessenger.of(widget.parentContext).showSnackBar(
+                  const SnackBar(
+                    content: ErrorMessage(message: 'Please Enter Phone Number'),
+                  ),
+                );
+                return;
+              }
+              if (statusValue == 'Status') {
+                ScaffoldMessenger.of(widget.parentContext).showSnackBar(
+                  const SnackBar(
+                    content: ErrorMessage(message: 'Please Choose Status'),
+                  ),
+                );
+                return;
+              }
+              if (ageValue == 'Age') {
+                ScaffoldMessenger.of(widget.parentContext).showSnackBar(
+                  const SnackBar(
+                    content: ErrorMessage(message: 'Please Choose Age'),
+                  ),
+                );
+                return;
+              }
+
+              context.read<AuthBloc>().registerWithEmail(
+                    emailController.text.trim(),
+                    passwordController.text.trim(),
+                  );
+            },
+          ),
         ],
       ];
 
@@ -246,10 +330,11 @@ class _OverlayRegisterScreenState extends State<OverlayRegisterScreen> {
           children: [
             TextButton(
               onPressed: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   CustomPageRoute(
                     builder: const LoginScreen(),
+                    direction: AxisDirection.right,
                   ),
                 );
               },
@@ -316,5 +401,9 @@ class _OverlayRegisterScreenState extends State<OverlayRegisterScreen> {
         ),
       ),
     );
+  }
+
+  void onSubmit() {
+    _formKey.currentState!.validate();
   }
 }
