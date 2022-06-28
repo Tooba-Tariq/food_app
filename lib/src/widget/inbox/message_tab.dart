@@ -1,6 +1,8 @@
 import 'dart:math';
+
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+
 import '../../../core/constants/app_colors.dart';
 
 class MessageTab extends StatelessWidget {
