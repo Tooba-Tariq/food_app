@@ -1,17 +1,15 @@
-class User {
+class Person {
   String id;
   String firstName;
   String lastName;
   String username;
   String phoneNo;
-  String address;
   String status;
-  int age;
+  String age;
   String image;
   String bio;
 
-  User({
-    required this.address,
+  Person({
     required this.age,
     required this.bio,
     required this.firstName,

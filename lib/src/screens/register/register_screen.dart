@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/core/util/custom_page_route.dart';
 import 'package:food_app/src/screens/login/login_screen.dart';
+import 'package:food_app/src/screens/tabs/tab_screen.dart';
 import 'package:food_app/src/screens/welcome/welcome_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:introduction_screen/introduction_screen.dart';
@@ -12,6 +13,8 @@ import 'package:introduction_screen/introduction_screen.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/util/gredient_circle.dart';
 import '../../widget/register/overlay_register_screen.dart';
+
+int state = 0;
 
 class RegisterScreen1 extends StatefulWidget {
   const RegisterScreen1({Key? key}) : super(key: key);
@@ -21,6 +24,13 @@ class RegisterScreen1 extends StatefulWidget {
 }
 
 class _RegisterScreen1State extends State<RegisterScreen1> {
+  @override
+  void dispose() {
+    
+    super.dispose();
+    // print('I am dead');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +43,12 @@ class _RegisterScreen1State extends State<RegisterScreen1> {
                 child: CircularProgressIndicator(),
               );
             } else if (snapshot.hasData) {
-              return WelcomeScreen();
+              // print(snapshot.data);
+              if (state == 0) {
+                return const WelcomeScreen();
+              } else {
+                return const TabScreen();
+              }
             } else if (snapshot.hasError) {
               return const Center(
                 child: Text("Something Went Wrong"),
@@ -83,7 +98,7 @@ class _RegisterScreen1State extends State<RegisterScreen1> {
                                     Navigator.pushReplacement(
                                       context,
                                       CustomPageRoute(
-                                        builder: LoginScreen(),
+                                        builder: const LoginScreen(),
                                         direction: AxisDirection.right,
                                       ),
                                     );

@@ -1,6 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:food_app/src/widget/register/overlay_register_screen.dart';
+import 'overlay_register_screen.dart';
 
 import '../../../core/constants/app_colors.dart';
 

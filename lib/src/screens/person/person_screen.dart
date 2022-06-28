@@ -1,14 +1,36 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import '../../../core/constants/app_colors.dart';
+import '../../blocs/user_bloc.dart';
 
 // ignore: must_be_immutable
-class PersonScreen extends StatelessWidget {
-  PersonScreen({Key? key}) : super(key: key);
+class PersonScreen extends StatefulWidget {
+  const PersonScreen({Key? key}) : super(key: key);
 
+  @override
+  State<PersonScreen> createState() => _PersonScreenState();
+}
+
+class _PersonScreenState extends State<PersonScreen> {
   var user = FirebaseAuth.instance.currentUser!;
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  getData() async {
+    String? id = user.email;
+    await context.read<UserBloc>().fetchUsers(id!.toString());
+    Future.delayed(Duration.zero);
+  }
+
   @override
   Widget build(BuildContext context) {
+    var userData = context.watch<UserBloc>().user;
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -32,13 +54,15 @@ class PersonScreen extends StatelessWidget {
                     ),
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
-                        child: Image.network(user.photoURL!)),
+                        child: Image.network(userData.image)),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   Text(
-                    user.providerData[0].displayName.toString(),
+                    userData.firstName.toString() +
+                        " " +
+                        userData.lastName.toString(),
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.normal,
@@ -48,7 +72,7 @@ class PersonScreen extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    "(Student)",
+                    userData.bio.toString(),
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w300,
@@ -82,16 +106,12 @@ class PersonScreen extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: dashboardMethod(
-                                Icons.euro_symbol_rounded,
-                                "Coupons",
-                                "(10)"),
+                                Icons.euro_symbol_rounded, "Coupons", "(10)"),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: dashboardMethod(
-                                Icons.shopping_cart_outlined,
-                                "Cart",
-                                "(100)"),
+                                Icons.shopping_cart_outlined, "Cart", "(100)"),
                           ),
                         ],
                       ),
@@ -101,8 +121,7 @@ class PersonScreen extends StatelessWidget {
                     color: Colors.white,
                     child: Column(children: [
                       // bottomCards(Icons.people, "General Settings"),
-                      bottomCards(
-                          Icons.perm_identity, "Profile Settings  "),
+                      bottomCards(Icons.perm_identity, "Profile Settings  "),
                       // bottomCards(
                       //     Icons.location_on_outlined, "Shipping Details"),
                       // bottomCards(Icons.payment_rounded, "Payment Details"),

@@ -298,7 +298,7 @@ class OverlayLoginScreen extends StatelessWidget {
 }
 
 class FormTextField extends StatelessWidget {
-  FormTextField({
+  const FormTextField({
     Key? key,
     required this.controller,
     required this.label,

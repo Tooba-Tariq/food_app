@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_login_facebook/flutter_login_facebook.dart';
-import '../services/auth_service.dart';
+import 'user_bloc.dart';
+import '../model/user.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthBloc with ChangeNotifier {
@@ -87,13 +87,15 @@ class AuthBloc with ChangeNotifier {
 
   UserCredential? emailUser;
 
-  registerWithEmail(String email, String password) async {
+  registerWithEmail(String email, String password,Person user) async {
     try {
       emailUser = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
-      print(user);
+          .createUserWithEmailAndPassword(email: email, password: password).then((value) => UserBloc().adduser(user));
+          
     } on Exception catch (e) {
-      print(e.toString());
+      if (kDebugMode) {
+        print(e.toString());
+      }
     }
   }
 
@@ -101,9 +103,11 @@ class AuthBloc with ChangeNotifier {
     try {
       emailUser = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-      print(user);
+      // print(user);
     } on Exception catch (e) {
-      print(e.toString());
+      if (kDebugMode) {
+        print(e.toString());
+      }
     }
   }
 

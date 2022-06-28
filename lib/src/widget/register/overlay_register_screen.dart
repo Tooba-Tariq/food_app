@@ -3,12 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/core/util/error_message.dart';
 import 'package:food_app/src/blocs/auth_bloc.dart';
+import 'package:food_app/src/model/user.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '/core/util/custom_page_route.dart';
 import '/src/screens/login/login_screen.dart';
-import '/src/screens/welcome/welcome_screen.dart';
 import '../../../core/constants/app_colors.dart';
 import 'form_drop_down_button.dart';
 import 'form_text_field.dart';
@@ -16,6 +16,7 @@ import 'form_text_field.dart';
 String ageValue = 'Age';
 String statusValue = 'Status';
 
+// ignore: must_be_immutable
 class OverlayRegisterScreen extends StatefulWidget {
   OverlayRegisterScreen({Key? key, required this.parentContext})
       : super(key: key);
@@ -156,9 +157,10 @@ class _OverlayRegisterScreenState extends State<OverlayRegisterScreen> {
           ),
           buildIndicator(),
           formControlButton(
-              title: 'Next',
-              onPressed: () {
-                setState(() {
+            title: 'Next',
+            onPressed: () {
+              setState(
+                () {
                   if (firstNameController.text.trim().isEmpty) {
                     ScaffoldMessenger.of(widget.parentContext).showSnackBar(
                       const SnackBar(
@@ -190,8 +192,10 @@ class _OverlayRegisterScreenState extends State<OverlayRegisterScreen> {
                   }
 
                   formController = (formController + 1) % 3;
-                });
-              }),
+                },
+              );
+            },
+          ),
         ],
         [
           Column(
@@ -226,9 +230,9 @@ class _OverlayRegisterScreenState extends State<OverlayRegisterScreen> {
           buildIndicator(),
           formControlButton(
             title: 'Sign Up',
-            onPressed: () {
-              print(statusValue);
-              print(ageValue);
+            onPressed: () async {
+              // print(statusValue);
+              // print(ageValue);
               if (phoneController.text.trim().isEmpty) {
                 ScaffoldMessenger.of(widget.parentContext).showSnackBar(
                   const SnackBar(
@@ -254,9 +258,23 @@ class _OverlayRegisterScreenState extends State<OverlayRegisterScreen> {
                 return;
               }
 
+              Person user = Person(
+                age: ageValue,
+                bio: 'Student',
+                firstName: firstNameController.text.trim(),
+                id: emailController.text,
+                image:
+                    'https://www.kindpng.com/picc/m/105-1055656_account-user-profile-avatar-avatar-user-profile-icon.png',
+                lastName: lastNameController.text,
+                phoneNo: phoneController.text,
+                username: userNameController.text,
+                status: statusValue,
+              );
+              // print(user);
               context.read<AuthBloc>().registerWithEmail(
                     emailController.text.trim(),
                     passwordController.text.trim(),
+                    user,
                   );
             },
           ),

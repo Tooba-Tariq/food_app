@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/src/blocs/auth_bloc.dart';
+import '../../blocs/auth_bloc.dart';
 import 'package:provider/provider.dart';
 import '../feed/news_feed_screen.dart';
 import '../person/person_screen.dart';
-import '../../../core/util/custom_page_route.dart';
-import '../login/login_screen.dart';
 
 import '../../widget/drawer/navigation_drawer.dart';
 import '/core/constants/app_colors.dart';
@@ -201,7 +199,7 @@ class _TabScreenState extends State<TabScreen> {
                   onPressed: () {}),
             ],
           ),
-          'route': PersonScreen(),
+          'route': const PersonScreen(),
         },
       ];
   @override

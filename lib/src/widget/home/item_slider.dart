@@ -3,7 +3,6 @@
 import 'dart:ui';
 
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -74,9 +73,6 @@ class ItemDealSliderState extends State<ItemDealSlider> {
                             ),
                             items: widget.items.map(
                               (e) {
-                                if (kDebugMode) {
-                                  print(activeindex);
-                                }
                                 return Row(
                                   children: [
                                     SizedBox(

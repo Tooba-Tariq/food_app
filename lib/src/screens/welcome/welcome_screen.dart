@@ -3,7 +3,7 @@ import '../../../core/constants/app_colors.dart';
 
 import 'package:introduction_screen/introduction_screen.dart';
 
-import '../tabs/tab_screen.dart';
+import '../register/register_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -24,12 +24,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           style: TextStyle(color: Colors.white),
         ),
         onDone: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: ((context) => const TabScreen()),
-            ),
-          );
+          state = 1;
+          Navigator.pop(context);
         },
         globalBackgroundColor: AppColor.themePrimary,
         dotsDecorator: DotsDecorator(
