@@ -34,7 +34,7 @@ class _FormDropDownButtonState extends State<FormDropDownButton> {
           fillColor: Colors.grey.shade100,
           filled: true,
           enabledBorder: InputBorder.none,
-          hintText: widget.label,
+          hintText: widget.valueController,
           hintStyle: Theme.of(context).textTheme.labelMedium,
           border: const OutlineInputBorder(),
         ),

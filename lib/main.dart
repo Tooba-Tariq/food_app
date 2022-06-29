@@ -2,7 +2,9 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:food_app/src/blocs/coupon_bloc.dart';
 import 'package:food_app/src/blocs/item_bloc.dart';
+import 'package:food_app/src/blocs/news_feed_bloc.dart';
 import 'package:food_app/src/blocs/user_bloc.dart';
 import 'src/blocs/auth_bloc.dart';
 import 'package:provider/provider.dart';
@@ -32,6 +34,11 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => UserBloc(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => NewsFeedBloc(),
+        ),ChangeNotifierProvider(
+          create: (context) => CouponBloc(),
         ),
       ],
       child: MaterialApp(

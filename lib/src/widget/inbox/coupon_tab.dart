@@ -1,40 +1,61 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/src/model/coupon.dart';
 
 import '../../../core/constants/app_colors.dart';
 
 class CouponTab extends StatelessWidget {
-  const CouponTab({Key? key}) : super(key: key);
-
+  const CouponTab({Key? key, required this.coupon}) : super(key: key);
+  final List<Coupon> coupon;
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 10,
+      itemCount: coupon.length,
       itemBuilder: (context, index) => Center(
         child: Container(
           height: 100,
           width: MediaQuery.of(context).size.width * 0.94,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/images/coupon.png"),
+              image: AssetImage(
+                "assets/images/coupon.png",
+              ),
+              fit: BoxFit.cover,
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(
+              left: 25.0,
+              top: 4,
+              right: 8,
+              bottom: 8,
+            ),
             child: Row(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.asset("assets/images/coupon1.png"),
+                Container(
+                  height: 50,
+                  width: 50,
+                  child: ClipRRect(
+                    // borderRadius: BorderRadius.circular(15),
+                    child: Image.network(
+                      coupon[index].image,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
                 ),
                 Container(
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.only(
+                    left: 8,
+                    top: 4,
+                    right: 8,
+                    bottom: 8,
+                  ),
                   width: MediaQuery.of(context).size.width * 0.65,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      const Text(
-                        "Chinese In Restaurant",
+                      Text(
+                        coupon[index].name,
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.black,
@@ -44,14 +65,19 @@ class CouponTab extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "20.00",
+                            coupon[index].discount + '.00',
                             style: TextStyle(
-                              fontSize: 22,
+                              fontSize: 30,
                               color: AppColor.themePrimary,
                             ),
                           ),
-                          const Text(
-                            "Oct 20, 04:00 am \nto 10:00 pm",
+                          Container(
+                            color: AppColor.themePrimary,
+                            width: 1,
+                            height: 20,
+                          ),
+                          Text(
+                            coupon[index].validity,
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.grey,
@@ -60,7 +86,7 @@ class CouponTab extends StatelessWidget {
                         ],
                       ),
                       Text(
-                        "For Orders Over 200",
+                        coupon[index].description,
                         style: TextStyle(
                           fontSize: 15,
                           color: AppColor.themePrimary,

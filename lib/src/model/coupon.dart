@@ -3,22 +3,18 @@ class Coupon {
   String name;
   String code;
   String description;
-  // String sellerId;
   String userId;
   String discount;
-  bool isUsed;
-  // String startDate;
-  // String endDate;
+  String image;
+  String validity;
   Coupon({
     required this.id,
     required this.code,
     required this.description,
     required this.discount,
-    // required this.endDate,
-    required this.isUsed,
     required this.name,
     required this.userId,
-    // required this.sellerId,
-    // required this.startDate,
+    required this.image,
+    required this.validity,
   });
 }
