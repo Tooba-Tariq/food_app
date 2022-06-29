@@ -31,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var items2 = context.watch<ItemBloc>().items;
     return RefreshIndicator(
       onRefresh: getItem,
       child: SingleChildScrollView(
@@ -39,12 +40,12 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
             child: Column(
               children: [
-                const Padding(
+                Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: SearchScreen(),
+                  child: SearchScreen(item: items2),
                 ),
                 ItemDealSlider(
-                  items: context.watch<ItemBloc>().items,
+                  items: items2,
                 ),
                 // SingleChildScrollView(
                 //   scrollDirection: Axis.horizontal,

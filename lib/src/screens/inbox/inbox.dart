@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/src/blocs/coupon_bloc.dart';
+import 'package:provider/provider.dart';
 
 import '../../widget/inbox/coupon_tab.dart';
 
@@ -15,83 +17,115 @@ class InboxScreen extends StatefulWidget {
 class _InboxScreenState extends State<InboxScreen> {
   double boxSize = 0;
   int? index;
+
+  Future<void> getData() async {
+    await context.read<CouponBloc>().fetchCoupon();
+    return Future.delayed(Duration.zero);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: DefaultTabController(
-        length: 1,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                    color: Colors.grey.shade200,
-                  ),
+    return FutureBuilder(
+        future: getData(),
+        builder: (context, snapshot) {
+          // if (snapshot.connectionState == ConnectionState.waiting) {
+          //   return Center(child: CircularProgressIndicator());
+          // }
+          print(snapshot);
+          if (context.watch<CouponBloc>().coupon.isEmpty) {
+            return RefreshIndicator(
+              onRefresh: getData,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("No Coupon"),
+                  ],
                 ),
-                height: 30,
-                child: LayoutBuilder(builder: (context, constraint) {
-                  boxSize = constraint.maxHeight;
-                  return TabBar(
-                      labelStyle: const TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w300,
-                      ),
-                      indicator: BoxDecoration(
-                        color: Colors.orange,
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      unselectedLabelColor: Colors.black,
-                      tabs: const [
-                        // Tab(
-                        //   text: 'Messages',
-                        // ),
-                        Tab(
-                          text: 'Coupons',
+              ),
+            );
+          }
+          return RefreshIndicator(
+            onRefresh: getData,
+            child: SingleChildScrollView(
+              child: DefaultTabController(
+                length: 1,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: Colors.grey.shade200,
+                          ),
                         ),
-                        // Tab(
-                        //   text: 'Promotions',
-                        // )
-                      ]);
-                }),
+                        height: 30,
+                        child: LayoutBuilder(builder: (context, constraint) {
+                          boxSize = constraint.maxHeight;
+                          return TabBar(
+                              labelStyle: const TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w300,
+                              ),
+                              indicator: BoxDecoration(
+                                color: Colors.orange,
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              unselectedLabelColor: Colors.black,
+                              tabs: const [
+                                // Tab(
+                                //   text: 'Messages',
+                                // ),
+                                Tab(
+                                  text: 'Coupons',
+                                ),
+                                // Tab(
+                                //   text: 'Promotions',
+                                // )
+                              ]);
+                        }),
+                      ),
+                    ),
+                    // Center(
+                    //   child: ToggleSwitch(
+                    //     fontSize: 18.0,
+                    //     cornerRadius: 5.0,
+                    //     totalSwitches: 3,
+                    //     initialLabelIndex: 0,
+                    //     minWidth: 350.0,
+                    //     labels: const ['Messages', 'Coupons', 'Promotions'],
+                    //     onToggle: (index) {
+                    //       if (kDebugMode) {
+                    //         print('switched to: $index');
+                    //       }
+                    //     },
+                    //     activeBgColor: const [Colors.orange],
+                    //     inactiveBgColor: Colors.white,
+                    //   ),
+                    // ),
+                    SizedBox(
+                      height: (MediaQuery.of(context).size.height -
+                          widget.appBarSize -
+                          (boxSize + 100)),
+                      child: LayoutBuilder(builder: (context, constarints) {
+                        var coupon2 = context.watch<CouponBloc>().coupon;
+
+                        return TabBarView(
+                          children: [
+                            // MessageTab(),
+                            CouponTab(coupon: coupon2),
+                            // PromotionTab(),
+                          ],
+                        );
+                      }),
+                    )
+                  ],
+                ),
               ),
             ),
-            // Center(
-            //   child: ToggleSwitch(
-            //     fontSize: 18.0,
-            //     cornerRadius: 5.0,
-            //     totalSwitches: 3,
-            //     initialLabelIndex: 0,
-            //     minWidth: 350.0,
-            //     labels: const ['Messages', 'Coupons', 'Promotions'],
-            //     onToggle: (index) {
-            //       if (kDebugMode) {
-            //         print('switched to: $index');
-            //       }
-            //     },
-            //     activeBgColor: const [Colors.orange],
-            //     inactiveBgColor: Colors.white,
-            //   ),
-            // ),
-            SizedBox(
-              height: (MediaQuery.of(context).size.height -
-                  widget.appBarSize -
-                  (boxSize + 100)),
-              child: LayoutBuilder(builder: (context, constarints) {
-                return const TabBarView(
-                  children: [
-                    // MessageTab(),
-                    CouponTab(),
-                    // PromotionTab(),
-                  ],
-                );
-              }),
-            )
-          ],
-        ),
-      ),
-    );
+          );
+        });
   }
 }

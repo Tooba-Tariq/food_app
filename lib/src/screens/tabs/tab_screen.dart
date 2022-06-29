@@ -66,15 +66,15 @@ class _TabScreenState extends State<TabScreen> {
             title: Row(
               children: [
                 const Text(
-                  "Current Location",
+                  "Home",
                   style: TextStyle(
                     fontSize: 18,
                   ),
                 ),
-                Icon(
-                  Icons.keyboard_arrow_down_rounded,
-                  color: AppColor.themePrimary,
-                )
+                // Icon(
+                //   Icons.keyboard_arrow_down_rounded,
+                //   color: AppColor.themePrimary,
+                // )
               ],
             ),
             actions: [
