@@ -216,15 +216,9 @@ class OverlayLoginScreen extends StatelessWidget {
               // loginOption(url: "assets/images/twitter.png", onPressed: () {}),
               loginOption(
                   url: "assets/images/google.png",
-                  onPressed: () {
-                    // await context.read<AuthBloc>().googleLogin();
-                    var data = FirebaseAuth.instance.currentUser;
-                    context.read<UserBloc>().isUserExist('faizan@gmail.com');
-                    // check.isUserExist(
-
-                    //     // data!.email.toString()
-                    //     'faizan@gmail.com');
-                  }),
+                  onPressed: ()async {
+                    await context.read<AuthBloc>().googleLogin();
+                   }),
             ],
           ),
         ),

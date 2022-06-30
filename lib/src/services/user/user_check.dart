@@ -13,8 +13,8 @@ class UserCheck {
     Response response = await Dio()
         .post(server + 'userExists.php', data: FormData.fromMap(body));
     print(response.data);
-    // var data = jsonDecode(response.data);
-    print(response.data);
-    return response.data;
+    var data = jsonDecode(response.data);
+    print(data[0]);
+    return data[0];
   }
 }
