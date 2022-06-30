@@ -28,9 +28,9 @@ class _InboxScreenState extends State<InboxScreen> {
     return FutureBuilder(
         future: getData(),
         builder: (context, snapshot) {
-          // if (snapshot.connectionState == ConnectionState.waiting) {
-          //   return Center(child: CircularProgressIndicator());
-          // }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
           print(snapshot);
           if (context.watch<CouponBloc>().coupon.isEmpty) {
             return RefreshIndicator(
@@ -45,84 +45,84 @@ class _InboxScreenState extends State<InboxScreen> {
               ),
             );
           }
-          return RefreshIndicator(
-            onRefresh: getData,
-            child: SingleChildScrollView(
-              child: DefaultTabController(
-                length: 1,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: Colors.grey.shade200,
-                          ),
+          return SingleChildScrollView(
+            child: DefaultTabController(
+              length: 1,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color: Colors.grey.shade200,
                         ),
-                        height: 30,
-                        child: LayoutBuilder(builder: (context, constraint) {
-                          boxSize = constraint.maxHeight;
-                          return TabBar(
-                              labelStyle: const TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w300,
-                              ),
-                              indicator: BoxDecoration(
-                                color: Colors.orange,
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              unselectedLabelColor: Colors.black,
-                              tabs: const [
-                                // Tab(
-                                //   text: 'Messages',
-                                // ),
-                                Tab(
-                                  text: 'Coupons',
-                                ),
-                                // Tab(
-                                //   text: 'Promotions',
-                                // )
-                              ]);
-                        }),
                       ),
+                      height: 30,
+                      child: LayoutBuilder(builder: (context, constraint) {
+                        boxSize = constraint.maxHeight;
+                        return TabBar(
+                            labelStyle: const TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w300,
+                            ),
+                            indicator: BoxDecoration(
+                              color: Colors.orange,
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            unselectedLabelColor: Colors.black,
+                            tabs: const [
+                              // Tab(
+                              //   text: 'Messages',
+                              // ),
+                              Tab(
+                                text: 'Coupons',
+                              ),
+                              // Tab(
+                              //   text: 'Promotions',
+                              // )
+                            ]);
+                      }),
                     ),
-                    // Center(
-                    //   child: ToggleSwitch(
-                    //     fontSize: 18.0,
-                    //     cornerRadius: 5.0,
-                    //     totalSwitches: 3,
-                    //     initialLabelIndex: 0,
-                    //     minWidth: 350.0,
-                    //     labels: const ['Messages', 'Coupons', 'Promotions'],
-                    //     onToggle: (index) {
-                    //       if (kDebugMode) {
-                    //         print('switched to: $index');
-                    //       }
-                    //     },
-                    //     activeBgColor: const [Colors.orange],
-                    //     inactiveBgColor: Colors.white,
-                    //   ),
-                    // ),
-                    SizedBox(
-                      height: (MediaQuery.of(context).size.height -
-                          widget.appBarSize -
-                          (boxSize + 100)),
-                      child: LayoutBuilder(builder: (context, constarints) {
-                        var coupon2 = context.watch<CouponBloc>().coupon;
+                  ),
+                  // Center(
+                  //   child: ToggleSwitch(
+                  //     fontSize: 18.0,
+                  //     cornerRadius: 5.0,
+                  //     totalSwitches: 3,
+                  //     initialLabelIndex: 0,
+                  //     minWidth: 350.0,
+                  //     labels: const ['Messages', 'Coupons', 'Promotions'],
+                  //     onToggle: (index) {
+                  //       if (kDebugMode) {
+                  //         print('switched to: $index');
+                  //       }
+                  //     },
+                  //     activeBgColor: const [Colors.orange],
+                  //     inactiveBgColor: Colors.white,
+                  //   ),
+                  // ),
+                  SizedBox(
+                    height: (MediaQuery.of(context).size.height -
+                        widget.appBarSize -
+                        (boxSize + 100)),
+                    child: LayoutBuilder(builder: (context, constarints) {
+                      var coupon2 = context.watch<CouponBloc>().coupon;
 
-                        return TabBarView(
+                      return RefreshIndicator(
+                        onRefresh: getData,
+                        child: TabBarView(
                           children: [
                             // MessageTab(),
                             CouponTab(coupon: coupon2),
                             // PromotionTab(),
                           ],
-                        );
-                      }),
-                    )
-                  ],
-                ),
+                        ),
+                      );
+                    }),
+                  )
+                ],
               ),
             ),
           );

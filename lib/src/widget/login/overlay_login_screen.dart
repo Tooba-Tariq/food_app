@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -5,6 +7,8 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/util/custom_page_route.dart';
 import '../../../core/util/error_message.dart';
 import '../../blocs/auth_bloc.dart';
+import '../../blocs/user_bloc.dart';
+import '../../model/user.dart';
 import '../../screens/register/register_screen.dart';
 
 class OverlayLoginScreen extends StatelessWidget {
@@ -213,7 +217,13 @@ class OverlayLoginScreen extends StatelessWidget {
               loginOption(
                   url: "assets/images/google.png",
                   onPressed: () {
-                    context.read<AuthBloc>().googleLogin();
+                    // await context.read<AuthBloc>().googleLogin();
+                    var data = FirebaseAuth.instance.currentUser;
+                    context.read<UserBloc>().isUserExist('faizan@gmail.com');
+                    // check.isUserExist(
+
+                    //     // data!.email.toString()
+                    //     'faizan@gmail.com');
                   }),
             ],
           ),

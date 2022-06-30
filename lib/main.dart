@@ -37,7 +37,8 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => NewsFeedBloc(),
-        ),ChangeNotifierProvider(
+        ),
+        ChangeNotifierProvider(
           create: (context) => CouponBloc(),
         ),
       ],
