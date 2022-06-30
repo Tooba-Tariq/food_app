@@ -19,7 +19,7 @@ class _PersonScreenState extends State<PersonScreen> {
   @override
   void initState() {
     super.initState();
-    getData();
+    // getData();
   }
 
   Future<void> getData() async {
@@ -34,10 +34,10 @@ class _PersonScreenState extends State<PersonScreen> {
     return FutureBuilder(
         future: getData(),
         builder: (context, snapshot) {
-          // if (snapshot.connectionState == ConnectionState.waiting) {
-          //   return Center(child: CircularProgressIndicator());
-          // }
-          print(snapshot);
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            print('wait');
+            return Center(child: CircularProgressIndicator());
+          }
           if (context.watch<UserBloc>().user.firstName == null) {
             return RefreshIndicator(
               onRefresh: getData,

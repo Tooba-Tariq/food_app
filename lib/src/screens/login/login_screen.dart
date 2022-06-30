@@ -31,69 +31,70 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: Colors.grey.shade100,
       resizeToAvoidBottomInset: false,
       body: StreamBuilder(
-          stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (snapshot.hasData) {
-              // var data = FirebaseAuth.instance.currentUser;
-              // UserBloc check = UserBloc();
-              // check.isUserExist(data!.email.toString());
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasData) {
+            var data = FirebaseAuth.instance.currentUser;
+            UserBloc check = UserBloc();
+            check.isUserExist(data!.email.toString());
 
-              // print(FirebaseAuth.instance.currentUser);
-              // if (check.isExist == 1) {
-              //   Person user = Person(
-              //     age: '',
-              //     bio: 'Student',
-              //     firstName: data.displayName == null
-              //         ? ''
-              //         : data.displayName!.split(' ')[0],
-              //     id: data.email == null ? '' : data.email!,
-              //     image: data.photoURL == null
-              //         ? 'https://www.kindpng.com/picc/m/105-1055656_account-user-profile-avatar-avatar-user-profile-icon.png'
-              //         : data.photoURL!,
-              //     lastName: data.displayName == null
-              //         ? ''
-              //         : data.displayName!.split(' ')[1],
-              //     phoneNo: data.phoneNumber == null ? '' : data.phoneNumber!,
-              //     username: data.email == null ? '' : data.email!.split('@')[0],
-              //     status: 'Single',
-              //   );
-              //   print(user);
-              //   context.read<UserBloc>().adduser(user);
-              // }
-
-              return const TabScreen();
-              // Navigator.of(context).pushReplacement(
-              //   CustomPageRoute(
-              //     builder: TabScreen(),
-              //   ),
-              // );
-            } else if (snapshot.hasError) {
-              return const Center(
-                child: Text("Something Went Wrong"),
+            print(FirebaseAuth.instance.currentUser);
+            if (check.isExist == 1) {
+              Person user = Person(
+                age: '',
+                bio: 'Student',
+                firstName: data.displayName == null
+                    ? ''
+                    : data.displayName!.split(' ')[0],
+                id: data.email == null ? '' : data.email!,
+                image: data.photoURL == null
+                    ? 'https://www.kindpng.com/picc/m/105-1055656_account-user-profile-avatar-avatar-user-profile-icon.png'
+                    : data.photoURL!,
+                lastName: data.displayName == null
+                    ? ''
+                    : data.displayName!.split(' ')[1],
+                phoneNo: data.phoneNumber == null ? '' : data.phoneNumber!,
+                username: data.email == null ? '' : data.email!.split('@')[0],
+                status: 'Single',
               );
-            } else {
-              return Stack(
-                clipBehavior: Clip.hardEdge,
-                children: [
-                  const Positioned(
-                    bottom: -500,
-                    right: -150,
-                    left: -150,
-                    child: GradientCircle(
-                      radius: 500,
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                    ),
-                  ),
-                  OverlayLoginScreen(),
-                ],
-              );
+              print(user);
+              context.read<UserBloc>().adduser(user);
             }
-          }),
+
+            return const TabScreen();
+            // Navigator.of(context).pushReplacement(
+            //   CustomPageRoute(
+            //     builder: TabScreen(),
+            //   ),
+            // );
+          } else if (snapshot.hasError) {
+            return const Center(
+              child: Text("Something Went Wrong"),
+            );
+          } else {
+            return Stack(
+              clipBehavior: Clip.hardEdge,
+              children: [
+                const Positioned(
+                  bottom: -500,
+                  right: -150,
+                  left: -150,
+                  child: GradientCircle(
+                    radius: 500,
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ),
+                ),
+                OverlayLoginScreen(),
+              ],
+            );
+          }
+        },
+      ),
     );
   }
 }

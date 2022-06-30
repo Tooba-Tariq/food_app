@@ -33,7 +33,7 @@ class UserBloc extends ChangeNotifier {
 
   isUserExist(String id) async {
     var value = await UserCheck.userExists(id);
-
-    isExist = value;
+    isExist = int.parse(value['COUNT(*)']);
+    // isExist = value
   }
 }
