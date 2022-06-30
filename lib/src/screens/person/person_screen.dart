@@ -22,118 +22,144 @@ class _PersonScreenState extends State<PersonScreen> {
     getData();
   }
 
-  getData() async {
+  Future<void> getData() async {
     String? id = user.email;
     await context.read<UserBloc>().fetchUsers(id!.toString());
-    Future.delayed(Duration.zero);
+    return Future.delayed(Duration.zero);
   }
 
   @override
   Widget build(BuildContext context) {
     var userData = context.watch<UserBloc>().user;
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  //container for profile
-                  Container(
-                    height: 100.0,
-                    width: 100.0,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey.shade300,
-                            offset: const Offset(2, 2),
-                            blurRadius: 2)
+    return FutureBuilder(
+        future: getData(),
+        builder: (context, snapshot) {
+          // if (snapshot.connectionState == ConnectionState.waiting) {
+          //   return Center(child: CircularProgressIndicator());
+          // }
+          print(snapshot);
+          if (context.watch<UserBloc>().user.firstName == null) {
+            return RefreshIndicator(
+              onRefresh: getData,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Something Went Wrong!"),
+                  ],
+                ),
+              ),
+            );
+          }
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      children: [
+                        //container for profile
+                        Container(
+                          height: 100.0,
+                          width: 100.0,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey.shade300,
+                                  offset: const Offset(2, 2),
+                                  blurRadius: 2)
+                            ],
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.network(userData.image)),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          userData.firstName.toString() +
+                              " " +
+                              userData.lastName.toString(),
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          userData.bio.toString(),
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w300,
+                            color: AppColor.themeSecondary,
+                          ),
+                        ),
+                        // orange container
+                        Container(
+                          margin: const EdgeInsets.only(top: 10),
+                          width: 360,
+                          color: Colors.white,
+                          child: Column(children: [
+                            //first row
+                            Row(
+                              children: const [
+                                // first container
+                                // dashboardMethod(
+                                //     Icons.photo_library, "Photos", "(120)"),
+                                // dashboardMethod(Icons.star, "Review", "(40)"),
+                                // dashboardMethod(Icons.emoji_people_sharp,
+                                //     "Following", "(280)"),
+                              ],
+                            ),
+                            //second row
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                // first container
+                                // dashboardMethod(
+                                //     Icons.discount, "Promotions", "(16-)"),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: dashboardMethod(
+                                      Icons.euro_symbol_rounded,
+                                      "Coupons",
+                                      "(10)"),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: dashboardMethod(
+                                      Icons.shopping_cart_outlined,
+                                      "Cart",
+                                      "(100)"),
+                                ),
+                              ],
+                            ),
+                          ]),
+                        ),
+                        Container(
+                          color: Colors.white,
+                          child: Column(children: [
+                            // bottomCards(Icons.people, "General Settings"),
+                            bottomCards(
+                                Icons.perm_identity, "Profile Settings  "),
+                            // bottomCards(
+                            //     Icons.location_on_outlined, "Shipping Details"),
+                            // bottomCards(Icons.payment_rounded, "Payment Details"),
+                          ]),
+                        ),
                       ],
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Image.network(userData.image)),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    userData.firstName.toString() +
-                        " " +
-                        userData.lastName.toString(),
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    userData.bio.toString(),
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w300,
-                      color: AppColor.themeSecondary,
-                    ),
-                  ),
-                  // orange container
-                  Container(
-                    margin: const EdgeInsets.only(top: 10),
-                    width: 360,
-                    color: Colors.white,
-                    child: Column(children: [
-                      //first row
-                      Row(
-                        children: const [
-                          // first container
-                          // dashboardMethod(
-                          //     Icons.photo_library, "Photos", "(120)"),
-                          // dashboardMethod(Icons.star, "Review", "(40)"),
-                          // dashboardMethod(Icons.emoji_people_sharp,
-                          //     "Following", "(280)"),
-                        ],
-                      ),
-                      //second row
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          // first container
-                          // dashboardMethod(
-                          //     Icons.discount, "Promotions", "(16-)"),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: dashboardMethod(
-                                Icons.euro_symbol_rounded, "Coupons", "(10)"),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: dashboardMethod(
-                                Icons.shopping_cart_outlined, "Cart", "(100)"),
-                          ),
-                        ],
-                      ),
-                    ]),
-                  ),
-                  Container(
-                    color: Colors.white,
-                    child: Column(children: [
-                      // bottomCards(Icons.people, "General Settings"),
-                      bottomCards(Icons.perm_identity, "Profile Settings  "),
-                      // bottomCards(
-                      //     Icons.location_on_outlined, "Shipping Details"),
-                      // bottomCards(Icons.payment_rounded, "Payment Details"),
-                    ]),
-                  ),
-                ],
-              )
-            ],
-          )
-        ],
-      ),
-    );
+                    )
+                  ],
+                )
+              ],
+            ),
+          );
+        });
   }
 
   bottomCards(IconData icon, String text) {
