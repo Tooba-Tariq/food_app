@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/src/screens/favorite/favoritie_screen.dart';
 import '../../blocs/auth_bloc.dart';
 import 'package:provider/provider.dart';
 import '../feed/news_feed_screen.dart';
@@ -167,7 +168,7 @@ class _TabScreenState extends State<TabScreen> {
               ),
             ),
           ),
-          'route': const Text('Favorites'),
+          'route': FavoriteScreen(),
         },
         {
           'appBar': AppBar(
