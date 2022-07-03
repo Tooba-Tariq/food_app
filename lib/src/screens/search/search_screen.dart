@@ -109,9 +109,16 @@ class SearchScreen extends StatelessWidget {
                                       const SizedBox(
                                         height: 10,
                                       ),
-                                      Text(
-                                        item.description,
-                                        style: TextStyle(color: Colors.grey),
+                                      Container(
+                                        width: 90,
+                                        child: Text(
+                                          item.description,
+                                          maxLines: 1,
+                                          style: TextStyle(
+                                            color: Colors.grey,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
                                       ),
                                       // Row(
                                       //   children: const [

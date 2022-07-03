@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -216,9 +215,11 @@ class OverlayLoginScreen extends StatelessWidget {
               // loginOption(url: "assets/images/twitter.png", onPressed: () {}),
               loginOption(
                   url: "assets/images/google.png",
-                  onPressed: ()async {
+                  onPressed: () async {
                     await context.read<AuthBloc>().googleLogin();
-                   }),
+
+                  
+                  }),
             ],
           ),
         ),

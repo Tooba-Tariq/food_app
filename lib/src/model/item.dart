@@ -14,5 +14,7 @@ class Item {
     required this.status,
     required this.imageUrl,
   });
+
+  void forEach(Null Function(dynamic element) param0) {}
 }
 

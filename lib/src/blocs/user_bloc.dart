@@ -31,9 +31,12 @@ class UserBloc extends ChangeNotifier {
     notifyListeners();
   }
 
-  isUserExist(String id) async {
+   isUserExist(String id) async {
+    print(id);
     var value = await UserCheck.userExists(id);
     isExist = int.parse(value['COUNT(*)']);
-    // isExist = value
+    await Future.delayed(Duration(seconds: 1));
+    notifyListeners();
+    return int.parse(value['COUNT(*)']);
   }
 }

@@ -1,24 +1,53 @@
-class MenuItemScreen extends StatelessWidget {
-  const MenuItemScreen({
+import 'package:flutter/material.dart';
+import 'package:food_app/core/constants/app_colors.dart';
+
+import '../../model/item.dart';
+
+class MenuItemScreen extends StatefulWidget {
+  MenuItemScreen({
     Key? key,
+    required this.item,
   }) : super(key: key);
+  final Item item;
+
+  @override
+  State<MenuItemScreen> createState() => _MenuItemScreenState();
+}
+
+class _MenuItemScreenState extends State<MenuItemScreen> {
+  int itemNo = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Zinger Burger"),
+        backgroundColor: AppColor.themePrimary,
+        title: Text(
+          widget.item.name,
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {},
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
         ),
       ),
       body: Column(
         children: [
           Container(
-            height: 100,
+            height: 300,
             width: double.infinity,
-            child: const FlutterLogo(),
+            child: Image.network(
+              widget.item.imageUrl,
+              fit: BoxFit.cover,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(14.0),
@@ -28,18 +57,17 @@ class MenuItemScreen extends StatelessWidget {
                   Icons.star_rounded,
                   color: Colors.orange,
                 ),
-                const Text(
-                  "4.5  (Based on 100 Reviews)",
+                Text(
+                  widget.item.description + " | " + widget.item.status,
                   style: const TextStyle(color: Colors.grey),
                 ),
-                const Spacer(),
-                OutlinedButton(
-                  onPressed: () {},
-                  child: const Text(
-                    "Share",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                )
+                // OutlinedButton(
+                //   onPressed: () {},
+                //   child: const Text(
+                //     "Share",
+                //     style: TextStyle(color: Colors.black),
+                //   ),
+                // )
               ],
             ),
           ),
@@ -48,13 +76,13 @@ class MenuItemScreen extends StatelessWidget {
             child: Row(
               children: const [
                 Text(
-                  "Sizes",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  "Item",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
                 ),
                 Spacer(),
                 Text(
                   "Price",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
                 ),
               ],
             ),
@@ -63,22 +91,19 @@ class MenuItemScreen extends StatelessWidget {
             height: 0,
           ),
           Price(
-            size: "Small",
+            size: "Orders",
             price: 30,
-          ),
-          Divider(
-            height: 0,
-          ),
-          Price(
-            size: "Medium",
-            price: 40,
-          ),
-          Divider(
-            height: 0,
-          ),
-          Price(
-            size: "Large",
-            price: 50,
+            itemNo: itemNo,
+            plus: () {
+              setState(() {
+                itemNo++;
+              });
+            },
+            minus: () {
+              setState(() {
+                itemNo--;
+              });
+            },
           ),
           Divider(),
           Padding(
@@ -89,7 +114,11 @@ class MenuItemScreen extends StatelessWidget {
                   width: 30,
                   height: 30,
                   child: OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        itemNo--;
+                      });
+                    },
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.zero,
                     ),
@@ -109,7 +138,7 @@ class MenuItemScreen extends StatelessWidget {
                       color: Colors.orange,
                     ),
                   ),
-                  child: const Center(child: Text("2")),
+                  child: Center(child: Text(itemNo.toString())),
                 ),
                 Container(
                   width: 30,
@@ -118,7 +147,11 @@ class MenuItemScreen extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.zero,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        itemNo++;
+                      });
+                    },
                     child: const Icon(
                       Icons.add,
                       size: 20,
@@ -130,8 +163,11 @@ class MenuItemScreen extends StatelessWidget {
                 OutlinedButton(
                   onPressed: () {},
                   child: Text(
-                    "Add to cart",
-                    style: TextStyle(color: Colors.black),
+                    "Add to Cart",
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w300,
+                    ),
                   ),
                   style: OutlinedButton.styleFrom(
                       side: BorderSide(color: Colors.black)),
@@ -139,9 +175,15 @@ class MenuItemScreen extends StatelessWidget {
                 Spacer(),
                 ElevatedButton(
                   onPressed: () {},
-                  child: Text("Order"),
+                  child: Text(
+                    "Order",
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.black, elevation: 0),
+                      primary: AppColor.themePrimary, elevation: 0),
                 )
               ],
             ),
@@ -153,9 +195,19 @@ class MenuItemScreen extends StatelessWidget {
 }
 
 class Price extends StatelessWidget {
-  Price({Key? key, required this.size, required this.price}) : super(key: key);
+  Price({
+    Key? key,
+    required this.size,
+    required this.price,
+    required this.plus,
+    required this.itemNo,
+    required this.minus,
+  }) : super(key: key);
   String? size;
   int? price;
+  int itemNo;
+  Function plus;
+  Function minus;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -166,17 +218,28 @@ class Price extends StatelessWidget {
             width: 80,
             child: Text(
               size!,
-              style: TextStyle(fontSize: 18),
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w300,
+              ),
             ),
           ),
           Spacer(),
-          Text(price.toString()),
+          Text(
+            price.toString() + '\$',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
           Spacer(),
           SizedBox(
             width: 30,
             height: 30,
             child: OutlinedButton(
-              onPressed: () {},
+              onPressed: () {
+                minus();
+              },
               style: ElevatedButton.styleFrom(
                 padding: EdgeInsets.zero,
               ),
@@ -196,7 +259,7 @@ class Price extends StatelessWidget {
                 color: Colors.orange,
               ),
             ),
-            child: const Center(child: Text("2")),
+            child: Center(child: Text(itemNo.toString())),
           ),
           Container(
             width: 30,
@@ -205,7 +268,9 @@ class Price extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 padding: EdgeInsets.zero,
               ),
-              onPressed: () {},
+              onPressed: () {
+                plus();
+              },
               child: const Icon(
                 Icons.add,
                 size: 20,

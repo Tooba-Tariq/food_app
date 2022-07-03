@@ -30,7 +30,6 @@ class _PersonScreenState extends State<PersonScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var userData = context.watch<UserBloc>().user;
     return FutureBuilder(
         future: getData(),
         builder: (context, snapshot) {
@@ -51,6 +50,8 @@ class _PersonScreenState extends State<PersonScreen> {
               ),
             );
           }
+          var userData = context.watch<UserBloc>().user;
+
           return SingleChildScrollView(
             child: Column(
               children: [

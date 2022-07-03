@@ -39,11 +39,17 @@ class _LoginScreenState extends State<LoginScreen> {
             );
           } else if (snapshot.hasData) {
             var data = FirebaseAuth.instance.currentUser;
-            UserBloc check = UserBloc();
-            check.isUserExist(data!.email.toString());
+
+            context.read<UserBloc>().isUserExist(data!.email.toString());
 
             print(FirebaseAuth.instance.currentUser);
-            if (check.isExist == 1) {
+            int exist = 0;
+            Future.delayed(Duration(seconds: 2)).then((value) async {
+              exist = await context
+                  .read<UserBloc>()
+                  .isUserExist(data.email.toString());
+            });
+            if (exist == 0) {
               Person user = Person(
                 age: '',
                 bio: 'Student',
@@ -61,10 +67,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 username: data.email == null ? '' : data.email!.split('@')[0],
                 status: 'Single',
               );
+
               print(user);
               context.read<UserBloc>().adduser(user);
             }
-
             return const TabScreen();
             // Navigator.of(context).pushReplacement(
             //   CustomPageRoute(
