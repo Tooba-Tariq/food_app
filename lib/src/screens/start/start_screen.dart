@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 
 import '../../../core/util/gredient_circle.dart';
 import '../../widget/start/overlay_start_screen.dart';
@@ -21,9 +19,7 @@ class _StartScreenState extends State<StartScreen> {
       body: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
-            if (kDebugMode) {
-              print(const Uuid().v4());
-            }
+           
 
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
@@ -31,11 +27,7 @@ class _StartScreenState extends State<StartScreen> {
               );
             } else if (snapshot.hasData) {
               return const TabScreen();
-              // Navigator.of(context).pushReplacement(
-              //   CustomPageRoute(
-              //     builder: TabScreen(),
-              //   ),
-              // );
+         
             } else if (snapshot.hasError) {
               return const Center(
                 child: Text("Something Went Wrong"),

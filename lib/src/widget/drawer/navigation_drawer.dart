@@ -6,12 +6,32 @@ import 'package:provider/provider.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/util/custom_page_route.dart';
 import '../../blocs/auth_bloc.dart';
+import '../../blocs/user_bloc.dart';
 import '../../screens/cart/cart.dart';
 
-class NavigationDrawer extends StatelessWidget {
-  NavigationDrawer({Key? key, required this.pageIndex}) : super(key: key);
+class NavigationDrawer extends StatefulWidget {
+  const NavigationDrawer({Key? key, required this.pageIndex}) : super(key: key);
   final Function pageIndex;
+
+  @override
+  State<NavigationDrawer> createState() => _NavigationDrawerState();
+}
+
+class _NavigationDrawerState extends State<NavigationDrawer> {
   final user = FirebaseAuth.instance.currentUser!;
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  getData() async {
+    String? id = user.email;
+    await context.read<UserBloc>().fetchUsers(id!);
+    Future.delayed(Duration.zero);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -20,7 +40,7 @@ class NavigationDrawer extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              headerWidget(),
+              headerWidget(context),
               const SizedBox(
                 height: 15.0,
               ),
@@ -31,7 +51,7 @@ class NavigationDrawer extends StatelessWidget {
               ),
               SizedBox(
                 child: Container(
-                  color: const Color(0XFFF2A902),
+                  color: AppColor.themePrimary,
                   child: Column(
                     children: [
                       GestureDetector(
@@ -72,7 +92,7 @@ class NavigationDrawer extends StatelessWidget {
                               color: Colors.white),
                         ),
                         onTap: () {
-                          pageIndex(2);
+                          widget.pageIndex(2);
                         },
                       ),
                       // ListTile(
@@ -157,7 +177,7 @@ class NavigationDrawer extends StatelessWidget {
                               color: Colors.white),
                         ),
                         onTap: () {
-                          pageIndex(1);
+                          widget.pageIndex(1);
                         },
                       ),
                       ListTile(
@@ -174,7 +194,7 @@ class NavigationDrawer extends StatelessWidget {
                               color: Colors.white),
                         ),
                         onTap: () {
-                          pageIndex(3);
+                          widget.pageIndex(3);
                         },
                       ),
                     ],
@@ -195,7 +215,7 @@ class NavigationDrawer extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
-                  pageIndex(4);
+                  widget.pageIndex(4);
                 },
               ),
               ListTile(
@@ -248,7 +268,7 @@ class NavigationDrawer extends StatelessWidget {
                                               style: OutlinedButton.styleFrom(),
                                               onPressed: () {
                                                 context
-                                                    .read<GoogleLoginBloc>()
+                                                    .read<AuthBloc>()
                                                     .logout();
                                                 Navigator.pop(context);
                                               },
@@ -297,22 +317,11 @@ class NavigationDrawer extends StatelessWidget {
   }
 
   // onItemPressed(BuildContext context, {required int index}) {
-  //   Navigator.pop(context);
-  //   switch (index) {
-  //     case 0:
-  //       Navigator.push(
-  //         context,
-  //         MaterialPageRoute(
-  //           builder: (context) => const Cart(),
-  //         ),
-  //       );
-  //   }
-  // }
-
-  headerWidget() {
+  headerWidget(BuildContext context) {
     if (kDebugMode) {
       print(user);
     }
+    var userData = context.watch<UserBloc>().user;
     return Row(
       children: [
         Container(
@@ -336,7 +345,7 @@ class NavigationDrawer extends StatelessWidget {
             ),
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
-                child: Image.network(user.photoURL!)),
+                child: Image.network(userData.image)),
           ),
         ),
         const SizedBox(
@@ -347,7 +356,7 @@ class NavigationDrawer extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                user.providerData[0].displayName.toString(),
+                userData.firstName + ' ' + userData.lastName,
                 style: const TextStyle(
                   fontSize: 14,
                   color: Colors.black,
@@ -356,7 +365,7 @@ class NavigationDrawer extends StatelessWidget {
                 ),
               ),
               Text(
-                "(Student)",
+                userData.bio,
                 style: TextStyle(
                   fontSize: 14,
                   color: AppColor.themePrimary,

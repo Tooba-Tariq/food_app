@@ -1,32 +1,25 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:food_app/src/blocs/item_bloc.dart';
+import 'package:food_app/src/model/item.dart';
 import 'package:search_page/search_page.dart';
-
-class Person {
-  final String name, surname;
-  final num age;
-
-  Person(this.name, this.surname, this.age);
-}
+import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
 class SearchScreen extends StatelessWidget {
-  const SearchScreen({Key? key}) : super(key: key);
-  static List<Person> people = [
-    Person('Mike', 'Barron', 64),
-    Person('Todd', 'Black', 30),
-    Person('Ahmad', 'Edwards', 55),
-    Person('Anthony', 'Johnson', 67),
-    Person('Annette', 'Brooks', 39),
-  ];
+  const SearchScreen({Key? key, required this.item}) : super(key: key);
+  final List<Item> item;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        print(Uuid().v1());
         showSearch(
           context: context,
-          delegate: SearchPage<Person>(
-            items: people,
+          delegate: SearchPage<Item>(
+            items: item,
             barTheme: ThemeData(
               appBarTheme: AppBarTheme(
                 elevation: 0,
@@ -50,71 +43,116 @@ class SearchScreen extends StatelessWidget {
             failure: const Center(
               child: Text('No item found :('),
             ),
-            filter: (person) => [
-              person.name,
-              person.surname,
-              person.age.toString(),
+            filter: (item) => [
+              item.name,
+              item.description,
+              item.imageUrl,
+              item.status,
             ],
-            builder: (person) => SizedBox(
-              width: 350,
-              child: Card(
-                child: Center(
-                  child: SizedBox(
-                    height: 120,
-                    width: 350,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: 100,
-                          height: 150,
-                          child: Image.asset("assets/images/chinese.PNG"),
+            builder: (item) => Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                              blurRadius: 1,
+                              spreadRadius: 1,
+                              color: Colors.grey.shade100,
+                              offset: Offset(2, 2))
+                        ]),
+                    width: 280,
+                    child: Center(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: Colors.white,
                         ),
-                        Container(
-                          padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                        height: 90,
+                        width: 280,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              const Text(
-                                "Chinese In Resturant",
-                                style: TextStyle(color: Colors.black),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              const Text(
-                                "Resturant Chinese Food | \$\$",
-                                style: TextStyle(color: Colors.grey),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                children: const [
-                                  Icon(Icons.star, color: Colors.yellow),
-                                  Text(
-                                    "4.5  ",
-                                    style: TextStyle(color: Colors.black),
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                width: 75,
+                                height: 75,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: Image.network(
+                                    item.imageUrl,
+                                    fit: BoxFit.cover,
                                   ),
-                                  Text("(Based on 100 reviews)",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 10)),
-                                ],
-                              )
+                                ),
+                              ),
+                              Center(
+                                child: Container(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        item.name,
+                                        style: TextStyle(color: Colors.black),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Container(
+                                        width: 90,
+                                        child: Text(
+                                          item.description,
+                                          maxLines: 1,
+                                          style: TextStyle(
+                                            color: Colors.grey,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                      ),
+                                      // Row(
+                                      //   children: const [
+                                      //     Icon(Icons.star, color: Colors.yellow),
+                                      //     Text(
+                                      //       "4.5  ",
+                                      //       style: TextStyle(color: Colors.black),
+                                      //     ),
+                                      //     Text(
+                                      //       "(Based on 100 reviews)",
+                                      //       style: TextStyle(
+                                      //         color: Colors.black,
+                                      //         fontSize: 10,
+                                      //       ),
+                                      //     ),
+                                      //   ],
+                                      // )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Spacer(),
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                      Icons.favorite_border_rounded)),
                             ],
                           ),
                         ),
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.favorite_border_rounded)),
-                      ],
+                      ),
                     ),
                   ),
                 ),
-              ),
+              ],
             ),
           ),
         );
@@ -147,5 +185,6 @@ class SearchScreen extends StatelessWidget {
         ),
       ),
     );
+    ;
   }
 }

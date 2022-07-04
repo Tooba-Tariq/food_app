@@ -1,16 +1,20 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../../core/util/custom_page_route.dart';
+import '../../../core/util/error_message.dart';
 import '../../blocs/auth_bloc.dart';
+import '../../blocs/user_bloc.dart';
+import '../../model/user.dart';
 import '../../screens/register/register_screen.dart';
-import '../../screens/tabs/tab_screen.dart';
 
 class OverlayLoginScreen extends StatelessWidget {
   OverlayLoginScreen({Key? key}) : super(key: key);
   final GlobalKey _formKey = GlobalKey();
-  final TextEditingController controller = TextEditingController();
+  final TextEditingController email = TextEditingController();
+  final TextEditingController password = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -78,38 +82,38 @@ class OverlayLoginScreen extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      formTextFeild(
-                        label: 'User Name',
-                        context: context,
+                      FormTextField(
+                        label: 'Email',
+                        controller: email,
                       ),
                       const SizedBox(
                         height: 20,
                       ),
-                      formTextFeild(
+                      FormTextField(
                         label: 'Password',
-                        obscureText: true,
-                        context: context,
+                        obsecureText: true,
+                        controller: password,
                       ),
                       const SizedBox(
                         height: 20,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          TextButton(
-                            onPressed: () {},
-                            child: const Text(
-                              "Forgot Password?",
-                              style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                fontSize: 14.0,
-                                color: Colors.black,
-                                decoration: TextDecoration.underline,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.end,
+                      //   children: [
+                      //     TextButton(
+                      //       onPressed: () {},
+                      //       child: const Text(
+                      //         "Forgot Password?",
+                      //         style: TextStyle(
+                      //           fontWeight: FontWeight.normal,
+                      //           fontSize: 14.0,
+                      //           color: Colors.black,
+                      //           decoration: TextDecoration.underline,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
                     ],
                   ),
                   Container(
@@ -125,12 +129,32 @@ class OverlayLoginScreen extends StatelessWidget {
                     ),
                     child: TextButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          CustomPageRoute(
-                            builder: const TabScreen(),
-                          ),
-                        );
+                        if (!(RegExp(
+                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            .hasMatch(email.text.toString()))) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: ErrorMessage(
+                                  message: 'Please Enter Valid Email'),
+                            ),
+                          );
+                          return;
+                        }
+                        if (RegExp(
+                                r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
+                            .hasMatch(password.text.trim())) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: ErrorMessage(
+                                  message: 'Please Enter Long User Name'),
+                            ),
+                          );
+                          return;
+                        }
+                        context.read<AuthBloc>().loginWithEmail(
+                              email.text.trim(),
+                              password.text.trim(),
+                            );
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -191,8 +215,10 @@ class OverlayLoginScreen extends StatelessWidget {
               // loginOption(url: "assets/images/twitter.png", onPressed: () {}),
               loginOption(
                   url: "assets/images/google.png",
-                  onPressed: () {
-                    context.read<GoogleLoginBloc>().googleLogin();
+                  onPressed: () async {
+                    await context.read<AuthBloc>().googleLogin();
+
+                  
                   }),
             ],
           ),
@@ -215,10 +241,10 @@ class OverlayLoginScreen extends StatelessWidget {
                 ),
                 child: TextButton(
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(
-                        builder: ((context) => const RegisterScreen1()),
+                      CustomPageRoute(
+                        builder: (const RegisterScreen1()),
                       ),
                     );
                   },
@@ -274,18 +300,27 @@ class OverlayLoginScreen extends StatelessWidget {
       ),
     );
   }
+}
 
-  SizedBox formTextFeild({
-    required String label,
-    bool obscureText = false,
-    required BuildContext context,
-  }) {
+class FormTextField extends StatelessWidget {
+  const FormTextField({
+    Key? key,
+    required this.controller,
+    required this.label,
+    this.obsecureText = false,
+  }) : super(key: key);
+  final String label;
+  final bool obsecureText;
+  final TextEditingController controller;
+
+  @override
+  Widget build(BuildContext context) {
     return SizedBox(
       height: 50,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: TextFormField(
-          obscureText: obscureText,
+          obscureText: obsecureText,
           controller: controller,
           style: const TextStyle(
             fontFamily: 'Poppins',

@@ -5,11 +5,11 @@ import '../server.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 
-class ItemCRUD {
+class CouponCRUD {
   static readItemData() async {
     try {
       final Response response =
-          await http.get(Uri.parse(server + 'readItem.php'));
+          await http.get(Uri.parse(server + 'readcoupon.php'));
       // print(response.body);
       List<dynamic> value = jsonDecode(response.body);
 

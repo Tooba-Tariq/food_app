@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
+import '/src/screens/favorite/favoritie_screen.dart';
+import '../../blocs/auth_bloc.dart';
+import 'package:provider/provider.dart';
 import '../feed/news_feed_screen.dart';
 import '../person/person_screen.dart';
-import '../../../core/util/custom_page_route.dart';
-import '../login/login_screen.dart';
 
 import '../../widget/drawer/navigation_drawer.dart';
 import '/core/constants/app_colors.dart';
@@ -37,6 +39,7 @@ class _TabScreenState extends State<TabScreen> {
           title: const Text(
             'Coupons',
             style: TextStyle(
+              fontWeight: FontWeight.w400,
               fontSize: 18,
             ),
           ),
@@ -66,15 +69,16 @@ class _TabScreenState extends State<TabScreen> {
             title: Row(
               children: [
                 const Text(
-                  "Current Location",
+                  "Home",
                   style: TextStyle(
                     fontSize: 18,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
-                Icon(
-                  Icons.keyboard_arrow_down_rounded,
-                  color: AppColor.themePrimary,
-                )
+                // Icon(
+                //   Icons.keyboard_arrow_down_rounded,
+                //   color: AppColor.themePrimary,
+                // )
               ],
             ),
             actions: [
@@ -82,11 +86,7 @@ class _TabScreenState extends State<TabScreen> {
                 splashRadius: 20,
                 onSelected: (value) {
                   if (value == 'Logout') {
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      CustomPageRoute(builder: const LoginScreen()),
-                      (route) => false,
-                    );
+                    context.read<AuthBloc>().logout();
                   }
                 },
                 icon: Icon(
@@ -137,9 +137,7 @@ class _TabScreenState extends State<TabScreen> {
                 }),
             title: const Text(
               'News Feed',
-              style: TextStyle(
-                fontSize: 18,
-              ),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
             ),
           ),
           'route': const NewsFeedScreen(),
@@ -166,12 +164,10 @@ class _TabScreenState extends State<TabScreen> {
             elevation: 0,
             title: const Text(
               'Favorites',
-              style: TextStyle(
-                fontSize: 18,
-              ),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
             ),
           ),
-          'route': const Text('Favorites'),
+          'route': FavoriteScreen(),
         },
         {
           'appBar': AppBar(
@@ -189,9 +185,7 @@ class _TabScreenState extends State<TabScreen> {
             centerTitle: true,
             title: const Text(
               'My Account',
-              style: TextStyle(
-                fontSize: 18,
-              ),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
             ),
             actions: [
               IconButton(
@@ -203,7 +197,7 @@ class _TabScreenState extends State<TabScreen> {
                   onPressed: () {}),
             ],
           ),
-          'route': PersonScreen(),
+          'route': const PersonScreen(),
         },
       ];
   @override
@@ -212,6 +206,7 @@ class _TabScreenState extends State<TabScreen> {
   }
 
   void returnToHomePage() {
+    print(Uuid().v1());
     setState(() {
       _selectedPageIndex = 0;
     });
