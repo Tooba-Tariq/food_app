@@ -1,30 +1,49 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:food_app/core/constants/app_colors.dart';
+import 'package:food_app/core/util/custom_page_route.dart';
+import 'package:food_app/src/blocs/favorite_item_bloc.dart';
+import 'package:food_app/src/blocs/user_bloc.dart';
+import 'package:food_app/src/model/favorite_item.dart';
+import 'package:food_app/src/screens/item/item_detail_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
-class PromotionItem extends StatelessWidget {
+import '../../model/item.dart';
+
+class Items extends StatefulWidget {
   String title;
+  String id;
   String subtitle;
   String imageUrl;
   String rating;
+  double price;
   bool stripVisible;
   int num = 0;
-  PromotionItem({
+  Items({
     Key? key,
+    required this.id,
     required this.title,
     required this.subtitle,
     required this.imageUrl,
     required this.rating,
     this.stripVisible = false,
     this.num = 0,
+    required this.price,
   }) : super(key: key);
 
+  @override
+  State<Items> createState() => _ItemsState();
+}
+
+class _ItemsState extends State<Items> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        height: stripVisible ? 220.0 : 194,
+        height: widget.stripVisible ? 220.0 : 194,
         width: 190.0,
         decoration: BoxDecoration(
             color: Colors.white,
@@ -45,13 +64,13 @@ class PromotionItem extends StatelessWidget {
           child: Column(
             children: [
               Visibility(
-                visible: stripVisible,
+                visible: widget.stripVisible,
                 child: Container(
                   height: 26,
                   width: 190,
                   decoration: BoxDecoration(
-                    color: num == 0 ? Colors.red : Colors.orange,
-                    borderRadius: stripVisible
+                    color: widget.num == 0 ? Colors.red : Colors.orange,
+                    borderRadius: widget.stripVisible
                         ? const BorderRadius.only(
                             topLeft: Radius.circular(10),
                             topRight: (Radius.circular(10)),
@@ -83,55 +102,77 @@ class PromotionItem extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                height: 130,
-                width: 190,
-                decoration: BoxDecoration(
-                  // color: Colors.blue,
-                  borderRadius: !stripVisible
-                      ? const BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: (Radius.circular(10)),
-                        )
-                      : BorderRadius.circular(0),
-                ),
-                child: ClipRRect(
-                  borderRadius: !stripVisible
-                      ? const BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: (Radius.circular(10)),
-                        )
-                      : BorderRadius.circular(0),
-                  child: Image.network(
-                    imageUrl,
-                    fit: BoxFit.cover,
-                    // height: 150,
-                    // width: 200,
-                    // scale: 4,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 4,
-                  horizontal: 12,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.normal,
-                        fontSize: 15.0,
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    CustomPageRoute(
+                      builder: MenuItemScreen(
+                        item: Item(
+                          id: widget.id,
+                          name: widget.title,
+                          description: widget.subtitle,
+                          imageUrl: widget.imageUrl,
+                          price: widget.price,
+                          status: widget.rating,
+                        ),
                       ),
                     ),
-                    Text(
-                      subtitle,
-                      style: const TextStyle(
-                        fontSize: 13.0,
-                        fontWeight: FontWeight.w300,
-                        color: Colors.grey,
+                  );
+                },
+                child: Column(
+                  children: [
+                    Container(
+                      height: 130,
+                      width: 190,
+                      decoration: BoxDecoration(
+                        // color: Colors.blue,
+                        borderRadius: !widget.stripVisible
+                            ? const BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                topRight: (Radius.circular(10)),
+                              )
+                            : BorderRadius.circular(0),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: !widget.stripVisible
+                            ? const BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                topRight: (Radius.circular(10)),
+                              )
+                            : BorderRadius.circular(0),
+                        child: Image.network(
+                          widget.imageUrl,
+                          fit: BoxFit.cover,
+                          // height: 150,
+                          // width: 200,
+                          // scale: 4,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 4,
+                        horizontal: 12,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            widget.title,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.normal,
+                              fontSize: 15.0,
+                            ),
+                          ),
+                          Text(
+                            widget.subtitle,
+                            style: const TextStyle(
+                              fontSize: 13.0,
+                              fontWeight: FontWeight.w300,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -148,11 +189,11 @@ class PromotionItem extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.star_rounded,
-                          color: Colors.orange,
+                          color: AppColor.themePrimary,
                         ),
-                        Text(rating),
+                        Text(widget.rating),
                       ],
                     ),
                     //  Text(
@@ -164,21 +205,65 @@ class PromotionItem extends StatelessWidget {
                     //                 letterSpacing: 2,
                     //               ),
                     //             ),
-                    const CircleAvatar(
-                      radius: 12,
-                      backgroundColor: Colors.red,
-                      child: Center(
-                        child: Icon(
-                          Icons.favorite_rounded,
-                          size: 15,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
+                    FavoriteButton(id: widget.id),
                   ],
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class FavoriteButton extends StatefulWidget {
+  const FavoriteButton({Key? key, required this.id}) : super(key: key);
+  final String id;
+  @override
+  State<FavoriteButton> createState() => _FavoriteButtonState();
+}
+
+class _FavoriteButtonState extends State<FavoriteButton> {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () async {
+        if (!context
+            .read<FavoriteItemBloc>()
+            .favoriteItems
+            .any((item) => item.itemId == widget.id)) {
+          await context.read<FavoriteItemBloc>().addFavorite(
+                FavoriteItem(
+                  id: const Uuid().v1(),
+                  itemId: widget.id,
+                  userId: context.read<UserBloc>().user.id,
+                ),
+              );
+        } else {
+          String value = '';
+          context.read<FavoriteItemBloc>().favoriteItems.forEach((element) {
+            if (element.itemId == widget.id) {
+              value = element.id;
+            }
+          });
+          await context.read<FavoriteItemBloc>().deleteFavorite(value);
+        }
+        setState(() {});
+      },
+      child: CircleAvatar(
+        radius: 12,
+        backgroundColor: context
+                .watch<FavoriteItemBloc>()
+                .favoriteItems
+                .any((item) => item.itemId == widget.id)
+            ? Colors.red
+            : Colors.grey.shade300,
+        child: Center(
+          child: Icon(
+            Icons.favorite_rounded,
+            size: 15,
+            color: Colors.white,
           ),
         ),
       ),

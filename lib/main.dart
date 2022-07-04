@@ -9,6 +9,7 @@ import 'package:food_app/src/blocs/user_bloc.dart';
 import 'src/blocs/auth_bloc.dart';
 import 'package:provider/provider.dart';
 
+import 'src/blocs/favorite_item_bloc.dart';
 import 'src/screens/start/splash_screen.dart';
 
 Future<void> main() async {
@@ -41,6 +42,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => CouponBloc(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => FavoriteItemBloc(),
+        )
       ],
       child: MaterialApp(
         title: 'Food App',
